@@ -20,7 +20,7 @@ data = {"Altitude": 1000 ,
 data = json.dumps(data)
 
 while(msg != '\x18'):
-    tcp.send(data.encode())
+    tcp.send(msg.encode())
     msg = input("Digite uma nova mensagem")
 
 tcp.close()
