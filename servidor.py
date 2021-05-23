@@ -14,7 +14,6 @@ class Servidor():
         self._host = host
         self._port = port
         self._tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        pass
 
     def start(self):
         """
