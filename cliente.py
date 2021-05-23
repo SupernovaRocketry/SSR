@@ -38,8 +38,9 @@ class Cliente():
             while msg != 'x':
                 msg = input("Digite a mensagem a ser enviada (x para sair): ")
                 self._tcp.send(msg.encode())
-                resp = self._tcp.recv(1024)
-                print(resp.decode())
+                while True:
+                    resp = self._tcp.recv(1024)
+                    print(resp.decode())
             self._tcp.close()
         except Exception as e:
             print(f'Erro ao realizar a comunicacao com o servidor {e.args}')
