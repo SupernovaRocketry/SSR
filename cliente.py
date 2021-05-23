@@ -14,14 +14,14 @@ class Cliente():
         """
         self._serverIP = server_ip
         self._port = port
-        self._tcp = socket.socket(socket.AF_inet, socket.SOCK_STREAM)        
+        self._tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)        
 
 
     def start(self):
         """
         Método que inicializa a execução do cliente
         """
-        endpoint = (self.__serverIP, self.__port)
+        endpoint = (self._serverIP, self._port)
         try:
             self._tcp.connect(endpoint)
             print("Conexao realiza com sucesso.")
