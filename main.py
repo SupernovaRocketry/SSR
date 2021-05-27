@@ -1,11 +1,13 @@
-from typing import Text
-from kivy.uix.behaviors import button
 from cliente import Cliente
+from grafico2d import Grafico2d
+
+from kivy.uix.behaviors import button
 import kivy
 from kivy.app import App
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
+
 class BasicApp(App):
     """
     Aplicativo Basico Kivy
@@ -31,6 +33,7 @@ if __name__ == '__main__':
     BasicApp().run()
 
 
+c = Grafico2d('localhost', 9000)
 
-c = Cliente('localhost', 9000)
-c.start()
+#c = Cliente('localhost', 9000)
+#c.start()
