@@ -35,5 +35,5 @@ if __name__ == '__main__':
 
 c = Grafico2d('localhost', 9000)
 
-#c = Cliente('localhost', 9000)
-#c.start()
+c = Cliente('localhost', 9000)
+c.start()

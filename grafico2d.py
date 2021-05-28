@@ -10,6 +10,11 @@ class Grafico2d():
     """
 
     def __init__(self, server_ip, port):
+        """
+        Construtor da classe Grafico2d
+        :param server_ip: ip do servidor
+        :param port: porta do servidor
+        """
         self.__getDados = Cliente(server_ip, port)
         self.__xs = []
         self.__ys = []  
