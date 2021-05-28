@@ -1,39 +1,29 @@
 from cliente import Cliente
 from grafico2d import Grafico2d
 
-from kivy.uix.behaviors import button
-import kivy
+from mainWidget import *
 from kivy.app import App
-from kivy.uix.button import Button
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.label import Label
+from kivy.lang.builder import Builder
 
-class BasicApp(App):
+
+
+class MainApp(App):
     """
     Aplicativo Basico Kivy
     """
     def build(self):
         """
-        Construir o aplicativo 
+        Método que gera o aplicativo com o widget principal
         """
-        layout = BoxLayout(orientation = 'vertical')
-        lb = Label(text = 'label 1')
-        bt = Button(text = "Botão 1")
-        layout.add_widget(bt)
-        layout.add_widget(lb)
-        layout2 = BoxLayout(orientation = 'horizontal')
-        lb2 = Label(text= 'label 2')
-        lb3 = Label(text = 'label 3')
-        layout2.add_widget(lb2)
-        layout2.add_widget(lb3)
-        layout.add_widget(layout2)
-        return layout
+        self._widget = MainWidget()
+        return self._widget
 
 if __name__ == '__main__':
-    BasicApp().run()
+    Builder.load_string(open('mainWidget.kv', encoding='utf8').read(), rulesonly= True)
+    MainApp().run()
 
 
-c = Grafico2d('localhost', 9000)
+# c = Grafico2d('localhost', 9000)
 
-c = Cliente('localhost', 9000)
-c.start()
+# c = Cliente('localhost', 9000)
+# c.start()

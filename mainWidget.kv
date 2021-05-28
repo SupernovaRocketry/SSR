@@ -1,0 +1,62 @@
+#:kivy 1.11.1
+
+# <MainWidget>:
+#     orientation : 'horizontal'
+#     Button:
+#         id: btn
+#         text: 'Button 1'
+#         on_release: root.incrementar()
+#     Label:
+#         id: lb
+#         text: '0'
+
+<MainWidget>:
+    orientation: 'vertical'
+    canvas:
+        Color:
+            rgb: .5, .5, .5
+        Rectangle:
+            size: self.size
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: (1, 0.1)
+        spacing: 10
+        Image:
+            id: logo_supernova
+            allow_stretch: True
+            keep_ratio: True
+            size_hint_y: None
+            size_hint_x: None
+            size: self.parent.width*self.image_ratio*.17, self.parent.height*self.image_ratio*.17
+            source: 'imgs/logo_supernova.jpeg'
+            pos_hint: {'top':1, 'left':1}
+        Label:
+            id: textSupernova
+            text: 'SSR - SUPERVISÓRIO SUPERNOVA ROCKETRY'
+            size_hint_x: None
+            size_hint_y: None
+            width: self.parent.width*.3
+            pos_hint: {'top':1}
+        Label:
+            id: nome_setor
+            size_hint_x: None
+            size_hint_y: None
+            width: self.parent.width*.3
+            text: 'Setor Eletrônica'
+            pos_hint: {'top':1}
+        Image:
+            id: img_con
+            allow_stretch: True
+            keep_ratio: True
+            size_hint_y: None
+            size_hint_x: None
+            size: self.parent.width*self.image_ratio*.05, self.parent.height*self.image_ratio*.05
+            source: 'imgs/desconectado.png'
+            pos_hint: {'top': 1, 'right': 1}
+    
+    # FloatLayout:
+    #     canvas:
+    #         rgb: .5, .5, .5
+
+            
+            
