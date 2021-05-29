@@ -11,52 +11,246 @@
 #         text: '0'
 
 <MainWidget>:
-    orientation: 'vertical'
-    canvas:
-        Color:
-            rgb: .5, .5, .5
-        Rectangle:
-            size: self.size
-    BoxLayout:
-        orientation: 'horizontal'
-        size_hint: (1, 0.1)
-        spacing: 10
-        Image:
-            id: logo_supernova
-            allow_stretch: True
-            keep_ratio: True
-            size_hint_y: None
-            size_hint_x: None
-            size: self.parent.width*self.image_ratio*.17, self.parent.height*self.image_ratio*.17
-            source: 'imgs/logo_supernova.jpeg'
-            pos_hint: {'top':1, 'left':1}
-        Label:
-            id: textSupernova
-            text: 'SSR - SUPERVISÓRIO SUPERNOVA ROCKETRY'
-            size_hint_x: None
-            size_hint_y: None
-            width: self.parent.width*.3
-            pos_hint: {'top':1}
-        Label:
-            id: nome_setor
-            size_hint_x: None
-            size_hint_y: None
-            width: self.parent.width*.3
-            text: 'Setor Eletrônica'
-            pos_hint: {'top':1}
-        Image:
-            id: img_con
-            allow_stretch: True
-            keep_ratio: True
-            size_hint_y: None
-            size_hint_x: None
-            size: self.parent.width*self.image_ratio*.05, self.parent.height*self.image_ratio*.05
-            source: 'imgs/desconectado.png'
-            pos_hint: {'top': 1, 'right': 1}
+    # orientation: 'vertical'
+    # canvas:
+    #     Color:
+    #         rgb: .5, .5, .5
+    #     Rectangle:
+    #         size: self.size
+    # BoxLayout:
+    #     orientation: 'horizontal'
+    #     size_hint: (1, 0.1)
+    #     spacing: 10
+    #     Image:
+    #         id: logo_supernova
+    #         allow_stretch: True
+    #         keep_ratio: True
+    #         size_hint_y: None
+    #         size_hint_x: None
+    #         size: self.parent.width*self.image_ratio*.17, self.parent.height*self.image_ratio*.17
+    #         source: 'imgs/logo_supernova.jpeg'
+    #         pos_hint: {'top':1, 'left':1}
+    #     Label:
+    #         id: textSupernova
+    #         text: 'SSR - SUPERVISÓRIO SUPERNOVA ROCKETRY'
+    #         size_hint_x: None
+    #         size_hint_y: None
+    #         width: self.parent.width*.3
+    #         pos_hint: {'top':1}
+    #     Label:
+    #         id: nome_setor
+    #         size_hint_x: None
+    #         size_hint_y: None
+    #         width: self.parent.width*.3
+    #         text: 'Setor Eletrônica'
+    #         pos_hint: {'top':1}
+    #     Image:
+    #         id: img_con
+    #         allow_stretch: True
+    #         keep_ratio: True
+    #         size_hint_y: None
+    #         size_hint_x: None
+    #         size: self.parent.width*self.image_ratio*.05, self.parent.height*self.image_ratio*.05
+    #         source: 'imgs/desconectado.png'
+    #         pos_hint: {'top': 1, 'right': 1}
     
     # FloatLayout:
+    #     size: self.width, .1*self.height
     #     canvas:
-    #         rgb: .5, .5, .5
+    #         Color:
+    #             rgb: .3, .4, .73
+    #         Rectangle:
+    #             size: self.parent.width, self.parent.height
+    #             pos: {'x' : -0.45, 'y': 0.01}
 
+    FloatLayout:
+        # Ambiente superior
+        canvas:
+            Color:
+                rgb: .3, .3, .3
+            Rectangle:
+                size: self.size
+            Color:
+                rgb: .5, .5, .5
+            Rectangle:
+                size: int(self.parent.width), int(self.parent.height)*0.90
+                pos: 0,0
+            Color:
+                rgb: .9, 0, 0
+            Line:
+                points: (0, 0.9*self.parent.height, self.parent.width, 0.9*self.parent.height)
+                width: 5
+        
+        # Dados ambiente superior
+        Image:
+            id: logo_supernova
+            keep_ratio: True
+            size_hint: .10, .1
+            pos_hint: {'top': 1, 'left': 1}
+            source: 'imgs/logo_supernova_velha.png'
+        Image:
+            id: conectado
+            size_hint: 0.08, 0.08
+            pos_hint: {'top': .99, 'right':1}
+            source: 'imgs/desconectado.png'
+        BoxLayout:
+            orientation:'horizontal'
+            size_hint: .65, .10
+            pos_hint: {'top': 1, 'x': .2 }
+            Label:
+                id: supervisorio
+                text: 'SUPERVISÓRIO SUPERNOVA ROCKETRY'
+                size_font: 32
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    id: eletronica
+                    text: 'SETOR ELETRÔNICA'
+                    size_font: 32
+                Label:
+                    id: data
+                    text: '29/05/2021'
+                    size_font: 14
+
+        # Dados foguete
+        BoxLayout:
+            orientation:'vertical'
+            size_hint: .25, .82
+            pos_hint: {'x': 0.025, 'y': 0.05}
+            valign: 'top'
+            halign: 'left'
+            BoxLayout:
+                orientation:'vertical'
+                valign: 'top'                     
+                Label:
+                    id: lb
+                    text: "Altitude"
+                    halign: 'left'
+                    text_size: self.size
+                    size_font: 20
+                Label:
+                    id: textAltitude
+                    text: 'dadoAltitude'
+                    halign: 'left'
+                    text_size: self.size
+                    size_font: 14
+            BoxLayout:
+                orientation:'horizontal'
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        text: "Latitude"
+                        halign: 'left'
+                        text_size: self.size                  
+                    Label:
+                        text: "dadoLatitude"
+                        halign: 'left'
+                        text_size: self.size
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        text: "Longitude"
+                        halign: 'left'
+                        text_size: self.size                  
+                    Label:
+                        text: "dadoLongitude"
+                        halign: 'left'
+                        text_size: self.size
+            BoxLayout:
+                orientation:'vertical'
+                valign: 'top'  
+                Label:
+                    text: 'Acelerometro'
+                    halign: 'left'
+                    text_size: self.size
+                BoxLayout:
+                    orientation:'horizontal'
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: 'dadoX'
+                            halign: 'left'
+                            text_size: self.size
+                        Label:
+                            text: 'x'
+                            halign: 'left'
+                            text_size: self.size
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: 'dadoY'
+                            halign: 'left'
+                            text_size: self.size
+                        Label:
+                            text: 'y'
+                            halign: 'left'
+                            text_size: self.size
+                    BoxLayout:
+                        orientation: 'vertical'
+                        Label:
+                            text: 'dadoZ'
+                            halign: 'left'
+                            text_size: self.size
+                        Label:
+                            text: 'z'
+                            halign: 'left'
+                            text_size: self.size
+            BoxLayout:
+                orientation:'vertical'
+                valign: 'top'  
+                Label:
+                    text: 'Giroscopio'
+                    halign: 'left'
+                    text_size: self.size
+                BoxLayout:
+                    orientation:'horizontal'
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: 'dadoX'
+                            halign: 'left'
+                            text_size: self.size
+                        Label:
+                            text: 'x'
+                            halign: 'left'
+                            text_size: self.size
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: 'dadoY'
+                            halign: 'left'
+                            text_size: self.size
+                        Label:
+                            text: 'y'
+                            halign: 'left'
+                            text_size: self.size
+                    BoxLayout:
+                        orientation: 'vertical'
+                        Label:
+                            text: 'dadoZ'
+                            halign: 'left'
+                            text_size: self.size
+                        Label:
+                            text: 'z'
+                            halign: 'left'
+                            text_size: self.size
+            BoxLayout:
+                orientation:'vertical'
+                Label:
+                    text: "RSSI:"
+                    halign: 'left'
+                    text_size: self.size
+                Label:
+                    text: "dadoRSSI"
+                    halign: 'left'
+                    text_size: self.size
             
-            
+
+    # FloatLayout:
+    #     canvas:
+    #         Color:
+    #             rgb: .7, .7, .7
+    #         Rectangle:
+    #             size: int(self.parent.width), int(self.parent.height)*0.15
+    #             pos: 0,0
+
