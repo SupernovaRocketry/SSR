@@ -1,68 +1,6 @@
 #:kivy 1.11.1
 
-# <MainWidget>:
-#     orientation : 'horizontal'
-#     Button:
-#         id: btn
-#         text: 'Button 1'
-#         on_release: root.incrementar()
-#     Label:
-#         id: lb
-#         text: '0'
-
 <MainWidget>:
-    # orientation: 'vertical'
-    # canvas:
-    #     Color:
-    #         rgb: .5, .5, .5
-    #     Rectangle:
-    #         size: self.size
-    # BoxLayout:
-    #     orientation: 'horizontal'
-    #     size_hint: (1, 0.1)
-    #     spacing: 10
-    #     Image:
-    #         id: logo_supernova
-    #         allow_stretch: True
-    #         keep_ratio: True
-    #         size_hint_y: None
-    #         size_hint_x: None
-    #         size: self.parent.width*self.image_ratio*.17, self.parent.height*self.image_ratio*.17
-    #         source: 'imgs/logo_supernova.jpeg'
-    #         pos_hint: {'top':1, 'left':1}
-    #     Label:
-    #         id: textSupernova
-    #         text: 'SSR - SUPERVISÓRIO SUPERNOVA ROCKETRY'
-    #         size_hint_x: None
-    #         size_hint_y: None
-    #         width: self.parent.width*.3
-    #         pos_hint: {'top':1}
-    #     Label:
-    #         id: nome_setor
-    #         size_hint_x: None
-    #         size_hint_y: None
-    #         width: self.parent.width*.3
-    #         text: 'Setor Eletrônica'
-    #         pos_hint: {'top':1}
-    #     Image:
-    #         id: img_con
-    #         allow_stretch: True
-    #         keep_ratio: True
-    #         size_hint_y: None
-    #         size_hint_x: None
-    #         size: self.parent.width*self.image_ratio*.05, self.parent.height*self.image_ratio*.05
-    #         source: 'imgs/desconectado.png'
-    #         pos_hint: {'top': 1, 'right': 1}
-    
-    # FloatLayout:
-    #     size: self.width, .1*self.height
-    #     canvas:
-    #         Color:
-    #             rgb: .3, .4, .73
-    #         Rectangle:
-    #             size: self.parent.width, self.parent.height
-    #             pos: {'x' : -0.45, 'y': 0.01}
-
     FloatLayout:
         canvas:
 
@@ -103,7 +41,7 @@
                 points: (int(self.parent.width)*.01, int(self.parent.height)*0.88, int(self.parent.width)*0.26, int(self.parent.height)*0.88)
                 width: 2
             
-            # Ambiente central
+            # Ambiente Superior booleano
             Color:
                 rgb: .3, .3, .3
             Rectangle:
@@ -114,6 +52,22 @@
             Line:
                 points: (int(self.parent.width)*.27, int(self.parent.height)*0.75, int(self.parent.width)*.994, int(self.parent.height)*0.75)
                 width: 2
+            Line:
+                points: (int(self.parent.width)*.27, int(self.parent.height)*0.88, int(self.parent.width)*.994, int(self.parent.height)*0.88)
+                width: 2
+            Line:
+                points: int(self.parent.width)*.27, int(self.parent.height)*0.75, int(self.parent.width)*.27, int(self.parent.height)*0.88
+                width: 2
+            Line:
+                points: int(self.parent.width)*.994, int(self.parent.height)*0.75, int(self.parent.width)*.994, int(self.parent.height)*0.88
+                width: 2
+
+            # LEDs indicativos
+            Color:
+                rgb: 0, 0, 1
+            Line:
+                circle: (int(self.parent.width)*.33, int(self.parent.height)*0.8, int(self.parent.width)*.02)
+
             
             
         
@@ -289,14 +243,20 @@
                     text: "dadoRSSI"
                     halign: 'left'
                     text_size: self.size
-    
-
-
-    # FloatLayout:
-    #     canvas:
-    #         Color:
-    #             rgb: .7, .7, .7
-    #         Rectangle:
-    #             size: int(self.parent.width), int(self.parent.height)*0.15
-    #             pos: 0,0
-
+        Label:
+            pos: int(self.parent.width)*.28, int(self.parent.height)*.845
+            text_size: self.size
+            text: 'Paraquedas Principal'
+            font_size: 20
+            bold: True
+        Label:
+            pos: int(self.parent.width)*.28, int(self.parent.height)*.82
+            text_size: self.size
+            text: 'Acionamento Principal'
+        Label:
+            pos: int(self.parent.width)*.415, int(self.parent.height)*.82
+            text_size: self.size
+            text: 'Acionamento Pion'
+        Label:
+            text_size: self.size
+            text: 'Acionamento Redundante'
