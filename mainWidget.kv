@@ -64,8 +64,9 @@
     #             pos: {'x' : -0.45, 'y': 0.01}
 
     FloatLayout:
-        # Ambiente superior
         canvas:
+
+            # Ambiente superior
             Color:
                 rgb: .3, .3, .3
             Rectangle:
@@ -80,7 +81,43 @@
             Line:
                 points: (0, 0.9*self.parent.height, self.parent.width, 0.9*self.parent.height)
                 width: 5
+            
+            # Ambiente Lateral esquerdo
+            Color:
+                rgb: 0.3, 0.3, 0.3
+            Rectangle:
+                size: int(self.parent.width)*.25, int(self.parent.height)*0.85
+                pos: int(self.parent.width)*.01,  int(self.parent.height)*0.03
+            Color:
+                rgb: 1,0,0
+            Line:
+                points: (int(self.parent.width)*.01, int(self.parent.height)*0.03, int(self.parent.width)*0.01, int(self.parent.height)*0.88)
+                width: 2
+            Line:
+                points: (int(self.parent.width)*.26, int(self.parent.height)*0.03, int(self.parent.width)*0.26, int(self.parent.height)*0.88)
+                width: 2
+            Line:
+                points: (int(self.parent.width)*.01, int(self.parent.height)*0.03, int(self.parent.width)*0.26, int(self.parent.height)*0.03)
+                width: 2
+            Line:
+                points: (int(self.parent.width)*.01, int(self.parent.height)*0.88, int(self.parent.width)*0.26, int(self.parent.height)*0.88)
+                width: 2
+            
+            # Ambiente central
+            Color:
+                rgb: .3, .3, .3
+            Rectangle:
+                size: int(self.parent.width)*.724, int(self.parent.height)*0.13
+                pos: int(self.parent.width)*.27, int(self.parent.height)*0.75
+            Color:
+                rgb: 1, 0, 0
+            Line:
+                points: (int(self.parent.width)*.27, int(self.parent.height)*0.75, int(self.parent.width)*.994, int(self.parent.height)*0.75)
+                width: 2
+            
+            
         
+
         # Dados ambiente superior
         Image:
             id: logo_supernova
@@ -117,8 +154,14 @@
             orientation:'vertical'
             size_hint: .25, .82
             pos_hint: {'x': 0.025, 'y': 0.05}
-            valign: 'top'
-            halign: 'left'
+            Label:
+                text: 'Dados Recebidos'
+                bold: True
+                text_size: self.size
+                valign: 'top'
+                halign: 'center'
+                font_size: 32
+                pos_hint: {'x': -0.07, 'y': 2}
             BoxLayout:
                 orientation:'vertical'
                 valign: 'top'                     
@@ -126,12 +169,14 @@
                     id: lb
                     text: "Altitude"
                     halign: 'left'
+                    valign: 'top'
                     text_size: self.size
                     size_font: 20
                 Label:
                     id: textAltitude
                     text: 'dadoAltitude'
                     halign: 'left'
+                    valign: 'top'
                     text_size: self.size
                     size_font: 14
             BoxLayout:
@@ -244,7 +289,8 @@
                     text: "dadoRSSI"
                     halign: 'left'
                     text_size: self.size
-            
+    
+
 
     # FloatLayout:
     #     canvas:
