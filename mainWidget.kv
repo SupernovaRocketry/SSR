@@ -6,11 +6,11 @@
 
             # Ambiente superior
             Color:
-                rgb: .3, .3, .3
+                rgb: 0, 0, 0
             Rectangle:
                 size: self.size
             Color:
-                rgb: .5, .5, .5
+                rgb: .9, .9, .9
             Rectangle:
                 size: int(self.parent.width), int(self.parent.height)*0.90
                 pos: 0,0
@@ -22,12 +22,12 @@
             
             # Ambiente Lateral esquerdo
             Color:
-                rgb: 0.3, 0.3, 0.3
+                rgb: 0.8, 0.8, 0.8
             Rectangle:
                 size: int(self.parent.width)*.25, int(self.parent.height)*0.85
                 pos: int(self.parent.width)*.01,  int(self.parent.height)*0.03
             Color:
-                rgb: 1,0,0
+                rgb: .7 , .7, .7
             Line:
                 points: (int(self.parent.width)*.01, int(self.parent.height)*0.03, int(self.parent.width)*0.01, int(self.parent.height)*0.88)
                 width: 2
@@ -43,12 +43,12 @@
             
             # Ambiente Superior booleano
             Color:
-                rgb: .3, .3, .3
+                rgb: .8, .8, .8
             Rectangle:
                 size: int(self.parent.width)*.724, int(self.parent.height)*0.13
                 pos: int(self.parent.width)*.27, int(self.parent.height)*0.75
             Color:
-                rgb: 1, 0, 0
+                rgb: .7, .7, .7
             Line:
                 points: (int(self.parent.width)*.27, int(self.parent.height)*0.75, int(self.parent.width)*.994, int(self.parent.height)*0.75)
                 width: 2
@@ -116,6 +116,7 @@
                 halign: 'center'
                 font_size: 32
                 pos_hint: {'x': -0.07, 'y': 2}
+                color: 0, 0, 0, 1
             BoxLayout:
                 orientation:'vertical'
                 valign: 'top'                     
@@ -126,6 +127,7 @@
                     valign: 'top'
                     text_size: self.size
                     size_font: 20
+                    color: 0, 0, 0, 1
                 Label:
                     id: textAltitude
                     text: 'dadoAltitude'
@@ -133,6 +135,7 @@
                     valign: 'top'
                     text_size: self.size
                     size_font: 14
+                    color: 0, 0, 0, 1
             BoxLayout:
                 orientation:'horizontal'
                 BoxLayout:
@@ -140,21 +143,25 @@
                     Label:
                         text: "Latitude"
                         halign: 'left'
-                        text_size: self.size                  
+                        text_size: self.size
+                        color: 0, 0, 0, 1                  
                     Label:
                         text: "dadoLatitude"
                         halign: 'left'
                         text_size: self.size
+                        color: 0, 0, 0, 1
                 BoxLayout:
                     orientation: 'vertical'
                     Label:
                         text: "Longitude"
                         halign: 'left'
-                        text_size: self.size                  
+                        text_size: self.size 
+                        color: 0, 0, 0, 1                 
                     Label:
                         text: "dadoLongitude"
                         halign: 'left'
                         text_size: self.size
+                        color: 0, 0, 0, 1
             BoxLayout:
                 orientation:'vertical'
                 valign: 'top'  
@@ -162,6 +169,7 @@
                     text: 'Acelerometro'
                     halign: 'left'
                     text_size: self.size
+                    color: 0, 0, 0, 1
                 BoxLayout:
                     orientation:'horizontal'
                     BoxLayout:
@@ -170,30 +178,36 @@
                             text: 'dadoX'
                             halign: 'left'
                             text_size: self.size
+                            color: 0, 0, 0, 1
                         Label:
                             text: 'x'
                             halign: 'left'
                             text_size: self.size
+                            color: 0, 0, 0, 1
                     BoxLayout:
                         orientation:'vertical'
                         Label:
                             text: 'dadoY'
                             halign: 'left'
                             text_size: self.size
+                            color: 0, 0, 0, 1
                         Label:
                             text: 'y'
                             halign: 'left'
                             text_size: self.size
+                            color: 0, 0, 0, 1
                     BoxLayout:
                         orientation: 'vertical'
                         Label:
                             text: 'dadoZ'
                             halign: 'left'
                             text_size: self.size
+                            color: 0, 0, 0, 1
                         Label:
                             text: 'z'
                             halign: 'left'
                             text_size: self.size
+                            color: 0, 0, 0, 1
             BoxLayout:
                 orientation:'vertical'
                 valign: 'top'  
@@ -201,6 +215,7 @@
                     text: 'Giroscopio'
                     halign: 'left'
                     text_size: self.size
+                    color: 0, 0, 0, 1
                 BoxLayout:
                     orientation:'horizontal'
                     BoxLayout:
@@ -209,54 +224,67 @@
                             text: 'dadoX'
                             halign: 'left'
                             text_size: self.size
+                            color: 0, 0, 0, 1
                         Label:
                             text: 'x'
                             halign: 'left'
                             text_size: self.size
+                            color: 0, 0, 0, 1
                     BoxLayout:
                         orientation:'vertical'
                         Label:
                             text: 'dadoY'
                             halign: 'left'
                             text_size: self.size
+                            color: 0, 0, 0, 1
                         Label:
                             text: 'y'
                             halign: 'left'
                             text_size: self.size
+                            color: 0, 0, 0, 1
                     BoxLayout:
                         orientation: 'vertical'
                         Label:
                             text: 'dadoZ'
                             halign: 'left'
                             text_size: self.size
+                            color: 0, 0, 0, 1
                         Label:
                             text: 'z'
                             halign: 'left'
                             text_size: self.size
+                            color: 0, 0, 0, 1
             BoxLayout:
                 orientation:'vertical'
                 Label:
                     text: "RSSI:"
                     halign: 'left'
                     text_size: self.size
+                    color: 0, 0, 0, 1
                 Label:
                     text: "dadoRSSI"
                     halign: 'left'
                     text_size: self.size
+                    color: 0, 0, 0, 1
         Label:
             pos: int(self.parent.width)*.28, int(self.parent.height)*.845
             text_size: self.size
             text: 'Paraquedas Principal'
             font_size: 20
             bold: True
+            color: 0, 0, 0, 1
         Label:
             pos: int(self.parent.width)*.28, int(self.parent.height)*.82
             text_size: self.size
             text: 'Acionamento Principal'
+            color: 0, 0, 0, 1
         Label:
+            id: acionamentoPion
             pos: int(self.parent.width)*.415, int(self.parent.height)*.82
             text_size: self.size
             text: 'Acionamento Pion'
+            color: 0, 0, 0, 1
         Label:
             text_size: self.size
             text: 'Acionamento Redundante'
+            color: 0, 0, 0, 1
