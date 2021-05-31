@@ -1,4 +1,5 @@
 #:kivy 1.11.1
+#: import MapView kivy.garden.mapview.MapView
 
 <MainWidget>:
     FloatLayout:
@@ -374,4 +375,14 @@
                             text: '3º'
                             color: 0, 0, 0, 1
                         Image:
-                            source: 'imgs/red_led.png'       
+                            source: 'imgs/red_led.png'   
+        MapView:
+            pos_hint: {'x': .32, 'y': .05}
+            size_hint: (.35, .35)
+            lat: -21.785624346951103
+            lon: -43.352172024699804
+            double_tap_zoom: True
+            zoom: 20
+            MapMarkerPopup:
+                lat: -21.785624346951103
+                lon: -43.352172024699804
