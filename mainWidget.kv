@@ -62,11 +62,29 @@
                 points: int(self.parent.width)*.994, int(self.parent.height)*0.75, int(self.parent.width)*.994, int(self.parent.height)*0.88
                 width: 2
 
-            # LEDs indicativos
+            # Ambiente Grafico
             Color:
-                rgb: 0, 0, 1
+                rgb: .8 ,.8 ,.8
+            Rectangle:
+                pos: int(self.parent.width)*.27, int(self.parent.height)*0.03
+                size: int(self.parent.width)*.724,  int(self.parent.height)*0.70
+            Color:
+                rgb: .7, .7, .7
             Line:
-                circle: (int(self.parent.width)*.33, int(self.parent.height)*0.8, int(self.parent.width)*.02)
+                points: int(self.parent.width)*.27, int(self.parent.height)*0.03, int(self.parent.width)*.27, int(self.parent.height)*0.73
+                width: 2
+            Line:
+                points: int(self.parent.width)*.27, int(self.parent.height)*0.03, int(self.parent.width)*.994, int(self.parent.height)*0.03
+                width: 2
+            Line:
+                points: int(self.parent.width)*.994, int(self.parent.height)*0.03, int(self.parent.width)*.994, int(self.parent.height)*0.73
+                width: 2
+            Line:
+                points: int(self.parent.width)*.27, int(self.parent.height)*0.73, int(self.parent.width)*.994, int(self.parent.height)*0.73
+                width: 2
+
+
+
 
             
             
@@ -266,25 +284,94 @@
                     halign: 'left'
                     text_size: self.size
                     color: 0, 0, 0, 1
-        Label:
-            pos: int(self.parent.width)*.28, int(self.parent.height)*.845
-            text_size: self.size
-            text: 'Paraquedas Principal'
-            font_size: 20
-            bold: True
-            color: 0, 0, 0, 1
-        Label:
-            pos: int(self.parent.width)*.28, int(self.parent.height)*.82
-            text_size: self.size
-            text: 'Acionamento Principal'
-            color: 0, 0, 0, 1
-        Label:
-            id: acionamentoPion
-            pos: int(self.parent.width)*.415, int(self.parent.height)*.82
-            text_size: self.size
-            text: 'Acionamento Pion'
-            color: 0, 0, 0, 1
-        Label:
-            text_size: self.size
-            text: 'Acionamento Redundante'
-            color: 0, 0, 0, 1
+
+        # PARTE BOOLEANA
+        BoxLayout:
+            orientation:'horizontal'
+            size_hint: (.724, .13)              # Tamanho baseado no tamanho da aba do supervosorio
+            pos_hint: {'x': .27, 'y': .765}      # Tamanho baseado no tamanho da aba do supervosorio
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    text: 'Paraquedas Estabilizador'
+                    color: 0, 0, 0, 1
+                    bold: True
+                    font_size: 20
+                    haling: 'center'
+                BoxLayout:
+                    orientation:'horizontal'
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: 'Acionamento Principal'
+                            valign: 'top'
+                            color: 0, 0, 0, 1
+                        Image:
+                            source: 'imgs/red_led.png'
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: 'Acionamento Redundante'
+                            color: 0, 0, 0, 1
+                        Image:
+                            source: 'imgs/red_led.png'
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: 'Acionamento Pion'
+                            color: 0, 0, 0, 1
+                        Image:
+                            source: 'imgs/red_led.png'  
+            BoxLayout:
+                orientation:'vertical'      
+                Label:
+                    text: 'Paraquedas Principal'
+                    bold: True
+                    font_size: 20
+                    color: 0, 0, 0, 1
+                BoxLayout:
+                    orientation:'horizontal'
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: 'Acionamento Principal'
+                            color: 0, 0, 0, 1
+                        Image:
+                            source: 'imgs/red_led.png'
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: 'Acionamento Pion'
+                            color: 0, 0, 0, 1
+                        Image:
+                            source: 'imgs/red_led.png'
+            BoxLayout:
+                orientation:'vertical'
+                Label:
+                    text: 'Remove Before Flight'
+                    color: 0, 0, 0, 1
+                    font_size: 20
+                    bold: True
+                BoxLayout:
+                    orientation:'horizontal'
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: '1º'
+                            color: 0, 0, 0, 1
+                        Image:
+                            source: 'imgs/red_led.png'
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: '2º'
+                            color: 0, 0, 0, 1
+                        Image:
+                            source: 'imgs/red_led.png'
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: '3º'
+                            color: 0, 0, 0, 1
+                        Image:
+                            source: 'imgs/red_led.png'       

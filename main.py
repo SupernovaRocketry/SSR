@@ -11,6 +11,7 @@ class MainApp(App):
     """
     Aplicativo Basico Kivy
     """
+
     def build(self):
         """
         Método que gera o aplicativo com o widget principal
@@ -18,8 +19,10 @@ class MainApp(App):
         self._widget = MainWidget()
         return self._widget
 
+
 if __name__ == '__main__':
-    Builder.load_string(open('mainWidget.kv', encoding='utf8').read(), rulesonly= True)
+    Builder.load_string(
+        open('mainWidget.kv', encoding='utf8').read(), rulesonly=True)
     MainApp().run()
 
 
