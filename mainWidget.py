@@ -8,7 +8,17 @@ from kivy.uix.label import Label
 
 
 class MainWidget(BoxLayout):
-    def incrementar(self):
-        self.ids['lb'].text = str(int(self.ids['lb'].text)+1)
+    '''
+    Widget principal do supervisório
+    '''
+
+    def __init__(self, **kwargs):
+        '''
+        Construtor do widget principal
+        '''
+        super().__init__(**kwargs)
+        self._login = kwargs.get('login')
+        self._senha = kwargs.get('senha')
+
 
     pass

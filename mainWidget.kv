@@ -98,11 +98,16 @@
             size_hint: .10, .1
             pos_hint: {'top': 1, 'left': 1}
             source: 'imgs/logo_supernova_velha.png'
-        Image:
-            id: conectado
+        Button:
+            background_normal: 'imgs/desconectado.png'
             size_hint: 0.08, 0.08
             pos_hint: {'top': .99, 'right':1}
-            source: 'imgs/desconectado.png'
+            
+        # Image:
+        #     id: conectado
+        #     size_hint: 0.08, 0.08
+        #     pos_hint: {'top': .99, 'right':1}
+        #     source: 'imgs/desconectado.png'
         BoxLayout:
             orientation:'horizontal'
             size_hint: .65, .10
