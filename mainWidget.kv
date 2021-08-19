@@ -84,7 +84,94 @@
                 points: int(self.parent.width)*.27, int(self.parent.height)*0.73, int(self.parent.width)*.994, int(self.parent.height)*0.73
                 width: 2
 
+            # Borda Mapa em Tempo Real
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.32, int(self.parent.height)*0.05, int(self.parent.width)*.67, int(self.parent.height)*0.05
+                width: 2
+            Line:
+                points: int(self.parent.width)*.32, int(self.parent.height)*0.05, int(self.parent.width)*.32, int(self.parent.height)*0.43
+                width: 2
+            Line:
+                points: int(self.parent.width)*.67, int(self.parent.height)*0.05, int(self.parent.width)*.67, int(self.parent.height)*0.40
+                width: 2
+            Line:
+                points: int(self.parent.width)*.40, int(self.parent.height)*0.40, int(self.parent.width)*.67, int(self.parent.height)*0.40
+                width: 2
+            Line:
+                points: int(self.parent.width)*.40, int(self.parent.height)*0.40, int(self.parent.width)*.40, int(self.parent.height)*0.43
+                width: 2
+            Line:
+                points: int(self.parent.width)*.40, int(self.parent.height)*0.43, int(self.parent.width)*.32, int(self.parent.height)*0.43
+                width: 2
+            Color:
+                rgb: .9, .9, .9
+            Rectangle:
+                pos: int(self.parent.width)*.32, int(self.parent.height)*0.40
+                size: int(self.parent.width)*.08,  int(self.parent.height)*0.03
 
+
+            # Area reservada para medidor de Altitude
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.28, int(self.parent.height)*0.05, int(self.parent.width)*.31, int(self.parent.height)*0.05
+                width: 2
+            Line:
+                points: int(self.parent.width)*.28, int(self.parent.height)*0.05, int(self.parent.width)*.28, int(self.parent.height)*0.71
+                width: 2
+            Line:
+                points: int(self.parent.width)*.31, int(self.parent.height)*0.05, int(self.parent.width)*.31, int(self.parent.height)*0.71
+                width: 2
+            Line:
+                points: int(self.parent.width)*.28, int(self.parent.height)*0.71, int(self.parent.width)*.31, int(self.parent.height)*0.71
+                width: 2
+            Color:
+                rgb: .9, .9, .9
+            Rectangle:
+                pos: int(self.parent.width)*.28, int(self.parent.height)*0.68
+                size: int(self.parent.width)*.03,  int(self.parent.height)*0.03
+
+            Color:
+                rgb: 0, 0, 0, 1
+            Rectangle:
+                pos: int(self.parent.width)*.28, int(self.parent.height)*0.05
+                size: int(self.parent.width)*.03,  int(self.parent.height)*0.63
+            
+
+            # Gráfico de Trajetoria 2D
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.32, int(self.parent.height)*0.44, int(self.parent.width)*.67, int(self.parent.height)*0.44
+                width: 2
+            Line:
+                points: int(self.parent.width)*.32, int(self.parent.height)*0.44, int(self.parent.width)*.32, int(self.parent.height)*0.71
+                width: 2
+            Line:
+                points: int(self.parent.width)*.67, int(self.parent.height)*0.44, int(self.parent.width)*.67, int(self.parent.height)*0.68
+                width: 2
+            Line:
+                points: int(self.parent.width)*.32, int(self.parent.height)*0.71, int(self.parent.width)*.38, int(self.parent.height)*0.71
+                width: 2
+            Line:
+                points: int(self.parent.width)*.38, int(self.parent.height)*0.71, int(self.parent.width)*.38, int(self.parent.height)*0.68
+                width: 2
+            Line:
+                points: int(self.parent.width)*.38, int(self.parent.height)*0.68, int(self.parent.width)*.67, int(self.parent.height)*0.68
+                width: 2
+            Color:
+                rgb: .9, .9, .9
+            Rectangle:
+                pos: int(self.parent.width)*.32, int(self.parent.height)*0.68
+                size: int(self.parent.width)*.06,  int(self.parent.height)*0.03
+            Color:
+                rgb: .7, .7, .7
+            Rectangle:
+                pos: int(self.parent.width)*.32, int(self.parent.height)*0.44
+                size: int(self.parent.width)*.35,  int(self.parent.height)*0.24
+           
 
 
             
@@ -97,7 +184,7 @@
             keep_ratio: True
             size_hint: .10, .1
             pos_hint: {'top': 1, 'left': 1}
-            source: 'imgs/logo_supernova_velha.png'
+            source: 'imgs/logo_supernova_branca.png'
         Button:
             background_normal: 'imgs/desconectado.png'
             size_hint: 0.08, 0.08
@@ -391,3 +478,33 @@
             MapMarkerPopup:
                 lat: -21.785624346951103
                 lon: -43.352172024699804
+
+    FloatLayout:
+        Label:
+            text: 'Posição do foguete'
+            font_size: 20
+            color: 0, 0, 0, 1
+            bold: True
+            size_hint: None, None
+            size: self.texture_size
+            pos_hint: {'x': .325, 'y': .405}
+        Label:
+            text: 'Altitude'
+            font_size: 20
+            color: 0, 0, 0, 1
+            bold: True
+            size_hint: None, None
+            size: self.texture_size
+            pos_hint: {'x': .2815 , 'y':.685}
+        Label:
+            text: 'Trajetória'
+            font_size: 20
+            color: 0, 0, 0, 1
+            bold: True
+            size_hint: None, None
+            size: self.texture_size
+            pos_hint: {'x': .325, 'y': .685}
+
+        
+
+

@@ -7,7 +7,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 
 
-class MainWidget(BoxLayout):
+class MainWidget(FloatLayout):
     '''
     Widget principal do supervisório
     '''
