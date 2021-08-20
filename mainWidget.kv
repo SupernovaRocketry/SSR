@@ -140,7 +140,7 @@
                 size: int(self.parent.width)*.03,  int(self.parent.height)*0.63
             
 
-            # Gráfico de Trajetoria 2D
+            # Gráfico de Giroscopio
             Color:
                 rgb: .5, .5, .5
             Line:
@@ -174,12 +174,72 @@
                 size: int(self.parent.width)*.35,  int(self.parent.height)*0.24
 
 
-            # Area para Giroscopio
+            # Area para Trajetória
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.68, int(self.parent.height)*0.05, int(self.parent.width)*.985, int(self.parent.height)*0.05
+                width: 2
+            Line:
+                points: int(self.parent.width)*.68, int(self.parent.height)*0.05, int(self.parent.width)*.68, int(self.parent.height)*0.43
+                width: 2
+            Line:
+                points: int(self.parent.width)*.985, int(self.parent.height)*0.05, int(self.parent.width)*.985, int(self.parent.height)*0.40
+                width: 2
+            Line:
+                points: int(self.parent.width)*.68, int(self.parent.height)*0.43, int(self.parent.width)*.74, int(self.parent.height)*0.43
+                width: 2
+            Line:
+                points: int(self.parent.width)*.74, int(self.parent.height)*0.43, int(self.parent.width)*.74, int(self.parent.height)*0.40
+                width: 2
+            Line:
+                points: int(self.parent.width)*.74, int(self.parent.height)*0.40, int(self.parent.width)*.985, int(self.parent.height)*0.40
+                width: 2
+            Color:
+                rgb: .9, .9, .9
+            Rectangle:
+                pos: int(self.parent.width)*.68, int(self.parent.height)*0.40
+                size: int(self.parent.width)*.06,  int(self.parent.height)*0.03
             Color:
                 rgb: .7, .7, .7
             Rectangle:
                 pos: int(self.parent.width)*.68, int(self.parent.height)*0.05
                 size: int(self.parent.width)*.305,  int(self.parent.height)*0.35
+
+            # Area para Acelerometro            
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.68, int(self.parent.height)*0.44, int(self.parent.width)*.985, int(self.parent.height)*0.44
+                width: 2
+            Line:
+                points: int(self.parent.width)*.68, int(self.parent.height)*0.44, int(self.parent.width)*.68, int(self.parent.height)*0.71
+                width: 2
+            Line:
+                points: int(self.parent.width)*.985, int(self.parent.height)*0.44, int(self.parent.width)*.985, int(self.parent.height)*0.68
+                width: 2
+            Line:
+                points: int(self.parent.width)*.68, int(self.parent.height)*0.71, int(self.parent.width)*.74, int(self.parent.height)*0.71
+                width: 2
+            Line:
+                points: int(self.parent.width)*.74, int(self.parent.height)*0.71, int(self.parent.width)*.74, int(self.parent.height)*0.68
+                width: 2
+            Line:
+                points: int(self.parent.width)*.74, int(self.parent.height)*0.68, int(self.parent.width)*.985, int(self.parent.height)*0.68
+                width: 2
+            Color:
+                rgb: .9, .9, .9
+            Rectangle:
+                pos: int(self.parent.width)*.68, int(self.parent.height)*0.68
+                size: int(self.parent.width)*.06,  int(self.parent.height)*0.03
+            Color:
+                rgb: .7, .7, .7
+            Rectangle:
+                pos: int(self.parent.width)*.68, int(self.parent.height)*0.44
+                size: int(self.parent.width)*.305,  int(self.parent.height)*0.24
+            
+            
+
            
 
 
@@ -487,55 +547,14 @@
             MapMarkerPopup:
                 lat: -21.785624346951103
                 lon: -43.352172024699804
-
-    FloatLayout:
-        # Label:
-        #     text: 'Posição do foguete'
-        #     font_size: 20
-        #     color: 0, 0, 0, 1
-        #     bold: True
-        #     size_hint: None, None
-        #     size: self.texture_size
-        #     pos_hint: {'x': .325, 'y': .405}
-        # Label:
-        #     text: 'Altitude'
-        #     font_size: 20
-        #     color: 0, 0, 0, 1
-        #     bold: True
-        #     size_hint: None, None
-        #     size: self.texture_size
-        #     pos_hint: {'x': .2815 , 'y':.685}
-        # Label:
-        #     text: 'Trajetória'
-        #     font_size: 20
-        #     color: 0, 0, 0, 1
-        #     bold: True
-        #     size_hint: None, None
-        #     size: self.texture_size
-        #     pos_hint: {'x': .325, 'y': .685}
-        
-    # BoxLayout:
-    #     orientation: 'vertical'
-    #     pos_hint: {'x': .325, 'y': .685}
-    #     size_hint: (.06, .20)  
-    #     Label:
-    #         text: 'Trajetória'
-    #         text_size: self.size
-    #         font_size: 20
-    #         valign: 'top'
-    #         haling: 'left'
-    #         color: 0, 0, 0, 1
-    #         bold: True
-    #         #size_hint: None, None
-    #         size: self.texture_size
-        
-
+       
+    # Titulos Area Grafica
     BoxLayout:
         orientation:'vertical'
         size_hint: .06, .03
         pos_hint: {'x': .325, 'y': .685}
         Label:
-            text: 'Trajetória'
+            text: 'Giroscópio'
             bold: True
             text_size: self.size
             valign: 'bottom'
@@ -568,12 +587,29 @@
             halign: 'left'
             font_size: self.parent.width/4
             color: 0, 0, 0, 1
-        
 
-
-
-
-
-    FloatLayout:
+    BoxLayout:
+        orientation:'vertical'
+        size_hint: .06, .03
+        pos_hint: {'x': .685 , 'y':.405}
         Label:
-            text:'aaaaaaaaaa'
+            text: 'Trajetória'
+            bold: True
+            text_size: self.size
+            valign: 'bottom'
+            halign: 'left'
+            font_size: self.parent.width/9
+            color: 0, 0, 0, 1
+    
+    BoxLayout:
+        orientation:'vertical'
+        size_hint: .06, .03
+        pos_hint: {'x': .685 , 'y':.685}
+        Label:
+            text: 'Acelerômetro'
+            bold: True
+            text_size: self.size
+            valign: 'bottom'
+            halign: 'left'
+            font_size: self.parent.width/9
+            color: 0, 0, 0, 1
