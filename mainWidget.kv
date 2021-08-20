@@ -164,6 +164,7 @@
             Color:
                 rgb: .9, .9, .9
             Rectangle:
+                id: 'AreaTextoTrajetoria'
                 pos: int(self.parent.width)*.32, int(self.parent.height)*0.68
                 size: int(self.parent.width)*.06,  int(self.parent.height)*0.03
             Color:
@@ -171,6 +172,14 @@
             Rectangle:
                 pos: int(self.parent.width)*.32, int(self.parent.height)*0.44
                 size: int(self.parent.width)*.35,  int(self.parent.height)*0.24
+
+
+            # Area para Giroscopio
+            Color:
+                rgb: .7, .7, .7
+            Rectangle:
+                pos: int(self.parent.width)*.68, int(self.parent.height)*0.05
+                size: int(self.parent.width)*.305,  int(self.parent.height)*0.35
            
 
 
@@ -496,15 +505,31 @@
             size_hint: None, None
             size: self.texture_size
             pos_hint: {'x': .2815 , 'y':.685}
+        # Label:
+        #     text: 'Trajetória'
+        #     font_size: 20
+        #     color: 0, 0, 0, 1
+        #     bold: True
+        #     size_hint: None, None
+        #     size: self.texture_size
+        #     pos_hint: {'x': .325, 'y': .685}
+        
+    BoxLayout:
+        orientation: 'vertical'
+        pos_hint: {'x': .325, 'y': .685}
+        size_hint: (.06, .03)  
         Label:
             text: 'Trajetória'
-            font_size: 20
+            #text_size: root.width, None
+            fontsize: 20
+            valign: 'bottom'
+            haling: 'left'
             color: 0, 0, 0, 1
             bold: True
             size_hint: None, None
             size: self.texture_size
-            pos_hint: {'x': .325, 'y': .685}
-
+            # pos_hint: {'x': .325, 'y': .685}
         
-
-
+    FloatLayout:
+        Label:
+            text:'aaaaaaaaaa'
