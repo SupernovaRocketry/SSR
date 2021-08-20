@@ -5,7 +5,8 @@ from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
-
+from kivy.core.window import Window
+from kivy.modules import inspector
 
 class MainWidget(FloatLayout):
     '''
@@ -19,6 +20,7 @@ class MainWidget(FloatLayout):
         super().__init__(**kwargs)
         self._login = kwargs.get('login')
         self._senha = kwargs.get('senha')
-
+        Window.fullscreen = False
+        Window.maximize()
 
     pass

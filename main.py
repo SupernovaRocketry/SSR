@@ -4,8 +4,7 @@ from grafico2d import Grafico2d
 from mainWidget import *
 from kivy.app import App
 from kivy.lang.builder import Builder
-from kivy.core.window import Window
-from kivy.config import Config
+
 
 
 
