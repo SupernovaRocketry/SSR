@@ -265,9 +265,9 @@
             Rectangle:
                 pos: int(self.parent.width)*.02, int(self.parent.height)*0.04
                 size: int(self.parent.width)*.07,  int(self.parent.height)*0.09
-            Line:
-                points: int(self.parent.width)*0.01, int(self.parent.height)*0.18, int(self.parent.width)*0.26, int(self.parent.height)*0.18
-                width: 2
+            # Line:
+            #     points: int(self.parent.width)*0.01, int(self.parent.height)*0.18, int(self.parent.width)*0.26, int(self.parent.height)*0.18
+            #     width: 2
 
 
 
@@ -334,9 +334,9 @@
             Rectangle:
                 pos: int(self.parent.width)*.18, int(self.parent.height)*0.21
                 size: int(self.parent.width)*.07,  int(self.parent.height)*0.09
-            Line:
-                points: int(self.parent.width)*0.01, int(self.parent.height)*0.35, int(self.parent.width)*0.26, int(self.parent.height)*0.35
-                width: 2
+            # Line:
+            #     points: int(self.parent.width)*0.01, int(self.parent.height)*0.35, int(self.parent.width)*0.26, int(self.parent.height)*0.35
+            #     width: 2
 
 
 
@@ -407,16 +407,91 @@
                 width: 2
             Color:
                 rgb: .7, .7, .7
-            Color:
-                rgb: .7, .7, .7
             Rectangle:
                 pos: int(self.parent.width)*.18, int(self.parent.height)*0.38
                 size: int(self.parent.width)*.07,  int(self.parent.height)*0.09
-            Line:
-                points: int(self.parent.width)*0.01, int(self.parent.height)*0.52, int(self.parent.width)*0.26, int(self.parent.height)*0.52
-                width: 2
+            # Line:
+            #     points: int(self.parent.width)*0.01, int(self.parent.height)*0.52, int(self.parent.width)*0.26, int(self.parent.height)*0.52
+            #     width: 2
             
         
+            # ------------------ GPS
+            # ------ Latitude
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.53, int(self.parent.width)*.09, int(self.parent.height)*0.53
+                width: 2
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.62, int(self.parent.width)*.09, int(self.parent.height)*0.62
+                width: 2
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.53, int(self.parent.width)*.02, int(self.parent.height)*0.62
+                width: 2
+            Line:
+                points: int(self.parent.width)*.09, int(self.parent.height)*0.53, int(self.parent.width)*.09, int(self.parent.height)*0.62
+                width: 2
+            Color:
+                rgb: .7, .7, .7
+            Rectangle:
+                pos: int(self.parent.width)*.02, int(self.parent.height)*0.53
+                size: int(self.parent.width)*.07,  int(self.parent.height)*0.09
+
+            # ------ Latitude
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.1, int(self.parent.height)*0.53, int(self.parent.width)*.17, int(self.parent.height)*0.53
+                width: 2
+            Line:
+                points: int(self.parent.width)*.1, int(self.parent.height)*0.62, int(self.parent.width)*.17, int(self.parent.height)*0.62
+                width: 2
+            Line:
+                points: int(self.parent.width)*.1, int(self.parent.height)*0.53, int(self.parent.width)*.1, int(self.parent.height)*0.62
+                width: 2
+            Line:
+                points: int(self.parent.width)*.17, int(self.parent.height)*0.53, int(self.parent.width)*.17, int(self.parent.height)*0.62
+                width: 2
+            Color:
+                rgb: .7, .7, .7
+            Rectangle:
+                pos: int(self.parent.width)*.1, int(self.parent.height)*0.53
+                size: int(self.parent.width)*.07,  int(self.parent.height)*0.09
+            # Line:
+            #     points: int(self.parent.width)*0.01, int(self.parent.height)*0.67, int(self.parent.width)*0.26, int(self.parent.height)*0.67
+            #     width: 2
+
+
+
+
+
+            # ------------------ Altitude
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.68, int(self.parent.width)*.09, int(self.parent.height)*0.68
+                width: 2
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.77, int(self.parent.width)*.09, int(self.parent.height)*0.77
+                width: 2
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.68, int(self.parent.width)*.02, int(self.parent.height)*0.77
+                width: 2
+            Line:
+                points: int(self.parent.width)*.09, int(self.parent.height)*0.68, int(self.parent.width)*.09, int(self.parent.height)*0.77
+                width: 2
+            Color:
+                rgb: .7, .7, .7
+            Rectangle:
+                pos: int(self.parent.width)*.02, int(self.parent.height)*0.68
+                size: int(self.parent.width)*.07,  int(self.parent.height)*0.09
+            # Line:
+            #     points: int(self.parent.width)*0.01, int(self.parent.height)*0.82, int(self.parent.width)*0.26, int(self.parent.height)*0.82
+            #     width: 2
+            
+            
+
+
 
         # Dados ambiente superior
         Image:
@@ -657,9 +732,9 @@
         BoxLayout:
             orientation: 'vertical'
             pos_hint: {'x': .02, 'y': .31} 
-            size_hint: (.07, .03)
+            size_hint: (.2, .03)
             Label:
-                text: 'Giroscopio'
+                text: 'Giroscópio'
                 text_size: self.size
                 valign: 'center'
                 halign: 'left'
@@ -707,9 +782,9 @@
         BoxLayout:
             orientation: 'vertical'
             pos_hint: {'x': .02, 'y': .48} 
-            size_hint: (.09, .03)
+            size_hint: (.2, .03)
             Label:
-                text: 'Acelerometro'
+                text: 'Acelerômetro'
                 text_size: self.size
                 valign: 'center'
                 halign: 'left'
@@ -752,6 +827,62 @@
                 color: 0, 0, 0, 1
 
 
+        # ------------------------- GPS ------------------------------
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'x': .02, 'y': .63} 
+            size_hint: (.09, .03)
+            Label:
+                text: 'Latitude'
+                text_size: self.size
+                valign: 'center'
+                halign: 'left'
+                font_size: self.parent.height
+                color: 0, 0, 0, 1
+
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'x': .1, 'y': .63} 
+            size_hint: (.09, .03)
+            Label:
+                text: 'Longitude'
+                text_size: self.size
+                valign: 'center'
+                halign: 'left'
+                font_size: self.parent.height
+                color: 0, 0, 0, 1
+
+
+
+
+
+        # ------------------------- Altitude ------------------------------
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'x': .02, 'y': .78} 
+            size_hint: (.09, .03)
+            Label:
+                text: 'Altitude'
+                text_size: self.size
+                valign: 'center'
+                halign: 'left'
+                font_size: self.parent.height
+                color: 0, 0, 0, 1
+
+
+
+        # ------------------------ Dados Recebidos ------------------------
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'x': .01, 'y': .82} 
+            size_hint: (.25, .06)
+            Label:
+                text: 'Dados Recebidos'
+                text_size: self.size
+                valign: 'center'
+                halign: 'center'
+                font_size: self.parent.height
+                color: 0, 0, 0, 1
         # ------------------------------------------------------------------------------------------------------------
         # ------------------------------------------ PARTE BOOLEANA --------------------------------------------------
         # ------------------------------------------------------------------------------------------------------------
