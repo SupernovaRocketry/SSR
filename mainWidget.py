@@ -5,10 +5,22 @@ from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
+from kivy.core.window import Window
+from kivy.modules import inspector
 
+class MainWidget(FloatLayout):
+    '''
+    Widget principal do supervisório
+    '''
 
-class MainWidget(BoxLayout):
-    def incrementar(self):
-        self.ids['lb'].text = str(int(self.ids['lb'].text)+1)
+    def __init__(self, **kwargs):
+        '''
+        Construtor do widget principal
+        '''
+        super().__init__(**kwargs)
+        self._login = kwargs.get('login')
+        self._senha = kwargs.get('senha')
+        Window.fullscreen = False
+        Window.maximize()
 
     pass

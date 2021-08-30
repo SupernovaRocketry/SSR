@@ -1,98 +1,515 @@
 #:kivy 1.11.1
-
-# <MainWidget>:
-#     orientation : 'horizontal'
-#     Button:
-#         id: btn
-#         text: 'Button 1'
-#         on_release: root.incrementar()
-#     Label:
-#         id: lb
-#         text: '0'
+#: import MapView kivy.garden.mapview.MapView
+#: import utils kivy.utils
 
 <MainWidget>:
-    # orientation: 'vertical'
-    # canvas:
-    #     Color:
-    #         rgb: .5, .5, .5
-    #     Rectangle:
-    #         size: self.size
-    # BoxLayout:
-    #     orientation: 'horizontal'
-    #     size_hint: (1, 0.1)
-    #     spacing: 10
-    #     Image:
-    #         id: logo_supernova
-    #         allow_stretch: True
-    #         keep_ratio: True
-    #         size_hint_y: None
-    #         size_hint_x: None
-    #         size: self.parent.width*self.image_ratio*.17, self.parent.height*self.image_ratio*.17
-    #         source: 'imgs/logo_supernova.jpeg'
-    #         pos_hint: {'top':1, 'left':1}
-    #     Label:
-    #         id: textSupernova
-    #         text: 'SSR - SUPERVISÓRIO SUPERNOVA ROCKETRY'
-    #         size_hint_x: None
-    #         size_hint_y: None
-    #         width: self.parent.width*.3
-    #         pos_hint: {'top':1}
-    #     Label:
-    #         id: nome_setor
-    #         size_hint_x: None
-    #         size_hint_y: None
-    #         width: self.parent.width*.3
-    #         text: 'Setor Eletrônica'
-    #         pos_hint: {'top':1}
-    #     Image:
-    #         id: img_con
-    #         allow_stretch: True
-    #         keep_ratio: True
-    #         size_hint_y: None
-    #         size_hint_x: None
-    #         size: self.parent.width*self.image_ratio*.05, self.parent.height*self.image_ratio*.05
-    #         source: 'imgs/desconectado.png'
-    #         pos_hint: {'top': 1, 'right': 1}
-    
-    # FloatLayout:
-    #     size: self.width, .1*self.height
-    #     canvas:
-    #         Color:
-    #             rgb: .3, .4, .73
-    #         Rectangle:
-    #             size: self.parent.width, self.parent.height
-    #             pos: {'x' : -0.45, 'y': 0.01}
-
     FloatLayout:
-        # Ambiente superior
         canvas:
+
+            # Ambiente superior
             Color:
-                rgb: .3, .3, .3
+                rgb: 0, 0, 0
             Rectangle:
                 size: self.size
             Color:
-                rgb: .5, .5, .5
+                rgb: .9, .9, .9
             Rectangle:
                 size: int(self.parent.width), int(self.parent.height)*0.90
                 pos: 0,0
             Color:
-                rgb: .9, 0, 0
+                #rgb: .9, 0, 0
+                rgb: utils.get_color_from_hex('#7D0101')
             Line:
                 points: (0, 0.9*self.parent.height, self.parent.width, 0.9*self.parent.height)
                 width: 5
+            
+            # Ambiente Lateral esquerdo
+            Color:
+                rgb: 0.8, 0.8, 0.8
+            Rectangle:
+                size: int(self.parent.width)*.25, int(self.parent.height)*0.85
+                pos: int(self.parent.width)*.01,  int(self.parent.height)*0.03
+            Color:
+                rgb: .7 , .7, .7
+            Line:
+                points: (int(self.parent.width)*.01, int(self.parent.height)*0.03, int(self.parent.width)*0.01, int(self.parent.height)*0.88)
+                width: 2
+            Line:
+                points: (int(self.parent.width)*.26, int(self.parent.height)*0.03, int(self.parent.width)*0.26, int(self.parent.height)*0.88)
+                width: 2
+            Line:
+                points: (int(self.parent.width)*.01, int(self.parent.height)*0.03, int(self.parent.width)*0.26, int(self.parent.height)*0.03)
+                width: 2
+            Line:
+                points: (int(self.parent.width)*.01, int(self.parent.height)*0.88, int(self.parent.width)*0.26, int(self.parent.height)*0.88)
+                width: 2
+            
+            # Ambiente Superior booleano
+            Color:
+                rgb: .8, .8, .8
+            Rectangle:
+                size: int(self.parent.width)*.724, int(self.parent.height)*0.13
+                pos: int(self.parent.width)*.27, int(self.parent.height)*0.75
+            Color:
+                rgb: .7, .7, .7
+            Line:
+                points: (int(self.parent.width)*.27, int(self.parent.height)*0.75, int(self.parent.width)*.994, int(self.parent.height)*0.75)
+                width: 2
+            Line:
+                points: (int(self.parent.width)*.27, int(self.parent.height)*0.88, int(self.parent.width)*.994, int(self.parent.height)*0.88)
+                width: 2
+            Line:
+                points: int(self.parent.width)*.27, int(self.parent.height)*0.75, int(self.parent.width)*.27, int(self.parent.height)*0.88
+                width: 2
+            Line:
+                points: int(self.parent.width)*.994, int(self.parent.height)*0.75, int(self.parent.width)*.994, int(self.parent.height)*0.88
+                width: 2
+
+            # Ambiente Grafico
+            Color:
+                rgb: .8 ,.8 ,.8
+            Rectangle:
+                pos: int(self.parent.width)*.27, int(self.parent.height)*0.03
+                size: int(self.parent.width)*.724,  int(self.parent.height)*0.70
+            Color:
+                rgb: .7, .7, .7
+            Line:
+                points: int(self.parent.width)*.27, int(self.parent.height)*0.03, int(self.parent.width)*.27, int(self.parent.height)*0.73
+                width: 2
+            Line:
+                points: int(self.parent.width)*.27, int(self.parent.height)*0.03, int(self.parent.width)*.994, int(self.parent.height)*0.03
+                width: 2
+            Line:
+                points: int(self.parent.width)*.994, int(self.parent.height)*0.03, int(self.parent.width)*.994, int(self.parent.height)*0.73
+                width: 2
+            Line:
+                points: int(self.parent.width)*.27, int(self.parent.height)*0.73, int(self.parent.width)*.994, int(self.parent.height)*0.73
+                width: 2
+
+            # Borda Mapa em Tempo Real
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.32, int(self.parent.height)*0.05, int(self.parent.width)*.67, int(self.parent.height)*0.05
+                width: 2
+            Line:
+                points: int(self.parent.width)*.32, int(self.parent.height)*0.05, int(self.parent.width)*.32, int(self.parent.height)*0.43
+                width: 2
+            Line:
+                points: int(self.parent.width)*.67, int(self.parent.height)*0.05, int(self.parent.width)*.67, int(self.parent.height)*0.40
+                width: 2
+            Line:
+                points: int(self.parent.width)*.40, int(self.parent.height)*0.40, int(self.parent.width)*.67, int(self.parent.height)*0.40
+                width: 2
+            Line:
+                points: int(self.parent.width)*.40, int(self.parent.height)*0.40, int(self.parent.width)*.40, int(self.parent.height)*0.43
+                width: 2
+            Line:
+                points: int(self.parent.width)*.40, int(self.parent.height)*0.43, int(self.parent.width)*.32, int(self.parent.height)*0.43
+                width: 2
+            Color:
+                rgb: .9, .9, .9
+            Rectangle:
+                pos: int(self.parent.width)*.32, int(self.parent.height)*0.40
+                size: int(self.parent.width)*.08,  int(self.parent.height)*0.03
+
+
+            # Area reservada para medidor de Altitude
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.28, int(self.parent.height)*0.05, int(self.parent.width)*.31, int(self.parent.height)*0.05
+                width: 2
+            Line:
+                points: int(self.parent.width)*.28, int(self.parent.height)*0.05, int(self.parent.width)*.28, int(self.parent.height)*0.71
+                width: 2
+            Line:
+                points: int(self.parent.width)*.31, int(self.parent.height)*0.05, int(self.parent.width)*.31, int(self.parent.height)*0.71
+                width: 2
+            Line:
+                points: int(self.parent.width)*.28, int(self.parent.height)*0.71, int(self.parent.width)*.31, int(self.parent.height)*0.71
+                width: 2
+            Color:
+                rgb: .9, .9, .9
+            Rectangle:
+                pos: int(self.parent.width)*.28, int(self.parent.height)*0.68
+                size: int(self.parent.width)*.03,  int(self.parent.height)*0.03
+
+            Color:
+                rgb: 0, 0, 0, 1
+            Rectangle:
+                pos: int(self.parent.width)*.28, int(self.parent.height)*0.05
+                size: int(self.parent.width)*.03,  int(self.parent.height)*0.63
+            
+
+            # Gráfico de Giroscopio
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.32, int(self.parent.height)*0.44, int(self.parent.width)*.67, int(self.parent.height)*0.44
+                width: 2
+            Line:
+                points: int(self.parent.width)*.32, int(self.parent.height)*0.44, int(self.parent.width)*.32, int(self.parent.height)*0.71
+                width: 2
+            Line:
+                points: int(self.parent.width)*.67, int(self.parent.height)*0.44, int(self.parent.width)*.67, int(self.parent.height)*0.68
+                width: 2
+            Line:
+                points: int(self.parent.width)*.32, int(self.parent.height)*0.71, int(self.parent.width)*.38, int(self.parent.height)*0.71
+                width: 2
+            Line:
+                points: int(self.parent.width)*.38, int(self.parent.height)*0.71, int(self.parent.width)*.38, int(self.parent.height)*0.68
+                width: 2
+            Line:
+                points: int(self.parent.width)*.38, int(self.parent.height)*0.68, int(self.parent.width)*.67, int(self.parent.height)*0.68
+                width: 2
+            Color:
+                rgb: .9, .9, .9
+            Rectangle:
+                id: 'AreaTextoTrajetoria'
+                pos: int(self.parent.width)*.32, int(self.parent.height)*0.68
+                size: int(self.parent.width)*.06,  int(self.parent.height)*0.03
+            Color:
+                rgb: .7, .7, .7
+            Rectangle:
+                pos: int(self.parent.width)*.32, int(self.parent.height)*0.44
+                size: int(self.parent.width)*.35,  int(self.parent.height)*0.24
+
+
+            # Area para Trajetória
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.68, int(self.parent.height)*0.05, int(self.parent.width)*.985, int(self.parent.height)*0.05
+                width: 2
+            Line:
+                points: int(self.parent.width)*.68, int(self.parent.height)*0.05, int(self.parent.width)*.68, int(self.parent.height)*0.43
+                width: 2
+            Line:
+                points: int(self.parent.width)*.985, int(self.parent.height)*0.05, int(self.parent.width)*.985, int(self.parent.height)*0.40
+                width: 2
+            Line:
+                points: int(self.parent.width)*.68, int(self.parent.height)*0.43, int(self.parent.width)*.74, int(self.parent.height)*0.43
+                width: 2
+            Line:
+                points: int(self.parent.width)*.74, int(self.parent.height)*0.43, int(self.parent.width)*.74, int(self.parent.height)*0.40
+                width: 2
+            Line:
+                points: int(self.parent.width)*.74, int(self.parent.height)*0.40, int(self.parent.width)*.985, int(self.parent.height)*0.40
+                width: 2
+            Color:
+                rgb: .9, .9, .9
+            Rectangle:
+                pos: int(self.parent.width)*.68, int(self.parent.height)*0.40
+                size: int(self.parent.width)*.06,  int(self.parent.height)*0.03
+            Color:
+                rgb: .7, .7, .7
+            Rectangle:
+                pos: int(self.parent.width)*.68, int(self.parent.height)*0.05
+                size: int(self.parent.width)*.305,  int(self.parent.height)*0.35
+
+            # Area para Acelerometro            
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.68, int(self.parent.height)*0.44, int(self.parent.width)*.985, int(self.parent.height)*0.44
+                width: 2
+            Line:
+                points: int(self.parent.width)*.68, int(self.parent.height)*0.44, int(self.parent.width)*.68, int(self.parent.height)*0.71
+                width: 2
+            Line:
+                points: int(self.parent.width)*.985, int(self.parent.height)*0.44, int(self.parent.width)*.985, int(self.parent.height)*0.68
+                width: 2
+            Line:
+                points: int(self.parent.width)*.68, int(self.parent.height)*0.71, int(self.parent.width)*.74, int(self.parent.height)*0.71
+                width: 2
+            Line:
+                points: int(self.parent.width)*.74, int(self.parent.height)*0.71, int(self.parent.width)*.74, int(self.parent.height)*0.68
+                width: 2
+            Line:
+                points: int(self.parent.width)*.74, int(self.parent.height)*0.68, int(self.parent.width)*.985, int(self.parent.height)*0.68
+                width: 2
+            Color:
+                rgb: .9, .9, .9
+            Rectangle:
+                pos: int(self.parent.width)*.68, int(self.parent.height)*0.68
+                size: int(self.parent.width)*.06,  int(self.parent.height)*0.03
+            Color:
+                rgb: .7, .7, .7
+            Rectangle:
+                pos: int(self.parent.width)*.68, int(self.parent.height)*0.44
+                size: int(self.parent.width)*.305,  int(self.parent.height)*0.24
+
+
+
+
+
+            # ----------------------------Dados Lateral Esquerda:
+            # ---------- RSSI
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.04, int(self.parent.width)*.09, int(self.parent.height)*0.04
+                width: 2
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.13, int(self.parent.width)*.09, int(self.parent.height)*0.13
+                width: 2
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.04, int(self.parent.width)*.02, int(self.parent.height)*0.13
+                width: 2
+            Line:
+                points: int(self.parent.width)*.09, int(self.parent.height)*0.04, int(self.parent.width)*.09, int(self.parent.height)*0.13
+                width: 2
+            Color:
+                rgb: .7, .7, .7
+            Rectangle:
+                pos: int(self.parent.width)*.02, int(self.parent.height)*0.04
+                size: int(self.parent.width)*.07,  int(self.parent.height)*0.09
+            # Line:
+            #     points: int(self.parent.width)*0.01, int(self.parent.height)*0.18, int(self.parent.width)*0.26, int(self.parent.height)*0.18
+            #     width: 2
+
+
+
+            # ---------- Giroscopio
+            # ------ X
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.21, int(self.parent.width)*.09, int(self.parent.height)*0.21
+                width: 2
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.30, int(self.parent.width)*.09, int(self.parent.height)*0.30
+                width: 2
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.21, int(self.parent.width)*.02, int(self.parent.height)*0.30
+                width: 2
+            Line:
+                points: int(self.parent.width)*.09, int(self.parent.height)*0.21, int(self.parent.width)*.09, int(self.parent.height)*0.30
+                width: 2
+            Color:
+                rgb: .7, .7, .7
+            Rectangle:
+                pos: int(self.parent.width)*.02, int(self.parent.height)*0.21
+                size: int(self.parent.width)*.07,  int(self.parent.height)*0.09
+
+            # ------ Y
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.1, int(self.parent.height)*0.21, int(self.parent.width)*.17, int(self.parent.height)*0.21
+                width: 2
+            Line:
+                points: int(self.parent.width)*.1, int(self.parent.height)*0.30, int(self.parent.width)*.17, int(self.parent.height)*0.30
+                width: 2
+            Line:
+                points: int(self.parent.width)*.1, int(self.parent.height)*0.21, int(self.parent.width)*.1, int(self.parent.height)*0.30
+                width: 2
+            Line:
+                points: int(self.parent.width)*.17, int(self.parent.height)*0.21, int(self.parent.width)*.17, int(self.parent.height)*0.30
+                width: 2
+            Color:
+                rgb: .7, .7, .7
+            Rectangle:
+                pos: int(self.parent.width)*.1, int(self.parent.height)*0.21
+                size: int(self.parent.width)*.07,  int(self.parent.height)*0.09
+
+            # ------ Z
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.18, int(self.parent.height)*0.21, int(self.parent.width)*.25, int(self.parent.height)*0.21
+                width: 2
+            Line:
+                points: int(self.parent.width)*.18, int(self.parent.height)*0.30, int(self.parent.width)*.25, int(self.parent.height)*0.30
+                width: 2
+            Line:
+                points: int(self.parent.width)*.18, int(self.parent.height)*0.21, int(self.parent.width)*.18, int(self.parent.height)*0.30
+                width: 2
+            Line:
+                points: int(self.parent.width)*.25, int(self.parent.height)*0.21, int(self.parent.width)*.25, int(self.parent.height)*0.30
+                width: 2
+            Color:
+                rgb: .7, .7, .7
+            Rectangle:
+                pos: int(self.parent.width)*.18, int(self.parent.height)*0.21
+                size: int(self.parent.width)*.07,  int(self.parent.height)*0.09
+            # Line:
+            #     points: int(self.parent.width)*0.01, int(self.parent.height)*0.35, int(self.parent.width)*0.26, int(self.parent.height)*0.35
+            #     width: 2
+
+
+
+
+            # ---------- Acelerometro
+            # ------ X
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.38, int(self.parent.width)*.09, int(self.parent.height)*0.38
+                width: 2
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.47, int(self.parent.width)*.09, int(self.parent.height)*0.47
+                width: 2
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.38, int(self.parent.width)*.02, int(self.parent.height)*0.47
+                width: 2
+            Line:
+                points: int(self.parent.width)*.09, int(self.parent.height)*0.38, int(self.parent.width)*.09, int(self.parent.height)*0.47
+                width: 2
+            Color:
+                rgb: .7, .7, .7
+            Rectangle:
+                pos: int(self.parent.width)*.02, int(self.parent.height)*0.38
+                size: int(self.parent.width)*.07,  int(self.parent.height)*0.09
+            
+
+
+
+            # ------ Y
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.1, int(self.parent.height)*0.38, int(self.parent.width)*.17, int(self.parent.height)*0.38
+                width: 2
+            Line:
+                points: int(self.parent.width)*.1, int(self.parent.height)*0.47, int(self.parent.width)*.17, int(self.parent.height)*0.47
+                width: 2
+            Line:
+                points: int(self.parent.width)*.1, int(self.parent.height)*0.38, int(self.parent.width)*.1, int(self.parent.height)*0.47
+                width: 2
+            Line:
+                points: int(self.parent.width)*.17, int(self.parent.height)*0.38, int(self.parent.width)*.17, int(self.parent.height)*0.47
+                width: 2
+            Color:
+                rgb: .7, .7, .7
+            Rectangle:
+                pos: int(self.parent.width)*.1, int(self.parent.height)*0.38
+                size: int(self.parent.width)*.07,  int(self.parent.height)*0.09
+
+
+
+
+             # ------ Z
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.18, int(self.parent.height)*0.38, int(self.parent.width)*.25, int(self.parent.height)*0.38
+                width: 2
+            Line:
+                points: int(self.parent.width)*.18, int(self.parent.height)*0.47, int(self.parent.width)*.25, int(self.parent.height)*0.47
+                width: 2
+            Line:
+                points: int(self.parent.width)*.18, int(self.parent.height)*0.38, int(self.parent.width)*.18, int(self.parent.height)*0.47
+                width: 2
+            Line:
+                points: int(self.parent.width)*.25, int(self.parent.height)*0.38, int(self.parent.width)*.25, int(self.parent.height)*0.47
+                width: 2
+            Color:
+                rgb: .7, .7, .7
+            Rectangle:
+                pos: int(self.parent.width)*.18, int(self.parent.height)*0.38
+                size: int(self.parent.width)*.07,  int(self.parent.height)*0.09
+            # Line:
+            #     points: int(self.parent.width)*0.01, int(self.parent.height)*0.52, int(self.parent.width)*0.26, int(self.parent.height)*0.52
+            #     width: 2
+            
         
+            # ------------------ GPS
+            # ------ Latitude
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.53, int(self.parent.width)*.09, int(self.parent.height)*0.53
+                width: 2
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.62, int(self.parent.width)*.09, int(self.parent.height)*0.62
+                width: 2
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.53, int(self.parent.width)*.02, int(self.parent.height)*0.62
+                width: 2
+            Line:
+                points: int(self.parent.width)*.09, int(self.parent.height)*0.53, int(self.parent.width)*.09, int(self.parent.height)*0.62
+                width: 2
+            Color:
+                rgb: .7, .7, .7
+            Rectangle:
+                pos: int(self.parent.width)*.02, int(self.parent.height)*0.53
+                size: int(self.parent.width)*.07,  int(self.parent.height)*0.09
+
+            # ------ Latitude
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.1, int(self.parent.height)*0.53, int(self.parent.width)*.17, int(self.parent.height)*0.53
+                width: 2
+            Line:
+                points: int(self.parent.width)*.1, int(self.parent.height)*0.62, int(self.parent.width)*.17, int(self.parent.height)*0.62
+                width: 2
+            Line:
+                points: int(self.parent.width)*.1, int(self.parent.height)*0.53, int(self.parent.width)*.1, int(self.parent.height)*0.62
+                width: 2
+            Line:
+                points: int(self.parent.width)*.17, int(self.parent.height)*0.53, int(self.parent.width)*.17, int(self.parent.height)*0.62
+                width: 2
+            Color:
+                rgb: .7, .7, .7
+            Rectangle:
+                pos: int(self.parent.width)*.1, int(self.parent.height)*0.53
+                size: int(self.parent.width)*.07,  int(self.parent.height)*0.09
+            # Line:
+            #     points: int(self.parent.width)*0.01, int(self.parent.height)*0.67, int(self.parent.width)*0.26, int(self.parent.height)*0.67
+            #     width: 2
+
+
+
+
+
+            # ------------------ Altitude
+            Color:
+                rgb: .5, .5, .5
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.68, int(self.parent.width)*.09, int(self.parent.height)*0.68
+                width: 2
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.77, int(self.parent.width)*.09, int(self.parent.height)*0.77
+                width: 2
+            Line:
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.68, int(self.parent.width)*.02, int(self.parent.height)*0.77
+                width: 2
+            Line:
+                points: int(self.parent.width)*.09, int(self.parent.height)*0.68, int(self.parent.width)*.09, int(self.parent.height)*0.77
+                width: 2
+            Color:
+                rgb: .7, .7, .7
+            Rectangle:
+                pos: int(self.parent.width)*.02, int(self.parent.height)*0.68
+                size: int(self.parent.width)*.07,  int(self.parent.height)*0.09
+            # Line:
+            #     points: int(self.parent.width)*0.01, int(self.parent.height)*0.82, int(self.parent.width)*0.26, int(self.parent.height)*0.82
+            #     width: 2
+            
+            
+
+
+
         # Dados ambiente superior
         Image:
             id: logo_supernova
             keep_ratio: True
             size_hint: .10, .1
             pos_hint: {'top': 1, 'left': 1}
-            source: 'imgs/logo_supernova_velha.png'
-        Image:
-            id: conectado
+            source: 'imgs/logo_supernova_branca.png'
+        Button:
+            background_normal: 'imgs/desconectado.png'
             size_hint: 0.08, 0.08
             pos_hint: {'top': .99, 'right':1}
-            source: 'imgs/desconectado.png'
+            
+        # Image:
+        #     id: conectado
+        #     size_hint: 0.08, 0.08
+        #     pos_hint: {'top': .99, 'right':1}
+        #     source: 'imgs/desconectado.png'
         BoxLayout:
             orientation:'horizontal'
             size_hint: .65, .10
@@ -100,157 +517,537 @@
             Label:
                 id: supervisorio
                 text: 'SUPERVISÓRIO SUPERNOVA ROCKETRY'
-                size_font: 32
+                #size_font: 32
+                bold: True
+                text_size: self.size
+                valign: 'center'
+                halign: 'center'
+                font_size: self.parent.width/50
             BoxLayout:
                 orientation: 'vertical'
                 Label:
                     id: eletronica
                     text: 'SETOR ELETRÔNICA'
-                    size_font: 32
+                    bold: True
+                    text_size: self.size
+                    valign: 'center'
+                    halign: 'center'
+                    font_size: self.parent.width/35
                 Label:
                     id: data
                     text: '29/05/2021'
-                    size_font: 14
+                    bold: True
+                    text_size: self.size
+                    valign: 'center'
+                    halign: 'center'
+                    font_size: self.parent.width/35
 
-        # Dados foguete
+        # ------------------------------------------------------------------------------------------------------------
+        # --------------------------------------- Dados foguete (ABA LATERAL) ----------------------------------------
+        # ------------------------------------------------------------------------------------------------------------
+
+        # BoxLayout:
+        #     orientation:'vertical'
+        #     size_hint: .25, .82
+        #     pos_hint: {'x': 0.025, 'y': 0.05}
+        #     Label:
+        #         text: 'Dados Recebidos'
+        #         bold: True
+        #         text_size: self.size
+        #         valign: 'top'
+        #         halign: 'center'
+        #         #font_size: 32
+        #         font_size: self.parent.width/15
+        #         pos_hint: {'x': -0.07, 'y': 2}
+        #         color: 0, 0, 0, 1
+        #     BoxLayout:
+        #         orientation:'vertical'
+        #         valign: 'top'                     
+        #         Label:
+        #             id: lb
+        #             text: "Altitude"
+        #             halign: 'left'
+        #             valign: 'top'
+        #             text_size: self.size
+        #             size_font: 20
+        #             color: 0, 0, 0, 1
+        #         Label:
+        #             id: textAltitude
+        #             text: 'dadoAltitude'
+        #             halign: 'left'
+        #             valign: 'top'
+        #             text_size: self.size
+        #             size_font: 14
+        #             color: 0, 0, 0, 1
+        #     BoxLayout:
+        #         orientation:'horizontal'
+        #         BoxLayout:
+        #             orientation: 'vertical'
+        #             Label:
+        #                 text: "Latitude"
+        #                 halign: 'left'
+        #                 text_size: self.size
+        #                 color: 0, 0, 0, 1                  
+        #             Label:
+        #                 text: "dadoLatitude"
+        #                 halign: 'left'
+        #                 text_size: self.size
+        #                 color: 0, 0, 0, 1
+        #         BoxLayout:
+        #             orientation: 'vertical'
+        #             Label:
+        #                 text: "Longitude"
+        #                 halign: 'left'
+        #                 text_size: self.size 
+        #                 color: 0, 0, 0, 1                 
+        #             Label:
+        #                 text: "dadoLongitude"
+        #                 halign: 'left'
+        #                 text_size: self.size
+        #                 color: 0, 0, 0, 1
+        #     BoxLayout:
+        #         orientation:'vertical'
+        #         valign: 'top'  
+        #         Label:
+        #             text: 'Acelerometro'
+        #             halign: 'left'
+        #             text_size: self.size
+        #             color: 0, 0, 0, 1
+        #         BoxLayout:
+        #             orientation:'horizontal'
+        #             BoxLayout:
+        #                 orientation:'vertical'
+        #                 Label:
+        #                     text: 'dadoX'
+        #                     halign: 'left'
+        #                     text_size: self.size
+        #                     color: 0, 0, 0, 1
+        #                 Label:
+        #                     text: 'x'
+        #                     halign: 'left'
+        #                     text_size: self.size
+        #                     color: 0, 0, 0, 1
+        #             BoxLayout:
+        #                 orientation:'vertical'
+        #                 Label:
+        #                     text: 'dadoY'
+        #                     halign: 'left'
+        #                     text_size: self.size
+        #                     color: 0, 0, 0, 1
+        #                 Label:
+        #                     text: 'y'
+        #                     halign: 'left'
+        #                     text_size: self.size
+        #                     color: 0, 0, 0, 1
+        #             BoxLayout:
+        #                 orientation: 'vertical'
+        #                 Label:
+        #                     text: 'dadoZ'
+        #                     halign: 'left'
+        #                     text_size: self.size
+        #                     color: 0, 0, 0, 1
+        #                 Label:
+        #                     text: 'z'
+        #                     halign: 'left'
+        #                     text_size: self.size
+        #                     color: 0, 0, 0, 1
+        #     BoxLayout:
+        #         orientation:'vertical'
+        #         valign: 'top'  
+        #         Label:
+        #             text: 'Giroscopio'
+        #             halign: 'left'
+        #             text_size: self.size
+        #             color: 0, 0, 0, 1
+        #         BoxLayout:
+        #             orientation:'horizontal'
+        #             BoxLayout:
+        #                 orientation:'vertical'
+        #                 Label:
+        #                     text: 'dadoX'
+        #                     halign: 'left'
+        #                     text_size: self.size
+        #                     color: 0, 0, 0, 1
+        #                 Label:
+        #                     text: 'x'
+        #                     halign: 'left'
+        #                     text_size: self.size
+        #                     color: 0, 0, 0, 1
+        #             BoxLayout:
+        #                 orientation:'vertical'
+        #                 Label:
+        #                     text: 'dadoY'
+        #                     halign: 'left'
+        #                     text_size: self.size
+        #                     color: 0, 0, 0, 1
+        #                 Label:
+        #                     text: 'y'
+        #                     halign: 'left'
+        #                     text_size: self.size
+        #                     color: 0, 0, 0, 1
+        #             BoxLayout:
+        #                 orientation: 'vertical'
+        #                 Label:
+        #                     text: 'dadoZ'
+        #                     halign: 'left'
+        #                     text_size: self.size
+        #                     color: 0, 0, 0, 1
+        #                 Label:
+        #                     text: 'z'
+        #                     halign: 'left'
+        #                     text_size: self.size
+        #                     color: 0, 0, 0, 1
+        #     BoxLayout:
+        #         orientation:'vertical'
+        #         Label:
+        #             text: "RSSI:"
+        #             halign: 'left'
+        #             text_size: self.size
+        #             color: 0, 0, 0, 1
+        #         Label:
+        #             text: "dadoRSSI"
+        #             halign: 'left'
+        #             text_size: self.size
+        #             color: 0, 0, 0, 1
+
+
+
+
+
+
+        # ------------------------- RSSI ------------------------------
         BoxLayout:
-            orientation:'vertical'
-            size_hint: .25, .82
-            pos_hint: {'x': 0.025, 'y': 0.05}
-            valign: 'top'
+            orientation: 'vertical'
+            pos_hint: {'x': .02, 'y': .14} 
+            size_hint: (.07, .03)
+            Label:
+                text: 'RSSI'
+                text_size: self.size
+                valign: 'center'
+                halign: 'left'
+                font_size: self.parent.height
+                color: 0, 0, 0, 1
+        
+        # ------------------------- Giroscopio ------------------------------
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'x': .02, 'y': .31} 
+            size_hint: (.2, .03)
+            Label:
+                text: 'Giroscópio'
+                text_size: self.size
+                valign: 'center'
+                halign: 'left'
+                font_size: self.parent.height
+                color: 0, 0, 0, 1
+
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'x': .02, 'y': .185} 
+            size_hint: (.07, .02)
+            Label:
+                text: 'X'
+                text_size: self.size
+                valign: 'center'
+                halign: 'center'
+                font_size: self.parent.height
+                color: 0, 0, 0, 1
+        
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'x': .1, 'y': .185} 
+            size_hint: (.07, .02)
+            Label:
+                text: 'Y'
+                text_size: self.size
+                valign: 'center'
+                halign: 'center'
+                font_size: self.parent.height
+                color: 0, 0, 0, 1
+
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'x': .18, 'y': .185} 
+            size_hint: (.07, .02)
+            Label:
+                text: 'Z'
+                text_size: self.size
+                valign: 'center'
+                halign: 'center'
+                font_size: self.parent.height
+                color: 0, 0, 0, 1
+        
+
+        # ------------------------- Acelerometro ------------------------------
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'x': .02, 'y': .48} 
+            size_hint: (.2, .03)
+            Label:
+                text: 'Acelerômetro'
+                text_size: self.size
+                valign: 'center'
+                halign: 'left'
+                font_size: self.parent.height
+                color: 0, 0, 0, 1
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'x': .02, 'y': .355} 
+            size_hint: (.07, .02)
+            Label:
+                text: 'X'
+                text_size: self.size
+                valign: 'center'
+                halign: 'center'
+                font_size: self.parent.height
+                color: 0, 0, 0, 1
+        
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'x': .1, 'y': .355} 
+            size_hint: (.07, .02)
+            Label:
+                text: 'Y'
+                text_size: self.size
+                valign: 'center'
+                halign: 'center'
+                font_size: self.parent.height
+                color: 0, 0, 0, 1
+
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'x': .18, 'y': .355} 
+            size_hint: (.07, .02)
+            Label:
+                text: 'Z'
+                text_size: self.size
+                valign: 'center'
+                halign: 'center'
+                font_size: self.parent.height
+                color: 0, 0, 0, 1
+
+
+        # ------------------------- GPS ------------------------------
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'x': .02, 'y': .63} 
+            size_hint: (.09, .03)
+            Label:
+                text: 'Latitude'
+                text_size: self.size
+                valign: 'center'
+                halign: 'left'
+                font_size: self.parent.height
+                color: 0, 0, 0, 1
+
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'x': .1, 'y': .63} 
+            size_hint: (.09, .03)
+            Label:
+                text: 'Longitude'
+                text_size: self.size
+                valign: 'center'
+                halign: 'left'
+                font_size: self.parent.height
+                color: 0, 0, 0, 1
+
+
+
+
+
+        # ------------------------- Altitude ------------------------------
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'x': .02, 'y': .78} 
+            size_hint: (.09, .03)
+            Label:
+                text: 'Altitude'
+                text_size: self.size
+                valign: 'center'
+                halign: 'left'
+                font_size: self.parent.height
+                color: 0, 0, 0, 1
+
+
+
+        # ------------------------ Dados Recebidos ------------------------
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'x': .01, 'y': .82} 
+            size_hint: (.25, .06)
+            Label:
+                text: 'Dados Recebidos'
+                text_size: self.size
+                valign: 'center'
+                halign: 'center'
+                font_size: self.parent.height
+                color: 0, 0, 0, 1
+        # ------------------------------------------------------------------------------------------------------------
+        # ------------------------------------------ PARTE BOOLEANA --------------------------------------------------
+        # ------------------------------------------------------------------------------------------------------------
+        BoxLayout:
+            orientation:'horizontal'
+            size_hint: (.724, .13)              # Tamanho baseado no tamanho da aba do supervosorio
+            pos_hint: {'x': .27, 'y': .765}      # Tamanho baseado no tamanho da aba do supervosorio
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    text: 'Paraquedas Estabilizador'
+                    color: 0, 0, 0, 1
+                    bold: True
+                    font_size: 20
+                    haling: 'center'
+                BoxLayout:
+                    orientation:'horizontal'
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: 'Acionamento Principal'
+                            valign: 'top'
+                            color: 0, 0, 0, 1
+                        Image:
+                            source: 'imgs/red_led.png'
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: 'Acionamento Redundante'
+                            color: 0, 0, 0, 1
+                        Image:
+                            source: 'imgs/red_led.png'
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: 'Acionamento Pion'
+                            color: 0, 0, 0, 1
+                        Image:
+                            source: 'imgs/red_led.png'  
+            BoxLayout:
+                orientation:'vertical'      
+                Label:
+                    text: 'Paraquedas Principal'
+                    bold: True
+                    font_size: 20
+                    color: 0, 0, 0, 1
+                BoxLayout:
+                    orientation:'horizontal'
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: 'Acionamento Principal'
+                            color: 0, 0, 0, 1
+                        Image:
+                            source: 'imgs/red_led.png'
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: 'Acionamento Pion'
+                            color: 0, 0, 0, 1
+                        Image:
+                            source: 'imgs/red_led.png'
+            BoxLayout:
+                orientation:'vertical'
+                Label:
+                    text: 'Remove Before Flight'
+                    color: 0, 0, 0, 1
+                    font_size: 20
+                    bold: True
+                BoxLayout:
+                    orientation:'horizontal'
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: '1º'
+                            color: 0, 0, 0, 1
+                        Image:
+                            source: 'imgs/red_led.png'
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: '2º'
+                            color: 0, 0, 0, 1
+                        Image:
+                            source: 'imgs/red_led.png'
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: '3º'
+                            color: 0, 0, 0, 1
+                        Image:
+                            source: 'imgs/red_led.png'   
+        MapView:
+            pos_hint: {'x': .32, 'y': .05}
+            size_hint: (.35, .35)
+            lat: -21.785624346951103
+            lon: -43.352172024699804
+            double_tap_zoom: True
+            zoom: 15
+            MapMarkerPopup:
+                lat: -21.785624346951103
+                lon: -43.352172024699804
+       
+    # Titulos Area Grafica
+    BoxLayout:
+        orientation:'vertical'
+        size_hint: .06, .03
+        pos_hint: {'x': .325, 'y': .685}
+        Label:
+            text: 'Giroscópio'
+            bold: True
+            text_size: self.size
+            valign: 'bottom'
             halign: 'left'
-            BoxLayout:
-                orientation:'vertical'
-                valign: 'top'                     
-                Label:
-                    id: lb
-                    text: "Altitude"
-                    halign: 'left'
-                    text_size: self.size
-                    size_font: 20
-                Label:
-                    id: textAltitude
-                    text: 'dadoAltitude'
-                    halign: 'left'
-                    text_size: self.size
-                    size_font: 14
-            BoxLayout:
-                orientation:'horizontal'
-                BoxLayout:
-                    orientation: 'vertical'
-                    Label:
-                        text: "Latitude"
-                        halign: 'left'
-                        text_size: self.size                  
-                    Label:
-                        text: "dadoLatitude"
-                        halign: 'left'
-                        text_size: self.size
-                BoxLayout:
-                    orientation: 'vertical'
-                    Label:
-                        text: "Longitude"
-                        halign: 'left'
-                        text_size: self.size                  
-                    Label:
-                        text: "dadoLongitude"
-                        halign: 'left'
-                        text_size: self.size
-            BoxLayout:
-                orientation:'vertical'
-                valign: 'top'  
-                Label:
-                    text: 'Acelerometro'
-                    halign: 'left'
-                    text_size: self.size
-                BoxLayout:
-                    orientation:'horizontal'
-                    BoxLayout:
-                        orientation:'vertical'
-                        Label:
-                            text: 'dadoX'
-                            halign: 'left'
-                            text_size: self.size
-                        Label:
-                            text: 'x'
-                            halign: 'left'
-                            text_size: self.size
-                    BoxLayout:
-                        orientation:'vertical'
-                        Label:
-                            text: 'dadoY'
-                            halign: 'left'
-                            text_size: self.size
-                        Label:
-                            text: 'y'
-                            halign: 'left'
-                            text_size: self.size
-                    BoxLayout:
-                        orientation: 'vertical'
-                        Label:
-                            text: 'dadoZ'
-                            halign: 'left'
-                            text_size: self.size
-                        Label:
-                            text: 'z'
-                            halign: 'left'
-                            text_size: self.size
-            BoxLayout:
-                orientation:'vertical'
-                valign: 'top'  
-                Label:
-                    text: 'Giroscopio'
-                    halign: 'left'
-                    text_size: self.size
-                BoxLayout:
-                    orientation:'horizontal'
-                    BoxLayout:
-                        orientation:'vertical'
-                        Label:
-                            text: 'dadoX'
-                            halign: 'left'
-                            text_size: self.size
-                        Label:
-                            text: 'x'
-                            halign: 'left'
-                            text_size: self.size
-                    BoxLayout:
-                        orientation:'vertical'
-                        Label:
-                            text: 'dadoY'
-                            halign: 'left'
-                            text_size: self.size
-                        Label:
-                            text: 'y'
-                            halign: 'left'
-                            text_size: self.size
-                    BoxLayout:
-                        orientation: 'vertical'
-                        Label:
-                            text: 'dadoZ'
-                            halign: 'left'
-                            text_size: self.size
-                        Label:
-                            text: 'z'
-                            halign: 'left'
-                            text_size: self.size
-            BoxLayout:
-                orientation:'vertical'
-                Label:
-                    text: "RSSI:"
-                    halign: 'left'
-                    text_size: self.size
-                Label:
-                    text: "dadoRSSI"
-                    halign: 'left'
-                    text_size: self.size
-            
+            font_size: self.parent.width/9
+            color: 0, 0, 0, 1
+        
+    BoxLayout:
+        orientation:'vertical'
+        size_hint: .06, .03
+        pos_hint: {'x': .325, 'y': .405}
+        Label:
+            text: 'Posição do foguete'
+            bold: True
+            text_size: self.size
+            valign: 'bottom'
+            halign: 'left'
+            font_size: self.parent.width/9
+            color: 0, 0, 0, 1
 
-    # FloatLayout:
-    #     canvas:
-    #         Color:
-    #             rgb: .7, .7, .7
-    #         Rectangle:
-    #             size: int(self.parent.width), int(self.parent.height)*0.15
-    #             pos: 0,0
+    BoxLayout:
+        orientation:'vertical'
+        size_hint: .03, .03
+        pos_hint: {'x': .2815 , 'y':.685}
+        Label:
+            text: 'Altitude'
+            bold: True
+            text_size: self.size
+            valign: 'bottom'
+            halign: 'left'
+            font_size: self.parent.width/4
+            color: 0, 0, 0, 1
 
+    BoxLayout:
+        orientation:'vertical'
+        size_hint: .06, .03
+        pos_hint: {'x': .685 , 'y':.405}
+        Label:
+            text: 'Trajetória'
+            bold: True
+            text_size: self.size
+            valign: 'bottom'
+            halign: 'left'
+            font_size: self.parent.width/9
+            color: 0, 0, 0, 1
+    
+    BoxLayout:
+        orientation:'vertical'
+        size_hint: .06, .03
+        pos_hint: {'x': .685 , 'y':.685}
+        Label:
+            text: 'Acelerômetro'
+            bold: True
+            text_size: self.size
+            valign: 'bottom'
+            halign: 'left'
+            font_size: self.parent.width/9
+            color: 0, 0, 0, 1
