@@ -725,20 +725,22 @@
                 text_size: self.size
                 valign: 'center'
                 halign: 'left'
-                font_size: self.parent.height
+                font_size: self.parent.width/5.6
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                 color: 0, 0, 0, 1
         
         # ------------------------- Giroscopio ------------------------------
         BoxLayout:
             orientation: 'vertical'
             pos_hint: {'x': .02, 'y': .31} 
-            size_hint: (.2, .03)
+            size_hint: (.14, .03)
             Label:
                 text: 'Giroscópio'
                 text_size: self.size
                 valign: 'center'
                 halign: 'left'
-                font_size: self.parent.height
+                font_size: self.parent.width/11.2
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                 color: 0, 0, 0, 1
 
         BoxLayout:
@@ -750,7 +752,8 @@
                 text_size: self.size
                 valign: 'center'
                 halign: 'center'
-                font_size: self.parent.height
+                font_size: self.parent.width/8
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                 color: 0, 0, 0, 1
         
         BoxLayout:
@@ -762,7 +765,8 @@
                 text_size: self.size
                 valign: 'center'
                 halign: 'center'
-                font_size: self.parent.height
+                font_size: self.parent.width/8
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                 color: 0, 0, 0, 1
 
         BoxLayout:
@@ -774,7 +778,8 @@
                 text_size: self.size
                 valign: 'center'
                 halign: 'center'
-                font_size: self.parent.height
+                font_size: self.parent.width/8
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                 color: 0, 0, 0, 1
         
 
@@ -782,13 +787,14 @@
         BoxLayout:
             orientation: 'vertical'
             pos_hint: {'x': .02, 'y': .48} 
-            size_hint: (.2, .03)
+            size_hint: (.14, .03)
             Label:
                 text: 'Acelerômetro'
                 text_size: self.size
                 valign: 'center'
                 halign: 'left'
-                font_size: self.parent.height
+                font_size: self.parent.width/11.2
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                 color: 0, 0, 0, 1
         BoxLayout:
             orientation: 'vertical'
@@ -799,7 +805,8 @@
                 text_size: self.size
                 valign: 'center'
                 halign: 'center'
-                font_size: self.parent.height
+                font_size: self.parent.width/8
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                 color: 0, 0, 0, 1
         
         BoxLayout:
@@ -811,7 +818,8 @@
                 text_size: self.size
                 valign: 'center'
                 halign: 'center'
-                font_size: self.parent.height
+                font_size: self.parent.width/8
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                 color: 0, 0, 0, 1
 
         BoxLayout:
@@ -823,7 +831,8 @@
                 text_size: self.size
                 valign: 'center'
                 halign: 'center'
-                font_size: self.parent.height
+                font_size: self.parent.width/8
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                 color: 0, 0, 0, 1
 
 
@@ -831,25 +840,27 @@
         BoxLayout:
             orientation: 'vertical'
             pos_hint: {'x': .02, 'y': .63} 
-            size_hint: (.09, .03)
+            size_hint: (.14, .03)
             Label:
                 text: 'Latitude'
                 text_size: self.size
                 valign: 'center'
                 halign: 'left'
-                font_size: self.parent.height
+                font_size: self.parent.width/11.2
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                 color: 0, 0, 0, 1
 
         BoxLayout:
             orientation: 'vertical'
             pos_hint: {'x': .1, 'y': .63} 
-            size_hint: (.09, .03)
+            size_hint: (.14, .03)
             Label:
                 text: 'Longitude'
                 text_size: self.size
                 valign: 'center'
                 halign: 'left'
-                font_size: self.parent.height
+                font_size: self.parent.width/11.2
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                 color: 0, 0, 0, 1
 
 
@@ -860,13 +871,14 @@
         BoxLayout:
             orientation: 'vertical'
             pos_hint: {'x': .02, 'y': .78} 
-            size_hint: (.09, .03)
+            size_hint: (.07, .03)
             Label:
                 text: 'Altitude'
                 text_size: self.size
                 valign: 'center'
                 halign: 'left'
-                font_size: self.parent.height
+                font_size: self.parent.width/5.6
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                 color: 0, 0, 0, 1
 
 
@@ -878,11 +890,11 @@
             size_hint: (.25, .06)
             Label:
                 text: 'Dados Recebidos'
-                font_name: 'Montserrat-Regular.ttf'
+                font_name: 'fontes/montserrat/Montserrat-SemiBold.ttf'
                 text_size: self.size
                 valign: 'center'
                 halign: 'center'
-                font_size: self.parent.height
+                font_size: self.parent.width/14
                 color: 0, 0, 0, 1
         # ------------------------------------------------------------------------------------------------------------
         # ------------------------------------------ PARTE BOOLEANA --------------------------------------------------
@@ -898,6 +910,7 @@
                     color: 0, 0, 0, 1
                     bold: True
                     font_size: self.parent.width/20
+                    font_name: 'fontes/montserrat/Montserrat-SemiBold.ttf'
                     haling: 'center'
                 BoxLayout:
                     orientation:'horizontal'
@@ -907,6 +920,7 @@
                             text: 'Principal'
                             valign: 'top'
                             font_size: self.parent.width/8
+                            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                             color: 0, 0, 0, 1
                         Image:
                             source: 'imgs/red_led.png'
@@ -916,6 +930,7 @@
                             text: 'Redundante'
                             valign: 'top'
                             font_size: self.parent.width/8
+                            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                             color: 0, 0, 0, 1
                         Image:
                             source: 'imgs/red_led.png'
@@ -925,6 +940,7 @@
                             text: 'Pion'
                             valign: 'top'
                             font_size: self.parent.width/8
+                            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                             color: 0, 0, 0, 1
                         Image:
                             source: 'imgs/red_led.png'  
@@ -934,6 +950,7 @@
                     text: 'Paraquedas Principal'
                     bold: True
                     font_size: self.parent.width/20
+                    font_name: 'fontes/montserrat/Montserrat-SemiBold.ttf'
                     color: 0, 0, 0, 1
                 BoxLayout:
                     orientation:'horizontal'
@@ -943,6 +960,7 @@
                             text: 'Principal'
                             valign: 'top'
                             font_size: self.parent.width/12
+                            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                             color: 0, 0, 0, 1
                         Image:
                             source: 'imgs/red_led.png'
@@ -952,6 +970,7 @@
                             text: 'Pion'
                             valign: 'top'
                             font_size: self.parent.width/12
+                            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                             color: 0, 0, 0, 1
                         Image:
                             source: 'imgs/red_led.png'
@@ -961,6 +980,7 @@
                     text: 'Remove Before Flight'
                     color: 0, 0, 0, 1
                     font_size: self.parent.width/20
+                    font_name: 'fontes/montserrat/Montserrat-SemiBold.ttf'
                     bold: True
                 BoxLayout:
                     orientation:'horizontal'
@@ -970,6 +990,7 @@
                             text: '1º'
                             valign: 'top'
                             font_size: self.parent.width/8
+                            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                             color: 0, 0, 0, 1
                         Image:
                             source: 'imgs/red_led.png'
@@ -979,6 +1000,7 @@
                             text: '2º'
                             valign: 'top'
                             font_size: self.parent.width/8
+                            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                             color: 0, 0, 0, 1
                         Image:
                             source: 'imgs/red_led.png'
@@ -988,6 +1010,7 @@
                             text: '3º'
                             valign: 'top'
                             font_size: self.parent.width/8
+                            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                             color: 0, 0, 0, 1
                         Image:
                             source: 'imgs/red_led.png'   
@@ -1014,11 +1037,12 @@
             valign: 'bottom'
             halign: 'left'
             font_size: self.parent.width/9
+            font_name: 'fontes/montserrat/Montserrat-Bold.ttf'
             color: 0, 0, 0, 1
         
     BoxLayout:
         orientation:'vertical'
-        size_hint: .06, .03
+        size_hint: .12, .03
         pos_hint: {'x': .325, 'y': .405}
         Label:
             text: 'Posição do foguete'
@@ -1026,7 +1050,8 @@
             text_size: self.size
             valign: 'bottom'
             halign: 'left'
-            font_size: self.parent.width/9
+            font_size: self.parent.width/18
+            font_name: 'fontes/montserrat/Montserrat-Bold.ttf'
             color: 0, 0, 0, 1
 
     BoxLayout:
@@ -1039,7 +1064,8 @@
             text_size: self.size
             valign: 'bottom'
             halign: 'left'
-            font_size: self.parent.width/4
+            font_size: self.parent.width/4.6
+            font_name: 'fontes/montserrat/Montserrat-Bold.ttf'
             color: 0, 0, 0, 1
 
     BoxLayout:
@@ -1053,6 +1079,7 @@
             valign: 'bottom'
             halign: 'left'
             font_size: self.parent.width/9
+            font_name: 'fontes/montserrat/Montserrat-Bold.ttf'
             color: 0, 0, 0, 1
     
     BoxLayout:
@@ -1066,4 +1093,5 @@
             valign: 'bottom'
             halign: 'left'
             font_size: self.parent.width/9
+            font_name: 'fontes/montserrat/Montserrat-Bold.ttf'
             color: 0, 0, 0, 1
