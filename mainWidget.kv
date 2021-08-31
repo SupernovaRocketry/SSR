@@ -878,6 +878,7 @@
             size_hint: (.25, .06)
             Label:
                 text: 'Dados Recebidos'
+                font_name: 'Montserrat-Regular.ttf'
                 text_size: self.size
                 valign: 'center'
                 halign: 'center'
@@ -896,29 +897,34 @@
                     text: 'Paraquedas Estabilizador'
                     color: 0, 0, 0, 1
                     bold: True
-                    font_size: 20
+                    font_size: self.parent.width/20
                     haling: 'center'
                 BoxLayout:
                     orientation:'horizontal'
                     BoxLayout:
                         orientation:'vertical'
                         Label:
-                            text: 'Acionamento Principal'
+                            text: 'Principal'
                             valign: 'top'
+                            font_size: self.parent.width/8
                             color: 0, 0, 0, 1
                         Image:
                             source: 'imgs/red_led.png'
                     BoxLayout:
                         orientation:'vertical'
                         Label:
-                            text: 'Acionamento Redundante'
+                            text: 'Redundante'
+                            valign: 'top'
+                            font_size: self.parent.width/8
                             color: 0, 0, 0, 1
                         Image:
                             source: 'imgs/red_led.png'
                     BoxLayout:
                         orientation:'vertical'
                         Label:
-                            text: 'Acionamento Pion'
+                            text: 'Pion'
+                            valign: 'top'
+                            font_size: self.parent.width/8
                             color: 0, 0, 0, 1
                         Image:
                             source: 'imgs/red_led.png'  
@@ -927,21 +933,25 @@
                 Label:
                     text: 'Paraquedas Principal'
                     bold: True
-                    font_size: 20
+                    font_size: self.parent.width/20
                     color: 0, 0, 0, 1
                 BoxLayout:
                     orientation:'horizontal'
                     BoxLayout:
                         orientation:'vertical'
                         Label:
-                            text: 'Acionamento Principal'
+                            text: 'Principal'
+                            valign: 'top'
+                            font_size: self.parent.width/12
                             color: 0, 0, 0, 1
                         Image:
                             source: 'imgs/red_led.png'
                     BoxLayout:
                         orientation:'vertical'
                         Label:
-                            text: 'Acionamento Pion'
+                            text: 'Pion'
+                            valign: 'top'
+                            font_size: self.parent.width/12
                             color: 0, 0, 0, 1
                         Image:
                             source: 'imgs/red_led.png'
@@ -950,7 +960,7 @@
                 Label:
                     text: 'Remove Before Flight'
                     color: 0, 0, 0, 1
-                    font_size: 20
+                    font_size: self.parent.width/20
                     bold: True
                 BoxLayout:
                     orientation:'horizontal'
@@ -958,6 +968,8 @@
                         orientation:'vertical'
                         Label:
                             text: '1º'
+                            valign: 'top'
+                            font_size: self.parent.width/8
                             color: 0, 0, 0, 1
                         Image:
                             source: 'imgs/red_led.png'
@@ -965,6 +977,8 @@
                         orientation:'vertical'
                         Label:
                             text: '2º'
+                            valign: 'top'
+                            font_size: self.parent.width/8
                             color: 0, 0, 0, 1
                         Image:
                             source: 'imgs/red_led.png'
@@ -972,6 +986,8 @@
                         orientation:'vertical'
                         Label:
                             text: '3º'
+                            valign: 'top'
+                            font_size: self.parent.width/8
                             color: 0, 0, 0, 1
                         Image:
                             source: 'imgs/red_led.png'   
