@@ -502,8 +502,11 @@
             source: 'imgs/logo_supernova_branca.png'
         Button:
             background_normal: 'imgs/desconectado.png'
+            background_down: 'imgs/conectado.png'
             size_hint: 0.08, 0.08
             pos_hint: {'top': .99, 'right':1}
+            on_release:
+                root._conn.open()
             
         # Image:
         #     id: conectado

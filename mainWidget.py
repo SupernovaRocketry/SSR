@@ -6,7 +6,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 from kivy.core.window import Window
-from kivy.modules import inspector
+from popups import connectSocket
 
 class MainWidget(FloatLayout):
     '''
@@ -22,5 +22,7 @@ class MainWidget(FloatLayout):
         self._senha = kwargs.get('senha')
         Window.fullscreen = False
         Window.maximize()
+
+        self._conn = connectSocket()
 
     pass
