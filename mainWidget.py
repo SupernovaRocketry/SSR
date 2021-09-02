@@ -7,6 +7,8 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 from kivy.core.window import Window
 from popups import connectSocket
+from timeseriesgraph import TimeSeriesGraph
+from kivy_garden.graph import LinePlot
 
 class MainWidget(FloatLayout):
     '''
@@ -24,5 +26,13 @@ class MainWidget(FloatLayout):
         Window.maximize()
 
         self._conn = connectSocket()
+        #self._graphAltitude = DataGraph(20)
 
     pass
+
+class DataGraph(FloatLayout):
+    def __init__ (self, xmax, **kwargs):
+        super().__init__(**kwargs)
+        self.plot = LinePlot(line_width = 1.5, color = '#7D0101')
+        self.ids.graphAltitude.add_plot(self.plot)
+        self.ids.graphAltitude.xmax = xmax

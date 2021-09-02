@@ -1098,3 +1098,30 @@
             font_size: self.parent.width/9
             font_name: 'fontes/montserrat/Montserrat-Bold.ttf'
             color: 0, 0, 0, 1
+
+
+# -----------------------------------------------------------------------
+# ----------------------- Inclusão dos Graficos -------------------------
+# -----------------------------------------------------------------------
+
+    BoxLayout:
+        orientation:'vertical'
+        size_hint: .305, .35
+        pos_hint: {'x': .68, 'y': 0.05}
+        TimeSeriesGraph:
+            id: graphAltitude
+            xlabel: 'Tempo'
+            ylabel: 'Altitude (m)'
+            bakground_color: 1, 1, 1
+            x_ticks_minor: 1
+            x_ticks_major: 5
+            y_ticks_major: 3000
+            y_grid_label: True
+            x_grid_label: True
+            padding: 5
+            x_grid: True
+            y_grid: True
+            x_min: 0
+            y_min: 0
+            y_max: 3000
+
