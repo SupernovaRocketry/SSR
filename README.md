@@ -2,9 +2,9 @@
  Repositório destinado ao supervisório SSR.
 
 ## O Projeto
-Esse repositório contém o Supervisorio Supernova Rocketry, projeto feito para monitorar o lançamento de mini foguetes e realizar testes com um banco estatico. Associado a esse projeto, existe o repositorio *simuladorSSR*, que serve como simulador de dados de voo para testes. 
+Esse repositório contém o Supervisório Supernova Rocketry, projeto feito para monitorar o lançamento de mini foguetes e realizar testes com um banco estático. Associado a esse projeto, existe o repositório *simuladorSSR*, que serve como simulador de dados de voo para testes. 
 
-Para o monitoramento do foguete, o supervisorio deverá receber e mostrar os seguintes dados:
+Para o monitoramento do foguete, o supervisório deverá receber e mostrar os seguintes dados:
 
 1. Altitude.
 2. Posição (latitude e longitude).
@@ -14,10 +14,19 @@ Para o monitoramento do foguete, o supervisorio deverá receber e mostrar os seg
 
 ## Andamento do projeto
 - [ ] Interface Gráfica
-    - [X] teste
+    - [X] Cabeçalho.
+    - [ ] Ambiente superior booleano
+    - [X] Ambiente lateral com dados em tempo real.
+    - [ ] Ambiente gráfico.
+- [X] Recebimento de dados em tempo real.
+- [ ] Multiprocessamento.
+- [ ] Abas com dados específicos.
+- [ ] Geração de relatórios automatizada.
+- [ ] Aba para banco estático.
+
 
 ## Instalação
-Ao realizar o download do projeto, é necessario instalar o ambiente virtual e todos os pacotes necessarios para o projeto. Para isso, basta executar no terminal os seguintes comandos:
+Ao realizar o download do projeto, é necessário instalar o ambiente virtual e todos os pacotes utilizados no projeto. Para isso, basta executar no terminal os seguintes comandos:
 
 1. pip install virtualenv
 2. python -m virtualenv .env
