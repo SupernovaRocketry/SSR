@@ -13,8 +13,8 @@ Para o monitoramento do foguete, o supervisorio deverá receber e mostrar os seg
 4. Qualidade do sinal da antena (RSSI).
 
 ## Andamento do projeto
-[] Interface Gráfica
-    []teste
+- [] Interface Gráfica
+    - [X]teste
 
 ## Instalação
 Ao realizar o download do projeto, é necessario instalar o ambiente virtual e todos os pacotes necessarios para o projeto. Para isso, basta executar no terminal os seguintes comandos:
