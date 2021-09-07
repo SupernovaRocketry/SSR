@@ -13,7 +13,7 @@ Para o monitoramento do foguete, o supervisorio deverá receber e mostrar os seg
 4. Qualidade do sinal da antena (RSSI).
 
 ## Andamento do projeto
-- [] Interface Gráfica
+- [ ] Interface Gráfica
     - [X]teste
 
 ## Instalação
