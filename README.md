@@ -14,7 +14,7 @@ Para o monitoramento do foguete, o supervisorio deverá receber e mostrar os seg
 
 ## Andamento do projeto
 - [ ] Interface Gráfica
-    - [X]teste
+    - [X] teste
 
 ## Instalação
 Ao realizar o download do projeto, é necessario instalar o ambiente virtual e todos os pacotes necessarios para o projeto. Para isso, basta executar no terminal os seguintes comandos:
