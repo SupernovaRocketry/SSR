@@ -58,12 +58,8 @@
                     app.root._login = txt_login.text
                     app.root._senha = txt_senha.text
                     app.root._serverIP = txt_ip.text
-                    app.root._port = txt_port.text
-                    print(app.root._login)
-                    print(app.root._senha)
-                    print(app.root._serverIP)
-                    print(app.root._port)
-                    root.dismiss()
+                    app.root._port = int(txt_port.text)
+                    app.root.startDataRead(str(txt_ip.text), int(txt_port.text))
             Button:
                 size_hint_y: None
                 height: 40

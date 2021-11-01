@@ -1,5 +1,6 @@
 import socket
 import json
+from time import sleep
 
 class Cliente():
     """
@@ -25,7 +26,7 @@ class Cliente():
         try:
             self._tcp.connect(endpoint)
             print("Conexao realiza com sucesso.")
-            self._method()
+            # self._method()
         except Exception as e:
             print(f'Erro ao conectar {e.args}')
 
@@ -44,6 +45,7 @@ class Cliente():
                     self._resp = self._tcp.recv(1024)
                     self._resp = self._resp.decode()
                     print(self._resp)
+                    sleep(1)
             self._tcp.close()
         except Exception as e:
             print(f'Erro ao realizar a comunicacao com o servidor {e.args}')
