@@ -38,6 +38,8 @@ class Cliente():
             while msg != 'x':
                 msg = input("Digite a mensagem a ser enviada (x para sair): ")
                 self._tcp.send(msg.encode())
+                if msg == "x":
+                    break
                 while True:
                     self._resp = self._tcp.recv(1024)
                     self._resp = self._resp.decode()

@@ -6,9 +6,10 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 from kivy.core.window import Window
-from popups import connectSocket
+from popups import ConnectSocketPopup
 from timeseriesgraph import TimeSeriesGraph
 from kivy_garden.graph import LinePlot
+from cliente import Cliente
 
 class MainWidget(FloatLayout):
     '''
@@ -19,13 +20,15 @@ class MainWidget(FloatLayout):
         '''
         Construtor do widget principal
         '''
-        super().__init__(**kwargs)
-        self._login = kwargs.get('login')
-        self._senha = kwargs.get('senha')
+        super().__init__()
+        self._login = ""
+        self._senha = ""
+        self._serverIP = kwargs.get('server_ip')
+        self._port = kwargs.get('server_port')
         Window.fullscreen = False
         Window.maximize()
 
-        self._conn = connectSocket()
+        self._conn = ConnectSocketPopup(self._serverIP, self._port)
         #self._graphAltitude = DataGraph(20)
 
     pass

@@ -2,13 +2,14 @@
 
 <ConnectSocketPopup>:
     title: 'Conexão Socket'
-    size_hint_y: None
-    size_hint_: 0.4
-    height: 200
+    size_hint_y: 0.3
+    size_hint_x: 0.2
+    # height: 200
     BoxLayout:
         id: layout
         orientation:'vertical'
         GridLayout:
+            size: int(self.parent.width),  int(self.parent.height)*0.8
             cols: 2
             rows: 4
             Label:
@@ -33,7 +34,7 @@
                 text: "Login"
                 font_size: 14
             TextInput:
-                id: txt_senha
+                id: txt_login
                 text: 'login'
                 font_size: 14
                 halign: 'center'
@@ -47,17 +48,27 @@
                 font_size: 14
                 halign: 'center'
                 valign: 'middle'
-            BoxLayout:
-                orientation:'horizontal'
-                Button:
-                    size_hint_y: None
-                    height: 40
-                    text: 'Conectar'
-                Button:
-                    size_hint_y: None
-                    height: 40
-                    text:'fechar'
-                    on_release: root.dismiss()
+        BoxLayout:
+            orientation:'horizontal'
+            Button:
+                size_hint_y: None
+                height: 40
+                text: 'Conectar'
+                on_release:
+                    app.root._login = txt_login.text
+                    app.root._senha = txt_senha.text
+                    app.root._serverIP = txt_ip.text
+                    app.root._port = txt_port.text
+                    print(app.root._login)
+                    print(app.root._senha)
+                    print(app.root._serverIP)
+                    print(app.root._port)
+                    root.dismiss()
+            Button:
+                size_hint_y: None
+                height: 40
+                text:'Fechar'
+                on_release: root.dismiss()
 
 
 
