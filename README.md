@@ -13,11 +13,11 @@ Para o monitoramento do foguete, o supervisório deverá receber e mostrar os se
 4. Qualidade do sinal da antena (RSSI).
 
 ## Andamento do projeto
-- [ ] Interface Gráfica
+- [X] Interface Gráfica
     - [X] Cabeçalho.
-    - [ ] Ambiente superior booleano
+    - [X] Ambiente superior booleano
     - [X] Ambiente lateral com dados em tempo real.
-    - [ ] Ambiente gráfico.
+    - [X] Ambiente gráfico.
 - [X] Recebimento de dados em tempo real.
 - [ ] Multiprocessamento.
 - [ ] Abas com dados específicos.
