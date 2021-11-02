@@ -17,7 +17,7 @@ class MainApp(App):
         """
         Método que gera o aplicativo com o widget principal
         """
-        self._widget = MainWidget(server_ip = "127.0.0.1", server_port = 502)
+        self._widget = MainWidget(server_ip = "127.0.0.1", server_port = 9000)
         return self._widget
 
 
@@ -29,5 +29,5 @@ if __name__ == '__main__':
 
 # c = Grafico2d('localhost', 9000)
 
-c = Cliente('localhost', 9000)
-c.start()
+# c = Cliente('localhost', 9000)
+# c.start()

@@ -436,7 +436,7 @@
                 pos: int(self.parent.width)*.02, int(self.parent.height)*0.53
                 size: int(self.parent.width)*.07,  int(self.parent.height)*0.09
 
-            # ------ Latitude
+            # ------ Longitude
             Color:
                 rgb: .5, .5, .5
             Line:
@@ -502,7 +502,7 @@
         Button:
             id: imagem_conexao
             background_normal: 'imgs/desconectado.png'
-            background_down: 'imgs/conectado.png'
+            # background_down: 'imgs/conectado.png'
             size_hint: 0.08, 0.08
             pos_hint: {'top': .99, 'right':1}
             on_release:
@@ -1018,6 +1018,7 @@
                         Image:
                             source: 'imgs/red_led.png'   
         MapView:
+            id: mapa
             pos_hint: {'x': .32, 'y': .05}
             size_hint: (.35, .35)
             lat: -21.785624346951103
@@ -1178,3 +1179,135 @@
             ymin: -180
             ymax: 180
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+
+
+
+# -----------------------------------------------------------------------
+# ------------------- Inclusão dos Textos com Dados ---------------------
+# -----------------------------------------------------------------------
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: .07, 0.09
+        pos_hint: {'x' : .02, 'y' : 0.68}
+        Label:
+            id: altitude
+            text: '-.-'
+            text_size: self.size
+            font_size: self.parent.width/2.2
+            valign: 'middle'
+            halign: 'center'
+            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+            color: 0, 0, 0, 1
+    
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: .07, 0.09
+        pos_hint: {'x' : .02, 'y' : 0.53}
+        Label:
+            id: latitude
+            text: '-.-'
+            text_size: self.size
+            font_size: self.parent.width/2.2
+            valign: 'middle'
+            halign: 'center'
+            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+            color: 0, 0, 0, 1
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: .07, 0.09
+        pos_hint: {'x' : .1, 'y' : 0.53}
+        Label:
+            id: longitude
+            text: '-.-'
+            text_size: self.size
+            font_size: self.parent.width/2.2
+            valign: 'middle'
+            halign: 'center'
+            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+            color: 0, 0, 0, 1
+                
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: .07, 0.09
+        pos_hint: {'x' : .02, 'y' : 0.38}
+        Label:
+            id: acelerometroX
+            text: '-.-'
+            text_size: self.size
+            font_size: self.parent.width/2.2
+            valign: 'middle'
+            halign: 'center'
+            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+            color: 0, 0, 0, 1
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: .07, 0.09
+        pos_hint: {'x' : .10, 'y' : 0.38}
+        Label:
+            id: acelerometroY
+            text: '-.-'
+            text_size: self.size
+            font_size: self.parent.width/2.2
+            valign: 'middle'
+            halign: 'center'
+            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+            color: 0, 0, 0, 1
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: .07, 0.09
+        pos_hint: {'x' : .18, 'y' : 0.38}
+        Label:
+            id: acelerometroZ
+            text: '-.-'
+            text_size: self.size
+            font_size: self.parent.width/2.2
+            valign: 'middle'
+            halign: 'center'
+            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+            color: 0, 0, 0, 1
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: .07, 0.09
+        pos_hint: {'x' : .02, 'y' : 0.21}
+        Label:
+            id: giroscopioX
+            text: '-.-'
+            text_size: self.size
+            font_size: self.parent.width/2.2
+            valign: 'middle'
+            halign: 'center'
+            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+            color: 0, 0, 0, 1
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: .07, 0.09
+        pos_hint: {'x' : .10, 'y' : 0.21}
+        Label:
+            id: giroscopioY
+            text: '-.-'
+            text_size: self.size
+            font_size: self.parent.width/2.2
+            valign: 'middle'
+            halign: 'center'
+            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+            color: 0, 0, 0, 1
+    
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: .07, 0.09
+        pos_hint: {'x' : .18, 'y' : 0.21}
+        Label:
+            id: giroscopioZ
+            text: '-.-'
+            text_size: self.size
+            font_size: self.parent.width/2.2
+            valign: 'middle'
+            halign: 'center'
+            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+            color: 0, 0, 0, 1
