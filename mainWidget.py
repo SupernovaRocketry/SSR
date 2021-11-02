@@ -72,10 +72,42 @@ class MainWidget(FloatLayout):
                 #ler dados
                 #atualizar a interface
                 #insedir os dados no banco de dados
-                print("Funcionando!")
-                sleep(1)
+
+                #Le dados
+                self._instDados = self._connect._method()
+
+                # Atualiza dados
+                self._updateGUI()
+
+
+                sleep(.1)
         except Exception as e:
             print(f'Erro: {e}')
+
+    
+    def readData(self):
+        """
+        Método para a leitura de dados via socket
+        """
+
+    def _updateGUI(self):
+        """
+        Método para a atualização dos da interface gráfica
+        """
+        self.ids.altitude.text = str(self._instDados['Altitude'])
+        self.ids.latitude.text = str(self._instDados['Latitude'])
+        self.ids.longitude.text = str(self._instDados['Longitude'])
+        self.ids.acelerometroX.text = str("{:.2f}".format(self._instDados['Acelerometro']['x']))
+        self.ids.acelerometroY.text = str("{:.2f}".format(self._instDados['Acelerometro']['y']))
+        self.ids.acelerometroZ.text = str("{:.1f}".format(self._instDados['Acelerometro']['z']))
+        self.ids.giroscopioX.text = str(int(self._instDados['Giroscopio']['x']))
+        self.ids.giroscopioY.text = str(int(self._instDados['Giroscopio']['y']))
+        self.ids.giroscopioZ.text = str(int(self._instDados['Giroscopio']['z']))
+        self.ids.mapa.lat = float(self._instDados['Latitude'])
+        self.ids.mapa.lon = float(self._instDados['Longitude'])
+
+
+
 
 
 
