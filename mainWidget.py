@@ -103,8 +103,10 @@ class MainWidget(FloatLayout):
         self.ids.giroscopioX.text = str(int(self._instDados['Giroscopio']['x']))
         self.ids.giroscopioY.text = str(int(self._instDados['Giroscopio']['y']))
         self.ids.giroscopioZ.text = str(int(self._instDados['Giroscopio']['z']))
+        self.ids.RSSI.text = str(self._instDados['RSSI'])
         self.ids.mapa.lat = float(self._instDados['Latitude'])
         self.ids.mapa.lon = float(self._instDados['Longitude'])
+
 
 
 

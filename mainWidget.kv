@@ -1311,3 +1311,29 @@
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
             color: 0, 0, 0, 1
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: .07, 0.09
+        pos_hint: {'x' : .02, 'y' : 0.04}
+        Label:
+            id: RSSI
+            text: '-.-'
+            text_size: self.size
+            font_size: self.parent.width/2.2
+            valign: 'middle'
+            halign: 'center'
+            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+            color: 0, 0, 0, 1
+
+
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: .03, 0.63
+        pos_hint: {'x' : .28, 'y' : .05}
+        Image:
+            id: teste
+            pos_hint: {'top': 1, 'left': 1}
+            source: 'imgs/teste.png'
+
