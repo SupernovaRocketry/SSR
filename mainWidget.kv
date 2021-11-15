@@ -1,6 +1,7 @@
 #:kivy 1.11.1
 #: import MapView kivy.garden.mapview.MapView
 #: import utils kivy.utils
+#: import Svg kivy.graphics.svg 
 
 <MainWidget>:
     FloatLayout:
@@ -135,11 +136,15 @@
                 pos: int(self.parent.width)*.28, int(self.parent.height)*0.68
                 size: int(self.parent.width)*.03,  int(self.parent.height)*0.03
 
+
+            
+
             Color:
-                rgb: 0, 0, 0, 1
+                rgb: 1, 0, 0
             Rectangle:
+                id: graficoMedidorAltitude
                 pos: int(self.parent.width)*.28, int(self.parent.height)*0.05
-                size: int(self.parent.width)*.03,  int(self.parent.height)*0.63
+                size: int(self.parent.width)*.03,  0
             
 
             # Gráfico de Giroscopio
@@ -926,7 +931,7 @@
                             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                             color: 0, 0, 0, 1
                         Image:
-                            source: 'imgs/red_led.png'
+                            source: 'imgs/red_led.png'                     
                     BoxLayout:
                         orientation:'vertical'
                         Label:
@@ -1026,288 +1031,359 @@
             double_tap_zoom: True
             zoom: 15
             MapMarkerPopup:
+                id: mapaMarker
                 lat: -21.785624346951103
                 lon: -43.352172024699804
        
-    # Titulos Area Grafica
-    BoxLayout:
-        orientation:'vertical'
-        size_hint: .06, .03
-        pos_hint: {'x': .325, 'y': .685}
-        Label:
-            text: 'Giroscópio'
-            bold: True
-            text_size: self.size
-            valign: 'bottom'
-            halign: 'left'
-            font_size: self.parent.width/9
-            font_name: 'fontes/montserrat/Montserrat-Bold.ttf'
-            color: 0, 0, 0, 1
+        # Titulos Area Grafica
+        BoxLayout:
+            orientation:'vertical'
+            size_hint: .06, .03
+            pos_hint: {'x': .325, 'y': .685}
+            Label:
+                text: 'Giroscópio'
+                bold: True
+                text_size: self.size
+                valign: 'bottom'
+                halign: 'left'
+                font_size: self.parent.width/9
+                font_name: 'fontes/montserrat/Montserrat-Bold.ttf'
+                color: 0, 0, 0, 1
+            
+        BoxLayout:
+            orientation:'vertical'
+            size_hint: .12, .03
+            pos_hint: {'x': .325, 'y': .405}
+            Label:
+                text: 'Posição do foguete'
+                bold: True
+                text_size: self.size
+                valign: 'bottom'
+                halign: 'left'
+                font_size: self.parent.width/18
+                font_name: 'fontes/montserrat/Montserrat-Bold.ttf'
+                color: 0, 0, 0, 1
+
+        BoxLayout:
+            orientation:'vertical'
+            size_hint: .03, .03
+            pos_hint: {'x': .2815 , 'y':.685}
+            Label:
+                text: 'Altitude'
+                bold: True
+                text_size: self.size
+                valign: 'bottom'
+                halign: 'left'
+                font_size: self.parent.width/4.6
+                font_name: 'fontes/montserrat/Montserrat-Bold.ttf'
+                color: 0, 0, 0, 1
+
+        BoxLayout:
+            orientation:'vertical'
+            size_hint: .06, .03
+            pos_hint: {'x': .685 , 'y':.405}
+            Label:
+                text: 'Trajetória'
+                bold: True
+                text_size: self.size
+                valign: 'bottom'
+                halign: 'left'
+                font_size: self.parent.width/9
+                font_name: 'fontes/montserrat/Montserrat-Bold.ttf'
+                color: 0, 0, 0, 1
         
-    BoxLayout:
-        orientation:'vertical'
-        size_hint: .12, .03
-        pos_hint: {'x': .325, 'y': .405}
-        Label:
-            text: 'Posição do foguete'
-            bold: True
-            text_size: self.size
-            valign: 'bottom'
-            halign: 'left'
-            font_size: self.parent.width/18
-            font_name: 'fontes/montserrat/Montserrat-Bold.ttf'
-            color: 0, 0, 0, 1
-
-    BoxLayout:
-        orientation:'vertical'
-        size_hint: .03, .03
-        pos_hint: {'x': .2815 , 'y':.685}
-        Label:
-            text: 'Altitude'
-            bold: True
-            text_size: self.size
-            valign: 'bottom'
-            halign: 'left'
-            font_size: self.parent.width/4.6
-            font_name: 'fontes/montserrat/Montserrat-Bold.ttf'
-            color: 0, 0, 0, 1
-
-    BoxLayout:
-        orientation:'vertical'
-        size_hint: .06, .03
-        pos_hint: {'x': .685 , 'y':.405}
-        Label:
-            text: 'Trajetória'
-            bold: True
-            text_size: self.size
-            valign: 'bottom'
-            halign: 'left'
-            font_size: self.parent.width/9
-            font_name: 'fontes/montserrat/Montserrat-Bold.ttf'
-            color: 0, 0, 0, 1
-    
-    BoxLayout:
-        orientation:'vertical'
-        size_hint: .06, .03
-        pos_hint: {'x': .685 , 'y':.685}
-        Label:
-            text: 'Acelerômetro'
-            bold: True
-            text_size: self.size
-            valign: 'bottom'
-            halign: 'left'
-            font_size: self.parent.width/9
-            font_name: 'fontes/montserrat/Montserrat-Bold.ttf'
-            color: 0, 0, 0, 1
+        BoxLayout:
+            orientation:'vertical'
+            size_hint: .06, .03
+            pos_hint: {'x': .685 , 'y':.685}
+            Label:
+                text: 'Acelerômetro'
+                bold: True
+                text_size: self.size
+                valign: 'bottom'
+                halign: 'left'
+                font_size: self.parent.width/9
+                font_name: 'fontes/montserrat/Montserrat-Bold.ttf'
+                color: 0, 0, 0, 1
 
 
-# -----------------------------------------------------------------------
-# ----------------------- Inclusão dos Graficos -------------------------
-# -----------------------------------------------------------------------
+    # -----------------------------------------------------------------------
+    # ----------------------- Inclusão dos Graficos -------------------------
+    # -----------------------------------------------------------------------
 
-    # --------------- Trajétoria ----------------------------------------
-    BoxLayout:
-        orientation:'vertical'
-        size_hint: .305, .35
-        pos_hint: {'x': .68, 'y': 0.05}
-        TimeSeriesGraph:
-            id: graphAltitude
-            xlabel: 'Tempo (s)'
-            ylabel: 'Altitude (m)'
-            bakground_color: 1, 1, 1
-            x_ticks_minor: 5
-            x_ticks_major: 10
-            #x_ticks_angle: 45  # Rotação do ticks 
-            y_ticks_minor: 5
-            y_ticks_major: 500
-            y_grid_label: True
-            x_grid_label: True
-            padding: 5
-            x_grid: True
-            y_grid: True
-            xmin: 0
-            ymin: 0
-            ymax: 3500
-            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+        # --------------- Trajétoria ----------------------------------------
+        BoxLayout:
+            orientation:'vertical'
+            size_hint: .305, .35
+            pos_hint: {'x': .68, 'y': 0.05}
+            TimeSeriesGraph:
+                id: graphAltitude
+                xlabel: 'Tempo (s)'
+                ylabel: 'Altitude (m)'
+                bakground_color: 1, 1, 1
+                x_ticks_minor: 5
+                x_ticks_major: 10
+                #x_ticks_angle: 45  # Rotação do ticks 
+                y_ticks_minor: 5
+                y_ticks_major: 500
+                y_grid_label: True
+                x_grid_label: True
+                padding: 5
+                x_grid: True
+                y_grid: True
+                xmin: 0
+                ymin: 0
+                ymax: 3500
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
 
-    # --------------- Acelerometro ----------------------------------------
-    BoxLayout:
-        orientation:'vertical'
-        size_hint: .305, .24
-        pos_hint: {'x': .68, 'y': 0.44}
-        TimeSeriesGraph:
-            id: graphAcelerometro
-            xlabel: 'Tempo (s)'
-            ylabel: 'Aceleração (m/s)'
-            bakground_color: 1, 1, 1
-            x_ticks_minor: 5
-            x_ticks_major: 10
-            #x_ticks_angle: 45  # Rotação do ticks 
-            y_ticks_minor: 5
-            y_ticks_major: 500
-            y_grid_label: True
-            x_grid_label: True
-            padding: 5
-            x_grid: True
-            y_grid: True
-            xmin: 0
-            ymin: 0
-            ymax: 3500
-            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+        # --------------- Acelerometro ----------------------------------------
+        BoxLayout:
+            orientation:'vertical'
+            size_hint: .305, .24
+            pos_hint: {'x': .68, 'y': 0.44}
+            TimeSeriesGraph:
+                id: graphAcelerometro
+                xlabel: 'Tempo (s)'
+                ylabel: 'Aceleração (m/s)'
+                bakground_color: 1, 1, 1
+                x_ticks_minor: 5
+                x_ticks_major: 10
+                #x_ticks_angle: 45  # Rotação do ticks 
+                y_ticks_minor: 5
+                y_ticks_major: 500
+                y_grid_label: True
+                x_grid_label: True
+                padding: 5
+                x_grid: True
+                y_grid: True
+                xmin: 0
+                ymin: 0
+                ymax: 3500
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
 
-    # --------------- Giroscopio ----------------------------------------
-    BoxLayout:
-        orientation:'vertical'
-        size_hint: .35, .24
-        pos_hint: {'x': .32, 'y': 0.44}
-        TimeSeriesGraph:
-            id: graphGiroscopio
-            xlabel: 'Tempo (s)'
-            ylabel: 'Angulação (Graus)'
-            bakground_color: 1, 1, 1
-            x_ticks_minor: 5
-            x_ticks_major: 10
-            #x_ticks_angle: 45  # Rotação do ticks 
-            y_ticks_minor: 5
-            y_ticks_major: 45
-            y_grid_label: True
-            x_grid_label: True
-            padding: 5
-            x_grid: True
-            y_grid: True
-            xmin: 0
-            ymin: -180
-            ymax: 180
-            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+        # --------------- Giroscopio ----------------------------------------
+        BoxLayout:
+            orientation:'vertical'
+            size_hint: .35, .24
+            pos_hint: {'x': .32, 'y': 0.44}
+            TimeSeriesGraph:
+                id: graphGiroscopio
+                xlabel: 'Tempo (s)'
+                ylabel: 'Angulação (Graus)'
+                bakground_color: 1, 1, 1
+                x_ticks_minor: 5
+                x_ticks_major: 10
+                #x_ticks_angle: 45  # Rotação do ticks 
+                y_ticks_minor: 5
+                y_ticks_major: 45
+                y_grid_label: True
+                x_grid_label: True
+                padding: 5
+                x_grid: True
+                y_grid: True
+                xmin: 0
+                ymin: -180
+                ymax: 180
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
 
 
 
-# -----------------------------------------------------------------------
-# ------------------- Inclusão dos Textos com Dados ---------------------
-# -----------------------------------------------------------------------
+    # -----------------------------------------------------------------------
+    # ------------------- Inclusão dos Textos com Dados ---------------------
+    # -----------------------------------------------------------------------
 
-    BoxLayout:
-        orientation: 'vertical'
-        size_hint: .07, 0.09
-        pos_hint: {'x' : .02, 'y' : 0.68}
-        Label:
-            id: altitude
-            text: '-.-'
-            text_size: self.size
-            font_size: self.parent.width/2.2
-            valign: 'middle'
-            halign: 'center'
-            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
-            color: 0, 0, 0, 1
-    
-    BoxLayout:
-        orientation: 'vertical'
-        size_hint: .07, 0.09
-        pos_hint: {'x' : .02, 'y' : 0.53}
-        Label:
-            id: latitude
-            text: '-.-'
-            text_size: self.size
-            font_size: self.parent.width/2.2
-            valign: 'middle'
-            halign: 'center'
-            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
-            color: 0, 0, 0, 1
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: .07, 0.09
+            pos_hint: {'x' : .02, 'y' : 0.68}
+            Label:
+                id: altitude
+                text: '-.-'
+                text_size: self.size
+                font_size: self.parent.width/2.2
+                valign: 'middle'
+                halign: 'center'
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+                color: 0, 0, 0, 1
+        
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: .07, 0.09
+            pos_hint: {'x' : .02, 'y' : 0.53}
+            Label:
+                id: latitude
+                text: '-.-'
+                text_size: self.size
+                font_size: self.parent.width/2.2
+                valign: 'middle'
+                halign: 'center'
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+                color: 0, 0, 0, 1
 
-    BoxLayout:
-        orientation: 'vertical'
-        size_hint: .07, 0.09
-        pos_hint: {'x' : .1, 'y' : 0.53}
-        Label:
-            id: longitude
-            text: '-.-'
-            text_size: self.size
-            font_size: self.parent.width/2.2
-            valign: 'middle'
-            halign: 'center'
-            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
-            color: 0, 0, 0, 1
-                
-    BoxLayout:
-        orientation: 'vertical'
-        size_hint: .07, 0.09
-        pos_hint: {'x' : .02, 'y' : 0.38}
-        Label:
-            id: acelerometroX
-            text: '-.-'
-            text_size: self.size
-            font_size: self.parent.width/2.2
-            valign: 'middle'
-            halign: 'center'
-            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
-            color: 0, 0, 0, 1
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: .07, 0.09
+            pos_hint: {'x' : .1, 'y' : 0.53}
+            Label:
+                id: longitude
+                text: '-.-'
+                text_size: self.size
+                font_size: self.parent.width/2.2
+                valign: 'middle'
+                halign: 'center'
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+                color: 0, 0, 0, 1
+                    
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: .07, 0.09
+            pos_hint: {'x' : .02, 'y' : 0.38}
+            Label:
+                id: acelerometroX
+                text: '-.-'
+                text_size: self.size
+                font_size: self.parent.width/2.2
+                valign: 'middle'
+                halign: 'center'
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+                color: 0, 0, 0, 1
 
-    BoxLayout:
-        orientation: 'vertical'
-        size_hint: .07, 0.09
-        pos_hint: {'x' : .10, 'y' : 0.38}
-        Label:
-            id: acelerometroY
-            text: '-.-'
-            text_size: self.size
-            font_size: self.parent.width/2.2
-            valign: 'middle'
-            halign: 'center'
-            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
-            color: 0, 0, 0, 1
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: .07, 0.09
+            pos_hint: {'x' : .10, 'y' : 0.38}
+            Label:
+                id: acelerometroY
+                text: '-.-'
+                text_size: self.size
+                font_size: self.parent.width/2.2
+                valign: 'middle'
+                halign: 'center'
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+                color: 0, 0, 0, 1
 
-    BoxLayout:
-        orientation: 'vertical'
-        size_hint: .07, 0.09
-        pos_hint: {'x' : .18, 'y' : 0.38}
-        Label:
-            id: acelerometroZ
-            text: '-.-'
-            text_size: self.size
-            font_size: self.parent.width/2.2
-            valign: 'middle'
-            halign: 'center'
-            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
-            color: 0, 0, 0, 1
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: .07, 0.09
+            pos_hint: {'x' : .18, 'y' : 0.38}
+            Label:
+                id: acelerometroZ
+                text: '-.-'
+                text_size: self.size
+                font_size: self.parent.width/2.2
+                valign: 'middle'
+                halign: 'center'
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+                color: 0, 0, 0, 1
 
-    BoxLayout:
-        orientation: 'vertical'
-        size_hint: .07, 0.09
-        pos_hint: {'x' : .02, 'y' : 0.21}
-        Label:
-            id: giroscopioX
-            text: '-.-'
-            text_size: self.size
-            font_size: self.parent.width/2.2
-            valign: 'middle'
-            halign: 'center'
-            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
-            color: 0, 0, 0, 1
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: .07, 0.09
+            pos_hint: {'x' : .02, 'y' : 0.21}
+            Label:
+                id: giroscopioX
+                text: '-.-'
+                text_size: self.size
+                font_size: self.parent.width/2.2
+                valign: 'middle'
+                halign: 'center'
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+                color: 0, 0, 0, 1
 
-    BoxLayout:
-        orientation: 'vertical'
-        size_hint: .07, 0.09
-        pos_hint: {'x' : .10, 'y' : 0.21}
-        Label:
-            id: giroscopioY
-            text: '-.-'
-            text_size: self.size
-            font_size: self.parent.width/2.2
-            valign: 'middle'
-            halign: 'center'
-            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
-            color: 0, 0, 0, 1
-    
-    BoxLayout:
-        orientation: 'vertical'
-        size_hint: .07, 0.09
-        pos_hint: {'x' : .18, 'y' : 0.21}
-        Label:
-            id: giroscopioZ
-            text: '-.-'
-            text_size: self.size
-            font_size: self.parent.width/2.2
-            valign: 'middle'
-            halign: 'center'
-            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
-            color: 0, 0, 0, 1
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: .07, 0.09
+            pos_hint: {'x' : .10, 'y' : 0.21}
+            Label:
+                id: giroscopioY
+                text: '-.-'
+                text_size: self.size
+                font_size: self.parent.width/2.2
+                valign: 'middle'
+                halign: 'center'
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+                color: 0, 0, 0, 1
+        
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: .07, 0.09
+            pos_hint: {'x' : .18, 'y' : 0.21}
+            Label:
+                id: giroscopioZ
+                text: '-.-'
+                text_size: self.size
+                font_size: self.parent.width/2.2
+                valign: 'middle'
+                halign: 'center'
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+                color: 0, 0, 0, 1
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: .07, 0.09
+            pos_hint: {'x' : .02, 'y' : 0.04}
+            Label:
+                id: RSSI
+                text: '-.-'
+                text_size: self.size
+                font_size: self.parent.width/2.2
+                valign: 'middle'
+                halign: 'center'
+                font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+                color: 0, 0, 0, 1
+
+
+
+    # BoxLayout:
+    #     orientation: 'vertical'
+    #     size_hint: .03, 0.63
+    #     pos_hint: {'x' : .28, 'y' : .05}
+    #     Image:
+    #         id: teste
+    #         pos_hint: {'top': 1, 'left': 1}
+    #         source: 'imgs/teste.png'
+
+  
+    Label:
+        id: medidorAltitude
+        pos: int(self.parent.width)*.28, int(self.parent.height)*0.05
+        # size: int(self.parent.width)*.03,  int(self.parent.height)*0.63  
+        size_hint: .03, 0.63      
+        canvas:
+            Color:
+                rgb: 0, 0, 0, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+    Label:
+        id:graficoMedidorAltitude
+        pos: medidorAltitude.pos
+        size_hint: medidorAltitude.size[0], 0
+        canvas:
+            Color:
+                rgb: utils.get_color_from_hex('#7D0101')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+    Label:
+        id: linhaGraficoMedidorAltitude
+        pos: medidorAltitude.pos
+        size_hint: medidorAltitude.size_hint[0], medidorAltitude.size_hint[1]*.005
+        canvas:
+            Color:
+                rgb: .5, .5, .5
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+    # Label:
+    #     id: janelaGraficoMedidorAltitude
+    #     pos: medidorAltitude.pos
+    #     size_hint: medidorAltitude.size_hint[0]/2, medidorAltitude.size_hint[1]*.010
+    #     canvas:
+    #         Color:
+    #             rgb: .5, .5, .5
+    #         Rectangle:
+    #             pos: self.pos
+    #             size: self.size

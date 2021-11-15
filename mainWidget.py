@@ -6,6 +6,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 from kivy.core.window import Window
+from kivy.graphics.svg import Svg
 from popups import ConnectSocketPopup
 from timeseriesgraph import TimeSeriesGraph
 from kivy_garden.graph import LinePlot
@@ -103,8 +104,15 @@ class MainWidget(FloatLayout):
         self.ids.giroscopioX.text = str(int(self._instDados['Giroscopio']['x']))
         self.ids.giroscopioY.text = str(int(self._instDados['Giroscopio']['y']))
         self.ids.giroscopioZ.text = str(int(self._instDados['Giroscopio']['z']))
-        self.ids.mapa.lat = float(self._instDados['Latitude'])
-        self.ids.mapa.lon = float(self._instDados['Longitude'])
+        self.ids.RSSI.text = str(self._instDados['RSSI'])
+        self.ids.mapa.lat = self._instDados['Latitude']
+        self.ids.mapa.lon = self._instDados['Longitude']
+        self.ids.graficoMedidorAltitude.size_hint = (self.ids.medidorAltitude.size_hint[0], float(self._instDados['Altitude']/3600)*self.ids.medidorAltitude.size_hint[1])
+        self.ids.linhaGraficoMedidorAltitude.pos = (self.ids.medidorAltitude.pos[0], self.ids.medidorAltitude.pos[1] + float(self._instDados['Altitude']/36)*self.ids.medidorAltitude.size_hint[1])
+
+    
+    def stopRefresh(self):
+        self._updateWidgets = False
 
 
 

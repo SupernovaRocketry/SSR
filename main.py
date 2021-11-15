@@ -20,6 +20,12 @@ class MainApp(App):
         self._widget = MainWidget(server_ip = "127.0.0.1", server_port = 9000)
         return self._widget
 
+    def on_stop(self):
+        """
+        Método que fecha toda a aplicação
+        """
+        self._widget.stopRefresh()
+
 
 if __name__ == '__main__':
     Builder.load_string(open('mainWidget.kv', encoding='utf8').read(), rulesonly=True)
