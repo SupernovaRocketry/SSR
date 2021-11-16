@@ -12,3 +12,14 @@ class ConnectSocketPopup(Popup):
         self.ids.txt_ip.text = str(server_ip)
         self.ids.txt_port.text = str(server_port)
     pass
+
+class ConfiguraGraficosPopup(Popup):
+    """
+    Popup para fazer a configuração dos graficos
+    """
+    def __init__(self, **kwargs):
+        """
+        Construtor da classe ConfiguraGraficosPopup
+        """
+        super().__init__(**kwargs)
+        

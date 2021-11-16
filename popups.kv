@@ -68,4 +68,45 @@
 
 
 
+<ConfiguraGraficosPopup>:
+    title: 'Configuração dos Gráficos'
+    size_hint_y: 0.3
+    size_hint_x: 0.2
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: 0.7
+            size_hint_x: 1
+            LabeledChedBoxDataGraph:
+                id: mp20
+                on_kv_post:
+                    self.ids.label.text = '20'
+                    self.ids.checkbox.group = 'cb_group'
+            LabeledChedBoxDataGraph:
+                id: mp50
+                on_kv_post:
+                    self.ids.label.text = '50'
+                    self.ids.checkbox.group = 'cb_group'
+            LabeledChedBoxDataGraph:
+                id: mp20
+                on_kv_post:
+                    self.ids.label.text = '100'
+                    self.ids.checkbox.group = 'cb_group'
+        Button:
+            text: 'Fechar'
+            size_hint: (0.2, 1)
+            on_relase: root.dismiss()
+
+
+<LabeledChedBoxDataGraph>:
+    orientation: 'horizontal'
+    size_hint: (0.1, 1)
+    CheckBox:
+        id: checkbox
+        on_active: app.root._graphAltitude.ids.graphAltitude.setMaxPoints(int(label.text), 0) if app.root is not None else None
+    Label:
+        id: label
+
+
 
