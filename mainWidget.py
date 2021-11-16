@@ -19,6 +19,8 @@ class MainWidget(FloatLayout):
     Widget principal do supervisório
     '''
     _updateWidgets = True
+    _max_points = 20
+    _supernova_color = "#7D0101"
 
     def __init__(self, **kwargs):
         '''
@@ -30,13 +32,15 @@ class MainWidget(FloatLayout):
         self._serverIP = kwargs.get('server_ip')
         self._port = kwargs.get('server_port')
         self._conn = ConnectSocketPopup(self._serverIP, self._port)
+        self._instDados = {}
+        self._instDados['timestamp'] = None
         
         # self._connect.start()
         Window.fullscreen = False
         Window.maximize()
 
         
-        #self._graphAltitude = DataGraph(20)
+        self._graphAltitude = self.DataGraph(self._max_points, self._supernova_color)
 
     pass
 
@@ -75,7 +79,7 @@ class MainWidget(FloatLayout):
                 #insedir os dados no banco de dados
 
                 #Le dados
-                self._instDados = self._connect._method()
+                self.readData()
 
                 # Atualiza dados
                 self._updateGUI()
@@ -90,6 +94,7 @@ class MainWidget(FloatLayout):
         """
         Método para a leitura de dados via socket
         """
+        self._instDados = self._connect._method()
 
     def _updateGUI(self):
         """
@@ -107,22 +112,30 @@ class MainWidget(FloatLayout):
         self.ids.RSSI.text = str(self._instDados['RSSI'])
         self.ids.mapa.lat = self._instDados['Latitude']
         self.ids.mapa.lon = self._instDados['Longitude']
+
+        # Atualiza o grafico vertical de altitude
         self.ids.graficoMedidorAltitude.size_hint = (self.ids.medidorAltitude.size_hint[0], float(self._instDados['Altitude']/3600)*self.ids.medidorAltitude.size_hint[1])
         self.ids.linhaGraficoMedidorAltitude.pos = (self.ids.medidorAltitude.pos[0], self.ids.medidorAltitude.pos[1] + float(self._instDados['Altitude']/36)*self.ids.medidorAltitude.size_hint[1])
+
+        #Atualiza o grafico de linhas de altitude
+        self.ids.graphAltitude.updateGraph((self._instDados['timestamp'], self._instDados['Altitude']),0)
+        
 
     
     def stopRefresh(self):
         self._updateWidgets = False
 
 
-
-
-
-
-
-class DataGraph(FloatLayout):
-    def __init__ (self, xmax, **kwargs):
+    def DataGraph(self, xmax, plot_color, **kwargs):
         super().__init__(**kwargs)
-        self.plot = LinePlot(line_width = 1.5, color = '#7D0101')
+        self.plot = LinePlot(line_width = 1.5, color = plot_color)
         self.ids.graphAltitude.add_plot(self.plot)
         self.ids.graphAltitude.xmax = xmax
+
+
+
+
+
+# class DataGraph(FloatLayout):    
+#     def __init__ (self, xmax, plot_color, **kwargs):
+        

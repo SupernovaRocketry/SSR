@@ -1,6 +1,7 @@
 import socket
 import json
 from time import sleep
+from datetime import datetime
 
 class Cliente():
     """
@@ -61,6 +62,7 @@ class Cliente():
             self._resp = self._tcp.recv(1024)
             self._resp = self._resp.decode()
             self._resp = eval(self._resp)
+            self._resp['timestamp'] = datetime.now()
             print(f'{type(self._resp)} : {self._resp}')
         except Exception as e:
             print(f'Erro ao realizar a comunicacao com o servidor {e.args}')
