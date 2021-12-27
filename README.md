@@ -19,7 +19,7 @@ Para o monitoramento do foguete, o supervisório deverá receber e mostrar os se
     - [X] Ambiente lateral com dados em tempo real.
     - [X] Ambiente gráfico.
 - [X] Recebimento de dados em tempo real.
-- [ ] Multiprocessamento.
+- [X] Multiprocessamento.
 - [ ] Abas com dados específicos.
 - [ ] Geração de relatórios automatizada.
 - [ ] Aba para banco estático.
