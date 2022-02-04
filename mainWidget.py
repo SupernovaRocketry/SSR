@@ -21,6 +21,7 @@ class MainWidget(FloatLayout):
     _updateWidgets = True
     _max_points = 100
     _supernova_color = "#7D0101"
+    _color_graphs = (1,0,0)
 
     def __init__(self, **kwargs):
         '''
@@ -40,7 +41,7 @@ class MainWidget(FloatLayout):
         Window.maximize()
 
         
-        self._graphAltitude = self.DataGraph(self._max_points, self._supernova_color)
+        self._graphAltitude = self.DataGraph(self._max_points, self._color_graphs)
 
     pass
 
@@ -128,7 +129,7 @@ class MainWidget(FloatLayout):
 
     def DataGraph(self, xmax, plot_color, **kwargs):
         super().__init__(**kwargs)
-        self.plot = LinePlot(line_width = 1.5, color = kivy.utils.get_color_from_hex(plot_color))
+        self.plot = LinePlot(line_width = 1.5, color = plot_color)
         self.ids.graphAltitude.add_plot(self.plot)
         self.ids.graphAltitude.xmax = xmax
 
