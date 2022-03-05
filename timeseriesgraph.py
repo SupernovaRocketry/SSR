@@ -15,8 +15,8 @@ class TimeSeriesGraph(Graph):
         super().__init__(**kwargs)
         self._trigger_time_label = Clock.create_trigger(self._addTimeLabels)
         self._timestamps = []
-        self._max_points = kwargs.get('max_points')
-        self._max_points = 20
+        #self._max_points = kwargs.get('max_points')
+        self._max_points = 1000
         self._numMeds = 0
 
     def update_x_labels(self,timestamps=None):

@@ -19,9 +19,11 @@ class MainWidget(FloatLayout):
     Widget principal do supervisório
     '''
     _updateWidgets = True
-    _max_points = 100
+    _max_points = 1000
     _supernova_color = "#7D0101"
     _color_graphs = (1,0,0)
+    _color_graphs_y = (0,1,0)
+    _color_graphs_z = (0,0,1)
 
     def __init__(self, **kwargs):
         '''
@@ -42,6 +44,7 @@ class MainWidget(FloatLayout):
 
         
         self._graphAltitude = self.DataGraph(self._max_points, self._color_graphs)
+        self._graphAcelerometro = self.DataGraph2(self._max_points, self._color_graphs)
 
     pass
 
@@ -120,6 +123,9 @@ class MainWidget(FloatLayout):
 
         #Atualiza o grafico de linhas de altitude
         self.ids.graphAltitude.updateGraph((self._instDados['timestamp'], self._instDados['Altitude']),0)
+
+        # Atualiza o grafico com dados do acelerometro
+        self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acelerometro']['x']),0)
         
 
     
@@ -132,7 +138,15 @@ class MainWidget(FloatLayout):
         self.plot = LinePlot(line_width = 1.5, color = plot_color)
         self.ids.graphAltitude.add_plot(self.plot)
         self.ids.graphAltitude.xmax = xmax
+            
 
+    def DataGraph2(self, xmax, plot_color, **kwargs):
+        super().__init__(**kwargs)
+        plot = LinePlot(line_width = 1.5, color = plot_color)
+        self.ids.graphAcelerometro.add_plot(plot)
+        self.ids.graphAcelerometro.xmax = xmax
+
+        
 
 
 
