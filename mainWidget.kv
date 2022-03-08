@@ -931,8 +931,8 @@
                             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                             color: 0, 0, 0, 1
                         Image:
-                            id: paraquedasPrincipal
-                            source: 'imgs/red_led.png'              
+                            id: paraquedasPrincipal                            
+                            source: 'imgs/green_led.png'
                     BoxLayout:
                         orientation:'vertical'
                         Label:
@@ -1357,6 +1357,8 @@
                 pos: self.pos
                 size: self.size
 
+    
+
     Label:
         id:graficoMedidorAltitude
         pos: medidorAltitude.pos
@@ -1377,6 +1379,12 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
+
+    # Image:
+    #     id: escala3000
+    #     pos: int(self.parent.width)*.28, int(self.parent.height)*0.02
+    #     size_hint: .03, 0.68 
+    #     source: 'imgs/escala3000.png'
 
     # Label:
     #     id: janelaGraficoMedidorAltitude

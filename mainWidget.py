@@ -24,6 +24,7 @@ class MainWidget(FloatLayout):
     _color_graphs = (1,0,0)
     _color_graphs_y = (0,1,0)
     _color_graphs_z = (0,0,1)
+    #_instDados = {'Principal Paraquedas Estabilizador' : 0}
 
     def __init__(self, **kwargs):
         '''
@@ -36,9 +37,11 @@ class MainWidget(FloatLayout):
         self._apogeu = 1
         self._serverIP = kwargs.get('server_ip')
         self._port = kwargs.get('server_port')
-        self._conn = ConnectSocketPopup(self._serverIP, self._port)
         self._instDados = {}
         self._instDados['timestamp'] = None
+        self._instDados['Principal Paraquedas Estabilizador'] = 0
+        self._conn = ConnectSocketPopup(self._serverIP, self._port)
+        
         
         #self._connect.start()
         Window.fullscreen = False
@@ -125,6 +128,8 @@ class MainWidget(FloatLayout):
 
         if self._instDados['Principal Paraquedas Estabilizador'] == 1:
             self.ids.paraquedasPrincipal.source = 'imgs/green_led.png'
+        else:
+            self.ids.paraquedasPrincipal.source = 'imgs/red_led.png'
                                                    
         # Atualiza o grafico vertical de altitude
         self.ids.graficoMedidorAltitude.size_hint = (self.ids.medidorAltitude.size_hint[0], float(self._instDados['Altitude']/(1.2*self._apogeu))*self.ids.medidorAltitude.size_hint[1]) if self._instDados['Altitude'] <= 1.2*self._apogeu else (self.ids.medidorAltitude.size_hint[0], self.ids.medidorAltitude.size_hint[1])
@@ -155,7 +160,7 @@ class MainWidget(FloatLayout):
         self.ids.graphAltitude.y_ticks_major = self._apogeu*1.2/6
 
     def DataGraph(self, xmax, plot_color, **kwargs):
-        super().__init__(**kwargs)
+        # super().__init__(**kwargs)
         plot = LinePlot(line_width = 1.5, color = plot_color)
         self.ids.graphAltitude.add_plot(plot)
         self.ids.graphAltitude.xmax = xmax
