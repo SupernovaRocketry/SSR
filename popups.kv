@@ -2,16 +2,18 @@
 
 <ConnectSocketPopup>:
     title: 'Conexão Socket'
-    size_hint_y: 0.3
-    size_hint_x: 0.2
-    # height: 200
+    # size_hint_y: 0.3
+    # size_hint_x: 0.2
+    size_hint: None, None
+    size: (600, 375)
     BoxLayout:
         id: layout
         orientation:'vertical'
         GridLayout:
-            size: int(self.parent.width),  int(self.parent.height)*0.8
+            # size: int(self.parent.width),  int(self.parent.height)*0.8
+            size_hint: (1, .8)
             cols: 2
-            rows: 4
+            rows: 6
             Label:
                 text: "IP"
                 font_size: 14
@@ -48,8 +50,27 @@
                 font_size: 14
                 halign: 'center'
                 valign: 'middle'
+            Label:
+                text: 'Missão'
+                font_size: 14
+            TextInput:
+                id: txt_missao
+                text: ''
+                font_size: 14
+                halign: 'center'
+                valign: 'middle'
+            Label:
+                text: 'Apogeu'
+                font_size: 14
+            TextInput:
+                id: txt_apogeu
+                text: ''
+                font_size: 14
+                halign: 'center'
+                valign: 'middle'
         BoxLayout:
             orientation:'horizontal'
+            size_hint: (1, .2)
             Button:
                 size_hint_y: None
                 height: 40
@@ -58,7 +79,9 @@
                     app.root._login = txt_login.text
                     app.root._senha = txt_senha.text
                     app.root._serverIP = txt_ip.text
+                    app.root._missao = txt_missao.text
                     app.root._port = int(txt_port.text)
+                    app.root._apogeu = int(txt_apogeu.text)
                     app.root.startDataRead(str(txt_ip.text), int(txt_port.text))
             Button:
                 size_hint_y: None

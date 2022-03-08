@@ -32,20 +32,22 @@ class MainWidget(FloatLayout):
         super().__init__()
         self._login = ""
         self._senha = ""
+        self._missao = ""
+        self._apogeu = 1
         self._serverIP = kwargs.get('server_ip')
         self._port = kwargs.get('server_port')
         self._conn = ConnectSocketPopup(self._serverIP, self._port)
         self._instDados = {}
         self._instDados['timestamp'] = None
         
-        # self._connect.start()
+        #self._connect.start()
         Window.fullscreen = False
         Window.maximize()
 
         
         self._graphAltitude = self.DataGraph(self._max_points, self._color_graphs)
-        self._graphAcelerometro = self.DataGraph2(self._max_points, self._color_graphs)
-
+        self._graphAcelerometro = self.DataGraphAcel(self._max_points, self._color_graphs, self._color_graphs_y, self._color_graphs_z)
+        self._graphGiroscopio = self.DataGraphGiro(self._max_points, self._color_graphs, self._color_graphs_y, self._color_graphs_z)
     pass
 
     def startDataRead(self, ip, port):
@@ -65,6 +67,7 @@ class MainWidget(FloatLayout):
                 self._updateThread = Thread(target = self.updater)
                 self._updateThread.start()
                 self.ids.imagem_conexao.background_normal = 'imgs/conectado.png'
+                self._limitesGraficos()
                 self._conn.dismiss()
             except:
                 print("Falha ao inicinar startDataRead")
@@ -89,7 +92,7 @@ class MainWidget(FloatLayout):
                 self._updateGUI()
 
 
-                sleep(.1)
+                #sleep(.05)
         except Exception as e:
             print(f'Erro: {e}')
 
@@ -98,7 +101,10 @@ class MainWidget(FloatLayout):
         """
         Método para a leitura de dados via socket
         """
-        self._instDados = self._connect._method()
+        try:
+            self._instDados = self._connect._method()
+        except Exception as e:
+            print(f'Falha ao adquirir os dados: {e}')
 
     def _updateGUI(self):
         """
@@ -117,15 +123,26 @@ class MainWidget(FloatLayout):
         self.ids.mapa.lat = self._instDados['Latitude']
         self.ids.mapa.lon = self._instDados['Longitude']
 
+        if self._instDados['Principal Paraquedas Estabilizador'] == 1:
+            self.ids.paraquedasPrincipal.source = 'imgs/green_led.png'
+                                                   
         # Atualiza o grafico vertical de altitude
-        self.ids.graficoMedidorAltitude.size_hint = (self.ids.medidorAltitude.size_hint[0], float(self._instDados['Altitude']/3600)*self.ids.medidorAltitude.size_hint[1])
+        self.ids.graficoMedidorAltitude.size_hint = (self.ids.medidorAltitude.size_hint[0], float(self._instDados['Altitude']/(1.2*self._apogeu))*self.ids.medidorAltitude.size_hint[1]) if self._instDados['Altitude'] <= 1.2*self._apogeu else (self.ids.medidorAltitude.size_hint[0], self.ids.medidorAltitude.size_hint[1])
         self.ids.linhaGraficoMedidorAltitude.pos = (self.ids.medidorAltitude.pos[0], self.ids.medidorAltitude.pos[1] + float(self._instDados['Altitude']/36)*self.ids.medidorAltitude.size_hint[1])
 
         #Atualiza o grafico de linhas de altitude
         self.ids.graphAltitude.updateGraph((self._instDados['timestamp'], self._instDados['Altitude']),0)
 
         # Atualiza o grafico com dados do acelerometro
-        self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acelerometro']['x']),0)
+        self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acelerometro']['x']), 0)
+        self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acelerometro']['y']), 1)
+        self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acelerometro']['z']), 2)
+        
+        # # Atualiza o grafico com dados do giroscopio
+        self.ids.graphGiroscopio.updateGraph((self._instDados['timestamp'], self._instDados['Giroscopio']['x']), 0)
+        self.ids.graphGiroscopio.updateGraph((self._instDados['timestamp'], self._instDados['Giroscopio']['y']), 1)
+        self.ids.graphGiroscopio.updateGraph((self._instDados['timestamp'], self._instDados['Giroscopio']['z']), 2)
+
         
 
     
@@ -133,19 +150,34 @@ class MainWidget(FloatLayout):
         self._updateWidgets = False
 
 
+    def _limitesGraficos(self):
+        self.ids.graphAltitude.ymax = self._apogeu*1.2
+        self.ids.graphAltitude.y_ticks_major = self._apogeu*1.2/6
+
     def DataGraph(self, xmax, plot_color, **kwargs):
         super().__init__(**kwargs)
-        self.plot = LinePlot(line_width = 1.5, color = plot_color)
-        self.ids.graphAltitude.add_plot(self.plot)
+        plot = LinePlot(line_width = 1.5, color = plot_color)
+        self.ids.graphAltitude.add_plot(plot)
         self.ids.graphAltitude.xmax = xmax
             
 
-    def DataGraph2(self, xmax, plot_color, **kwargs):
-        super().__init__(**kwargs)
+    def DataGraphAcel(self, xmax, plot_color, plot_color_y, plot_color_z, **kwargs):
         plot = LinePlot(line_width = 1.5, color = plot_color)
+        plot2 = LinePlot(line_width = 1.5, color = plot_color_y)
+        plot3 = LinePlot(line_width = 1.5, color = plot_color_z)
         self.ids.graphAcelerometro.add_plot(plot)
+        self.ids.graphAcelerometro.add_plot(plot2)
+        self.ids.graphAcelerometro.add_plot(plot3)        
         self.ids.graphAcelerometro.xmax = xmax
 
+    def DataGraphGiro(self, xmax, plot_color, plot_color_y, plot_color_z, **kwargs):
+        plot = LinePlot(line_width = 1.5, color = plot_color)
+        plot2 = LinePlot(line_width = 1.5, color = plot_color_y)
+        plot3 = LinePlot(line_width = 1.5, color = plot_color_z)
+        self.ids.graphGiroscopio.add_plot(plot)
+        self.ids.graphGiroscopio.add_plot(plot2)
+        self.ids.graphGiroscopio.add_plot(plot3)
+        self.ids.graphGiroscopio.xmax = xmax
         
 
 
