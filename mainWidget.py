@@ -5,6 +5,7 @@ from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
+from kivy.uix.image import AsyncImage
 from kivy.core.window import Window
 from kivy.graphics.svg import Svg
 from popups import ConnectSocketPopup
@@ -24,7 +25,6 @@ class MainWidget(FloatLayout):
     _color_graphs = (1,0,0)
     _color_graphs_y = (0,1,0)
     _color_graphs_z = (0,0,1)
-    #_instDados = {'Principal Paraquedas Estabilizador' : 0}
 
     def __init__(self, **kwargs):
         '''
@@ -127,9 +127,7 @@ class MainWidget(FloatLayout):
         self.ids.mapa.lon = self._instDados['Longitude']
 
         if self._instDados['Principal Paraquedas Estabilizador'] == 1:
-            self.ids.paraquedasPrincipal.source = 'imgs/green_led.png'
-        else:
-            self.ids.paraquedasPrincipal.source = 'imgs/red_led.png'
+            self.ids.paraquedasEstabilizadorPrincipal.source = 'imgs/green_led.png'
                                                    
         # Atualiza o grafico vertical de altitude
         self.ids.graficoMedidorAltitude.size_hint = (self.ids.medidorAltitude.size_hint[0], float(self._instDados['Altitude']/(1.2*self._apogeu))*self.ids.medidorAltitude.size_hint[1]) if self._instDados['Altitude'] <= 1.2*self._apogeu else (self.ids.medidorAltitude.size_hint[0], self.ids.medidorAltitude.size_hint[1])

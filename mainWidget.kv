@@ -930,9 +930,10 @@
                             font_size: self.parent.width/8
                             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                             color: 0, 0, 0, 1
-                        Image:
-                            id: paraquedasPrincipal                            
-                            source: 'imgs/green_led.png'
+                        AsyncImage:
+                            id: paraquedasEstabilizadorPrincipal                            
+                            source: 'imgs/red_led.png'
+                            # source: 'imgs/red_led.png' if app.build._widget._instDados['Principal Paraquedas Estabilizador'] == 0 else 'imgs/green_led.png'
                     BoxLayout:
                         orientation:'vertical'
                         Label:
@@ -941,17 +942,19 @@
                             font_size: self.parent.width/8
                             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                             color: 0, 0, 0, 1
-                        Image:
+                        AsyncImage:
+                            id: paraquedasEstabilizadorRedundante
                             source: 'imgs/red_led.png'
                     BoxLayout:
                         orientation:'vertical'
                         Label:
-                            text: 'Pion'
+                            text: 'Comercial'
                             valign: 'top'
                             font_size: self.parent.width/8
                             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                             color: 0, 0, 0, 1
-                        Image:
+                        AsyncImage:
+                            id: paraquedasEstabilizadorComercial
                             source: 'imgs/red_led.png'  
             BoxLayout:
                 orientation:'vertical'      
@@ -971,17 +974,19 @@
                             font_size: self.parent.width/12
                             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                             color: 0, 0, 0, 1
-                        Image:
+                        AsyncImage:
+                            id: paraquedasPrincipal
                             source: 'imgs/red_led.png'
                     BoxLayout:
                         orientation:'vertical'
                         Label:
-                            text: 'Pion'
+                            text: 'Comercial'
                             valign: 'top'
                             font_size: self.parent.width/12
                             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                             color: 0, 0, 0, 1
-                        Image:
+                        AsyncImage:
+                            id: paraquedasPrincipalComercial
                             source: 'imgs/red_led.png'
             BoxLayout:
                 orientation:'vertical'
@@ -1001,7 +1006,7 @@
                             font_size: self.parent.width/8
                             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                             color: 0, 0, 0, 1
-                        Image:
+                        AsyncImage:
                             source: 'imgs/red_led.png'
                     BoxLayout:
                         orientation:'vertical'
@@ -1011,7 +1016,7 @@
                             font_size: self.parent.width/8
                             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                             color: 0, 0, 0, 1
-                        Image:
+                        AsyncImage:
                             source: 'imgs/red_led.png'
                     BoxLayout:
                         orientation:'vertical'
@@ -1021,7 +1026,7 @@
                             font_size: self.parent.width/8
                             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                             color: 0, 0, 0, 1
-                        Image:
+                        AsyncImage:
                             source: 'imgs/red_led.png'   
         MapView:
             id: mapa
