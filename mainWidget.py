@@ -5,7 +5,7 @@ from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
-from kivy.uix.image import AsyncImage
+# from kivy.uix.image import AsyncImage
 from kivy.core.window import Window
 from kivy.graphics.svg import Svg
 from popups import ConnectSocketPopup
@@ -37,9 +37,6 @@ class MainWidget(FloatLayout):
         self._apogeu = 1
         self._serverIP = kwargs.get('server_ip')
         self._port = kwargs.get('server_port')
-        self._instDados = {}
-        self._instDados['timestamp'] = None
-        self._instDados['Principal Paraquedas Estabilizador'] = 0
         self._conn = ConnectSocketPopup(self._serverIP, self._port)
         
         
@@ -126,12 +123,12 @@ class MainWidget(FloatLayout):
         self.ids.mapa.lat = self._instDados['Latitude']
         self.ids.mapa.lon = self._instDados['Longitude']
 
-        if self._instDados['Principal Paraquedas Estabilizador'] == 1:
-            self.ids.paraquedasEstabilizadorPrincipal.source = 'imgs/green_led.png'
+
+        self.updateBoolean()
                                                    
         # Atualiza o grafico vertical de altitude
         self.ids.graficoMedidorAltitude.size_hint = (self.ids.medidorAltitude.size_hint[0], float(self._instDados['Altitude']/(1.2*self._apogeu))*self.ids.medidorAltitude.size_hint[1]) if self._instDados['Altitude'] <= 1.2*self._apogeu else (self.ids.medidorAltitude.size_hint[0], self.ids.medidorAltitude.size_hint[1])
-        self.ids.linhaGraficoMedidorAltitude.pos = (self.ids.medidorAltitude.pos[0], self.ids.medidorAltitude.pos[1] + float(self._instDados['Altitude']/36)*self.ids.medidorAltitude.size_hint[1])
+        # self.ids.linhaGraficoMedidorAltitude.pos = (self.ids.medidorAltitude.pos[0], self.ids.medidorAltitude.pos[1] + float(self._instDados['Altitude']/36)*self.ids.medidorAltitude.size_hint[1])
 
         #Atualiza o grafico de linhas de altitude
         self.ids.graphAltitude.updateGraph((self._instDados['timestamp'], self._instDados['Altitude']),0)
@@ -156,6 +153,14 @@ class MainWidget(FloatLayout):
     def _limitesGraficos(self):
         self.ids.graphAltitude.ymax = self._apogeu*1.2
         self.ids.graphAltitude.y_ticks_major = self._apogeu*1.2/6
+        if self._apogeu == 500:
+            self.ids.escala.source = 'imgs/escala500.png'
+        if self._apogeu == 1000:
+            self.ids.escala.source = 'imgs/escala1000.png'
+        if self._apogeu == 3000:
+            self.ids.escala.source = 'imgs/escala3000.png'
+        if self._apogeu == 5000:
+            self.ids.escala.source = 'imgs/escala5000.png'
 
     def DataGraph(self, xmax, plot_color, **kwargs):
         # super().__init__(**kwargs)
@@ -184,8 +189,21 @@ class MainWidget(FloatLayout):
         
 
 
+    def updateBoolean(self):
+        if self._instDados['Principal Paraquedas Estabilizador'] == 1:
+            self.ids.paraquedasEstabilizadorPrincipal.source = 'imgs/green_led.png'
+        
+        if self._instDados['Redundancia Paraquedas Estabilizador'] == 1:
+            self.ids.paraquedasEstabilizadorRedundante.source = 'imgs/green_led.png'
 
+        if self._instDados['Comercial Paraquedas Estabilizador'] == 1:
+            self.ids.paraquedasEstabilizadorComercial.source = 'imgs/green_led.png'
 
+        if self._instDados['Principal Paraquedas Principal'] == 1:
+            self.ids.paraquedasPrincipal.source = 'imgs/green_led.png'
+
+        if self._instDados['Comercial Paraquedas Principal'] == 1:
+            self.ids.paraquedasPrincipalComercial.source = 'imgs/green_led.png'
 # class DataGraph(FloatLayout):    
 #     def __init__ (self, xmax, plot_color, **kwargs):
         

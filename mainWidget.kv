@@ -1374,22 +1374,24 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-    Label:
-        id: linhaGraficoMedidorAltitude
-        pos: medidorAltitude.pos
-        size_hint: medidorAltitude.size_hint[0], medidorAltitude.size_hint[1]*.005
-        canvas:
-            Color:
-                rgb: .5, .5, .5
-            Rectangle:
-                pos: self.pos
-                size: self.size
+    # Label:
+    #     id: linhaGraficoMedidorAltitude
+    #     pos: medidorAltitude.pos
+    #     size_hint: medidorAltitude.size_hint[0], medidorAltitude.size_hint[1]*.005
+    #     canvas:
+    #         Color:
+    #             rgb: .5, .5, .5
+    #         Rectangle:
+    #             pos: self.pos
+    #             size: self.size
 
-    # Image:
-    #     id: escala3000
-    #     pos: int(self.parent.width)*.28, int(self.parent.height)*0.02
-    #     size_hint: .03, 0.68 
-    #     source: 'imgs/escala3000.png'
+    AsyncImage:
+        id: escala
+        pos: int(self.parent.width)*.28, int(self.parent.height)*0.05
+        size_hint: .03, 0.63  
+        source: 'imgs/escalaZerada.png'
+        allow_stretch: True
+        keep_ratio: False
 
     # Label:
     #     id: janelaGraficoMedidorAltitude
