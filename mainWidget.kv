@@ -904,6 +904,7 @@
                 halign: 'center'
                 font_size: self.parent.width/14
                 color: 0, 0, 0, 1
+
         # ------------------------------------------------------------------------------------------------------------
         # ------------------------------------------ PARTE BOOLEANA --------------------------------------------------
         # ------------------------------------------------------------------------------------------------------------
@@ -933,7 +934,6 @@
                         AsyncImage:
                             id: paraquedasEstabilizadorPrincipal                            
                             source: 'imgs/red_led.png'
-                            # source: 'imgs/red_led.png' if app.build._widget._instDados['Principal Paraquedas Estabilizador'] == 0 else 'imgs/green_led.png'
                     BoxLayout:
                         orientation:'vertical'
                         Label:
@@ -991,7 +991,7 @@
             BoxLayout:
                 orientation:'vertical'
                 Label:
-                    text: 'Remove Before Flight'
+                    text: 'Remove Before Flight (1/2/3)'
                     color: 0, 0, 0, 1
                     font_size: self.parent.width/20
                     font_name: 'fontes/montserrat/Montserrat-SemiBold.ttf'
@@ -1000,34 +1000,69 @@
                     orientation:'horizontal'
                     BoxLayout:
                         orientation:'vertical'
-                        Label:
-                            text: '1º'
-                            valign: 'top'
-                            font_size: self.parent.width/8
-                            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
-                            color: 0, 0, 0, 1
+                        # Label:
+                        #     text: '1º'
+                        #     valign: 'top'
+                        #     font_size: self.parent.width/8
+                        #     font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+                        #     color: 0, 0, 0, 1
                         AsyncImage:
                             source: 'imgs/red_led.png'
+                        Switch:
+                            id: rbf1
                     BoxLayout:
                         orientation:'vertical'
-                        Label:
-                            text: '2º'
-                            valign: 'top'
-                            font_size: self.parent.width/8
-                            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
-                            color: 0, 0, 0, 1
+                        # Label:
+                        #     text: '2º'
+                        #     valign: 'top'
+                        #     font_size: self.parent.width/8
+                        #     font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+                        #     color: 0, 0, 0, 1
                         AsyncImage:
                             source: 'imgs/red_led.png'
+                        Switch:
+                            id: rbf2
                     BoxLayout:
                         orientation:'vertical'
-                        Label:
-                            text: '3º'
-                            valign: 'top'
-                            font_size: self.parent.width/8
-                            font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
-                            color: 0, 0, 0, 1
+                        # Label:
+                        #     text: '3º'
+                        #     valign: 'top'
+                        #     font_size: self.parent.width/8
+                        #     font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+                        #     color: 0, 0, 0, 1
                         AsyncImage:
-                            source: 'imgs/red_led.png'   
+                            id: rbf3_img
+                            source: 'imgs/red_led.png'
+                        Switch:
+                            id: rbf3
+                            # active: rbf3_img.source:'imgs/green_led.png'  
+
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    text: 'Banco de Dados'
+                    color: 0, 0, 0, 1
+                    bold: True
+                    font_size: self.parent.width/20
+                    font_name: 'fontes/montserrat/Montserrat-SemiBold.ttf'
+                    haling: 'center'
+                BoxLayout:
+                    orientation:'horizontal'
+                    BoxLayout:
+                        orientation:'vertical'
+                        # Label:
+                        #     text: 'Principal'
+                        #     valign: 'top'
+                        #     font_size: self.parent.width/8
+                        #     font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
+                        #     color: 0, 0, 0, 1                        
+                        AsyncImage:
+                            id: bd                            
+                            source: 'imgs/red_led.png'
+                        Switch:
+                            id: teste
+                            on_active: root.bdActivate(self, self.active)
+
         MapView:
             id: mapa
             pos_hint: {'x': .32, 'y': .05}

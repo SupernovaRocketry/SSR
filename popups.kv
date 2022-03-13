@@ -62,12 +62,17 @@
             Label:
                 text: 'Apogeu'
                 font_size: 14
-            TextInput:
+            # TextInput:
+            #     id: txt_apogeu
+            #     text: ''
+            #     font_size: 14
+            #     halign: 'center'
+            #     valign: 'middle'
+            Spinner:
                 id: txt_apogeu
-                text: ''
-                font_size: 14
-                halign: 'center'
-                valign: 'middle'
+                text: "selecione o apogeu"
+                values: ['500', '1000', '3000', '5000']
+
         BoxLayout:
             orientation:'horizontal'
             size_hint: (1, .2)

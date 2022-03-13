@@ -38,6 +38,7 @@ class MainWidget(FloatLayout):
         self._serverIP = kwargs.get('server_ip')
         self._port = kwargs.get('server_port')
         self._conn = ConnectSocketPopup(self._serverIP, self._port)
+        self._bdValue = False
         
         
         #self._connect.start()
@@ -206,4 +207,11 @@ class MainWidget(FloatLayout):
             self.ids.paraquedasPrincipalComercial.source = 'imgs/green_led.png'
 # class DataGraph(FloatLayout):    
 #     def __init__ (self, xmax, plot_color, **kwargs):
-        
+
+
+    def bdActivate(self, switchObject, switchValue):
+        self._bdValue = switchValue
+        if switchValue == True:
+            self.ids.bd.source = 'imgs/green_led.png'
+        if switchValue == False:
+            self.ids.bd.source = 'imgs/red_led.png'
