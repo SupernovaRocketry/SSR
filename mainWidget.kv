@@ -1007,9 +1007,12 @@
                         #     font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                         #     color: 0, 0, 0, 1
                         AsyncImage:
+                            id: rbf1_led
                             source: 'imgs/red_led.png'
                         Switch:
-                            id: rbf1
+                            id: rbf1_switch
+                            on_active: root.rbf1Activate(self, self.active)
+                            disabled: True
                     BoxLayout:
                         orientation:'vertical'
                         # Label:
@@ -1019,9 +1022,12 @@
                         #     font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                         #     color: 0, 0, 0, 1
                         AsyncImage:
+                            id: rbf2_led
                             source: 'imgs/red_led.png'
                         Switch:
-                            id: rbf2
+                            id: rbf2_switch
+                            on_active: root.rbf2Activate(self, self.active)
+                            disabled: True
                     BoxLayout:
                         orientation:'vertical'
                         # Label:
@@ -1031,11 +1037,12 @@
                         #     font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                         #     color: 0, 0, 0, 1
                         AsyncImage:
-                            id: rbf3_img
+                            id: rbf3_led
                             source: 'imgs/red_led.png'
                         Switch:
-                            id: rbf3
-                            # active: rbf3_img.source:'imgs/green_led.png'  
+                            id: rbf3_switch
+                            on_active: root.rbf3Activate(self, self.active)
+                            disabled: True 
 
             BoxLayout:
                 orientation: 'vertical'
@@ -1057,11 +1064,12 @@
                         #     font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
                         #     color: 0, 0, 0, 1                        
                         AsyncImage:
-                            id: bd                            
+                            id: bd_led
                             source: 'imgs/red_led.png'
                         Switch:
-                            id: teste
+                            id: bd_switch
                             on_active: root.bdActivate(self, self.active)
+                            disabled: True
 
         MapView:
             id: mapa

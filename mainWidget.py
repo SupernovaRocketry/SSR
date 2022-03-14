@@ -70,6 +70,12 @@ class MainWidget(FloatLayout):
                 self._updateThread.start()
                 self.ids.imagem_conexao.background_normal = 'imgs/conectado.png'
                 self._limitesGraficos()
+                self.enableSwitches()
+                try:
+                    self.ids.mapa.do_update(10)
+                except: 
+                    print("Falha ao atualizar location")
+
                 self._conn.dismiss()
             except:
                 print("Falha ao iniciar startDataRead")
@@ -129,8 +135,10 @@ class MainWidget(FloatLayout):
         self.ids.RSSI.text = str(self._instDados['RSSI'])
         self.ids.mapa.lat = self._instDados['Latitude']
         self.ids.mapa.lon = self._instDados['Longitude']
-
-
+        self.ids.mapaMarker.lat = self._instDados['Latitude']
+        self.ids.mapaMarker.lon = self._instDados['Longitude']
+        # self.ids.mapaMarker.do_update(1)
+        self.ids.mapa.do_update(1)
         self.updateBoolean()
                                                    
         # Atualiza o grafico vertical de altitude
@@ -218,6 +226,30 @@ class MainWidget(FloatLayout):
     def bdActivate(self, switchObject, switchValue):
         self._bdValue = switchValue
         if switchValue:
-            self.ids.bd.source = 'imgs/green_led.png'
+            self.ids.bd_led.source = 'imgs/green_led.png'
         else:
-            self.ids.bd.source = 'imgs/red_led.png'
+            self.ids.bd_led.source = 'imgs/red_led.png'
+
+    def enableSwitches(self):
+        self.ids.rbf1_switch.disabled = False
+        self.ids.rbf2_switch.disabled = False
+        self.ids.rbf3_switch.disabled = False
+        self.ids.bd_switch.disabled = False
+
+    def rbf1Activate(self, switchObject, switchValue):
+        if switchValue:
+            self.ids.rbf1_led.source = 'imgs/green_led.png'
+        else:
+            self.ids.rbf1_led.source = 'imgs/red_led.png'
+
+    def rbf2Activate(self, switchObject, switchValue):
+        if switchValue:
+            self.ids.rbf2_led.source = 'imgs/green_led.png'
+        else:
+            self.ids.rbf2_led.source = 'imgs/red_led.png'
+
+    def rbf3Activate(self, switchObject, switchValue):
+        if switchValue:
+            self.ids.rbf3_led.source = 'imgs/green_led.png'
+        else:
+            self.ids.rbf3_led.source = 'imgs/red_led.png'
