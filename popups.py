@@ -13,6 +13,14 @@ class ConnectSocketPopup(Popup):
         self.ids.txt_port.text = str(server_port)
     pass
 
+class ConnectSocketPopupError(Popup):
+    """
+        Popup de error de ConnectSocketPopup
+        """
+    def __init__(self, **kwargs):        
+        super().__init__(**kwargs)
+    pass
+
 class ConfiguraGraficosPopup(Popup):
     """
     Popup para fazer a configuração dos graficos

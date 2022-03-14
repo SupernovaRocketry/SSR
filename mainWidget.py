@@ -8,7 +8,7 @@ from kivy.uix.label import Label
 # from kivy.uix.image import AsyncImage
 from kivy.core.window import Window
 from kivy.graphics.svg import Svg
-from popups import ConnectSocketPopup
+from popups import ConnectSocketPopup, ConnectSocketPopupError
 from timeseriesgraph import TimeSeriesGraph
 from kivy_garden.graph import LinePlot
 from cliente import Cliente
@@ -38,6 +38,7 @@ class MainWidget(FloatLayout):
         self._serverIP = kwargs.get('server_ip')
         self._port = kwargs.get('server_port')
         self._conn = ConnectSocketPopup(self._serverIP, self._port)
+        self._connError = ConnectSocketPopupError()
         self._bdValue = False
         
         
@@ -71,9 +72,14 @@ class MainWidget(FloatLayout):
                 self._limitesGraficos()
                 self._conn.dismiss()
             except:
-                print("Falha ao inicinar startDataRead")
+                print("Falha ao iniciar startDataRead")
+                Window.set_system_cursor("arrow")
+                self._connError.ids.erroConnect.text = "Falha ao conectar!"
+                self._connError.open()
         else:
             print("Senha invalida!")
+            self._connError.ids.erroConnect.text = "Senha incorreta!"
+            self._connError.open()
 
     
     def updater(self):
@@ -211,7 +217,7 @@ class MainWidget(FloatLayout):
 
     def bdActivate(self, switchObject, switchValue):
         self._bdValue = switchValue
-        if switchValue == True:
+        if switchValue:
             self.ids.bd.source = 'imgs/green_led.png'
-        if switchValue == False:
+        else:
             self.ids.bd.source = 'imgs/red_led.png'

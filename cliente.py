@@ -30,6 +30,7 @@ class Cliente():
             # self._method()
         except Exception as e:
             print(f'Erro ao conectar {e.args}')
+            raise OverflowError
 
     # def _method(self):
     #     """
@@ -66,6 +67,6 @@ class Cliente():
             print(f'{type(self._resp)} : {self._resp}')
         except Exception as e:
             print(f'Erro ao realizar a comunicacao com o servidor {e.args}')
-        
+
         return self._resp
 

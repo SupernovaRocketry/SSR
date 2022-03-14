@@ -95,6 +95,31 @@
                 on_release: root.dismiss()
 
 
+<ConnectSocketPopupError>:
+    title: ""
+    separator_height: 0
+    size_hint: None, None
+    size: (200, 100)
+    BoxLayout:
+        orientation: 'vertical'
+        Button:
+            id: erroConnect
+            background_color: 0, 0, 0, 0
+            size_hint_y: None
+            height: 40
+            text: "Falha ao conectar!"
+            font_size: 14
+            halign: "center"
+            valign: "middle"
+        Button:
+            size_hint_y: None
+            height: 40
+            text: "Fechar"
+            halign: "center"
+            valign: "middle"
+            on_release: root.dismiss()
+
+
 
 <ConfiguraGraficosPopup>:
     title: 'Configuração dos Gráficos'
