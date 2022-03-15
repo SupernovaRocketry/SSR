@@ -97,9 +97,10 @@ class TimeSeriesGraph(Graph):
             # Verifica se o número de pontos é maior que zero para atribuir corretamente o índice da medição
             self.plots[plot_number].points.append((self._numMeds,meas[1]))    
             self._numMeds +=1     
-
-            self._timestamps.append(meas[0])
-            self._timestamps = self._timestamps[-self._max_points:]
+            
+            if plot_number == 0:
+                self._timestamps.append(meas[0])
+                self._timestamps = self._timestamps[-self._max_points:]
 
             # Verifica se o número de pontos é maior que o número máximo e remove os pontos mais antigos
             self.plots[plot_number].points = self.plots[plot_number].points[-self._max_points:]

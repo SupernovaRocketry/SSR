@@ -11,6 +11,7 @@ from kivy.graphics.svg import Svg
 from popups import ConnectSocketPopup, ConnectSocketPopupError
 from timeseriesgraph import TimeSeriesGraph
 from kivy_garden.graph import LinePlot
+from kivy.garden.mapview import MapMarkerPopup
 from cliente import Cliente
 from threading import Thread
 from time import sleep
@@ -151,7 +152,7 @@ class MainWidget(FloatLayout):
         # Atualiza o grafico com dados do acelerometro
         self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acelerometro']['x']), 0)
         self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acelerometro']['y']), 1)
-        self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acelerometro']['z']), 2)
+       # self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acelerometro']['z']), 2)
         
         # # Atualiza o grafico com dados do giroscopio
         self.ids.graphGiroscopio.updateGraph((self._instDados['timestamp'], self._instDados['Giroscopio']['x']), 0)
@@ -223,18 +224,21 @@ class MainWidget(FloatLayout):
 #     def __init__ (self, xmax, plot_color, **kwargs):
 
 
-    def bdActivate(self, switchObject, switchValue):
-        self._bdValue = switchValue
-        if switchValue:
-            self.ids.bd_led.source = 'imgs/green_led.png'
-        else:
-            self.ids.bd_led.source = 'imgs/red_led.png'
-
+    # Ativa todos os switches (torna todos os switches clicaveis)
     def enableSwitches(self):
         self.ids.rbf1_switch.disabled = False
         self.ids.rbf2_switch.disabled = False
         self.ids.rbf3_switch.disabled = False
         self.ids.bd_switch.disabled = False
+
+
+    # Métodos de callback para ativação de todos os switches
+    def bdActivate(self, switchObject, switchValue):
+        self._bdValue = switchValue
+        if switchValue:
+            self.ids.bd_led.source = 'imgs/green_led.png'
+        else:
+            self.ids.bd_led.source = 'imgs/red_led.png'   
 
     def rbf1Activate(self, switchObject, switchValue):
         if switchValue:
@@ -253,3 +257,8 @@ class MainWidget(FloatLayout):
             self.ids.rbf3_led.source = 'imgs/green_led.png'
         else:
             self.ids.rbf3_led.source = 'imgs/red_led.png'
+
+    def _markBase(self):
+        marker = MapMarkerPopup(lat=self._instDados['Latitude'], lon=self._instDados['Longitude'])
+        self.ids.mapa.add_widget(marker)
+        self.ids.bttnMarkBase.disabled = True
