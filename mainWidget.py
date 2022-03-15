@@ -71,11 +71,11 @@ class MainWidget(FloatLayout):
                 self._updateThread.start()
                 self.ids.imagem_conexao.background_normal = 'imgs/conectado.png'
                 self._limitesGraficos()
-                self.enableSwitches()
-                try:
-                    self.ids.mapa.do_update(10)
-                except: 
-                    print("Falha ao atualizar location")
+                self.enableSwitchesAndButtons()
+                # try:
+                #     self.ids.mapa.do_update(10)
+                # except: 
+                #     print("Falha ao atualizar location")
 
                 self._conn.dismiss()
             except:
@@ -138,7 +138,6 @@ class MainWidget(FloatLayout):
         self.ids.mapa.lon = self._instDados['Longitude']
         self.ids.mapaMarker.lat = self._instDados['Latitude']
         self.ids.mapaMarker.lon = self._instDados['Longitude']
-        # self.ids.mapaMarker.do_update(1)
         self.ids.mapa.do_update(1)
         self.updateBoolean()
                                                    
@@ -225,11 +224,12 @@ class MainWidget(FloatLayout):
 
 
     # Ativa todos os switches (torna todos os switches clicaveis)
-    def enableSwitches(self):
+    def enableSwitchesAndButtons(self):
         self.ids.rbf1_switch.disabled = False
         self.ids.rbf2_switch.disabled = False
         self.ids.rbf3_switch.disabled = False
         self.ids.bd_switch.disabled = False
+        self.ids.bttnMarkBase.disabled = False
 
 
     # Métodos de callback para ativação de todos os switches

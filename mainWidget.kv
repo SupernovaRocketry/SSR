@@ -756,7 +756,7 @@
             pos_hint: {'x': .02, 'y': .185} 
             size_hint: (.07, .02)
             Label:
-                text: 'X'
+                text: 'Roll'
                 text_size: self.size
                 valign: 'center'
                 halign: 'center'
@@ -769,7 +769,7 @@
             pos_hint: {'x': .1, 'y': .185} 
             size_hint: (.07, .02)
             Label:
-                text: 'Y'
+                text: 'Pitch'
                 text_size: self.size
                 valign: 'center'
                 halign: 'center'
@@ -782,7 +782,7 @@
             pos_hint: {'x': .18, 'y': .185} 
             size_hint: (.07, .02)
             Label:
-                text: 'Z'
+                text: 'Yaw'
                 text_size: self.size
                 valign: 'center'
                 halign: 'center'
@@ -1094,6 +1094,7 @@
             text: "Marcar base"
             font_size: self.size[0]*0.15
             on_release: root._markBase()
+            disabled: True
 
 
        
@@ -1262,7 +1263,8 @@
             id: altitude
             text: '-.-'
             text_size: self.size
-            font_size: self.parent.width/2.2
+            font_size: self.parent.width/2.6
+            multiline: False
             valign: 'middle'
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
@@ -1276,7 +1278,7 @@
             id: latitude
             text: '-.-'
             text_size: self.size
-            font_size: self.parent.width/2.2
+            font_size: self.parent.width/2.6
             valign: 'middle'
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
@@ -1290,7 +1292,7 @@
             id: longitude
             text: '-.-'
             text_size: self.size
-            font_size: self.parent.width/2.2
+            font_size: self.parent.width/2.6
             valign: 'middle'
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
@@ -1304,7 +1306,7 @@
             id: acelerometroX
             text: '-.-'
             text_size: self.size
-            font_size: self.parent.width/2.2
+            font_size: self.parent.width/2.6
             valign: 'middle'
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
@@ -1318,7 +1320,7 @@
             id: acelerometroY
             text: '-.-'
             text_size: self.size
-            font_size: self.parent.width/2.2
+            font_size: self.parent.width/2.6
             valign: 'middle'
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
@@ -1332,7 +1334,7 @@
             id: acelerometroZ
             text: '-.-'
             text_size: self.size
-            font_size: self.parent.width/2.2
+            font_size: self.parent.width/2.6
             valign: 'middle'
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
@@ -1346,7 +1348,7 @@
             id: giroscopioX
             text: '-.-'
             text_size: self.size
-            font_size: self.parent.width/2.2
+            font_size: self.parent.width/2.6
             valign: 'middle'
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
@@ -1360,7 +1362,7 @@
             id: giroscopioY
             text: '-.-'
             text_size: self.size
-            font_size: self.parent.width/2.2
+            font_size: self.parent.width/2.6
             valign: 'middle'
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
@@ -1374,7 +1376,7 @@
             id: giroscopioZ
             text: '-.-'
             text_size: self.size
-            font_size: self.parent.width/2.2
+            font_size: self.parent.width/2.6
             valign: 'middle'
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
@@ -1388,7 +1390,7 @@
             id: RSSI
             text: '-.-'
             text_size: self.size
-            font_size: self.parent.width/2.2
+            font_size: self.parent.width/2.6
             valign: 'middle'
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
