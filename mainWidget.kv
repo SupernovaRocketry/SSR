@@ -9,7 +9,7 @@
 
             # Ambiente superior
             Color:
-                rgb: 0, 0, 0
+                rgb: utils.get_color_from_hex('#191919')
             Rectangle:
                 size: self.size
             Color:
@@ -1071,6 +1071,7 @@
                             on_active: root.bdActivate(self, self.active)
                             disabled: True
 
+        # Mapa e funcionalidades do mapa 
         MapView:
             id: mapa
             pos_hint: {'x': .32, 'y': .05}
@@ -1083,6 +1084,18 @@
                 id: mapaMarker
                 lat: -21.785624346951103
                 lon: -43.352172024699804
+                Button:
+                    text: 'Marcar base'
+                    on_release: root._markBase()
+        Button:
+            id: bttnMarkBase
+            size_hint: .05, 0.05
+            pos_hint: {'x': .62, 'y': .05}
+            text: "Marcar base"
+            font_size: self.size[0]*0.15
+            on_release: root._markBase()
+
+
        
         # Titulos Area Grafica
         BoxLayout:
