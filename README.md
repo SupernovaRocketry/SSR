@@ -26,7 +26,7 @@ Para o monitoramento do foguete, o supervisório deverá receber e mostrar os se
 
 
 ## Instalação
-Ao realizar o download do projeto, é necessário instalar o ambiente virtual e todos os pacotes utilizados no projeto. Para isso, basta executar no terminal os seguintes comandos:
+Utilizando o Python 3.7.8, ao realizar o download do projeto, é necessário instalar o ambiente virtual e todos os pacotes utilizados no projeto. Para isso, basta executar no terminal os seguintes comandos:
 
 1. pip install virtualenv
 2. python -m virtualenv .env
