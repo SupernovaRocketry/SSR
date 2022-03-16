@@ -59,10 +59,12 @@ class MainWidget(FloatLayout):
         :param ip: ip da conexão socket
         :param port: porta para a conexao socket
         """
-        self._serverIP = ip
-        self._serverPort = port
-        if self._login == 'supernova' and self._senha == 'astra':
-            try:
+        try:
+            print(self._apogeu)
+            self._apogeu = int(self._apogeu)
+            self._serverIP = ip
+            self._serverPort = port
+            if self._login == 'supernova' and self._senha == 'astra':
                 Window.set_system_cursor("wait")
                 self._connect = Cliente(self._serverIP, self._port)
                 self._connect.start()
@@ -70,23 +72,32 @@ class MainWidget(FloatLayout):
                 self._updateThread = Thread(target = self.updater)
                 self._updateThread.start()
                 self.ids.imagem_conexao.background_normal = 'imgs/conectado.png'
+                self.ids.latitude.font_size = self.ids.altitude.font_size/2
+                self.ids.longitude.font_size = self.ids.altitude.font_size/2
                 self._limitesGraficos()
                 self.enableSwitchesAndButtons()
-                # try:
-                #     self.ids.mapa.do_update(10)
-                # except: 
-                #     print("Falha ao atualizar location")
-
                 self._conn.dismiss()
-            except:
-                print("Falha ao iniciar startDataRead")
-                Window.set_system_cursor("arrow")
-                self._connError.ids.erroConnect.text = "Falha ao conectar!"
+            else:
+                print("Senha invalida!")
+                self._connError.ids.erroConnect.text = "Senha incorreta!"
                 self._connError.open()
-        else:
-            print("Senha invalida!")
-            self._connError.ids.erroConnect.text = "Senha incorreta!"
+        except ValueError:            
+            self._connError.ids.erroConnect.text = "Selecione o apogeu!"
+            print("Selecione o apogeu!")
             self._connError.open()
+        except ConnectionRefusedError:
+            print("Falha ao iniciar startDataRead")
+            Window.set_system_cursor("arrow")
+            self._connError.ids.erroConnect.text = "Falha ao conectar!"
+            self._connError.open()
+        
+
+        # finally:
+        #     print("Falha ao iniciar startDataRead")
+        #     Window.set_system_cursor("arrow")
+        #     self._connError.ids.erroConnect.text = "Falha ao conectar!"
+        #     self._connError.open()
+        
 
     
     def updater(self):
@@ -125,8 +136,8 @@ class MainWidget(FloatLayout):
         Método para a atualização dos da interface gráfica
         """
         self.ids.altitude.text = str(self._instDados['Altitude'])
-        self.ids.latitude.text = str(self._instDados['Latitude'])
-        self.ids.longitude.text = str(self._instDados['Longitude'])
+        self.ids.latitude.text = str("{:.15f}".format(self._instDados['Latitude']))
+        self.ids.longitude.text = str("{:.15f}".format(self._instDados['Longitude']))
         self.ids.acelerometroX.text = str("{:.2f}".format(self._instDados['Acelerometro']['x']))
         self.ids.acelerometroY.text = str("{:.2f}".format(self._instDados['Acelerometro']['y']))
         self.ids.acelerometroZ.text = str("{:.1f}".format(self._instDados['Acelerometro']['z']))
@@ -151,7 +162,7 @@ class MainWidget(FloatLayout):
         # Atualiza o grafico com dados do acelerometro
         self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acelerometro']['x']), 0)
         self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acelerometro']['y']), 1)
-       # self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acelerometro']['z']), 2)
+        self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acelerometro']['z']), 2)
         
         # # Atualiza o grafico com dados do giroscopio
         self.ids.graphGiroscopio.updateGraph((self._instDados['timestamp'], self._instDados['Giroscopio']['x']), 0)
@@ -176,6 +187,7 @@ class MainWidget(FloatLayout):
             self.ids.escala.source = 'imgs/escala3000.png'
         if self._apogeu == 5000:
             self.ids.escala.source = 'imgs/escala5000.png'
+        
 
     def DataGraph(self, xmax, plot_color, **kwargs):
         # super().__init__(**kwargs)
