@@ -54,7 +54,7 @@ class MainWidget(FloatLayout):
         self._graphGiroscopio = self.DataGraphGiro(self._max_points, self._color_graphs, self._color_graphs_y, self._color_graphs_z)
     pass
 
-    def startDataRead(self, ip, port):
+    def startDataRead(self):
         """
         Método utilizado para configurar a conexão socket e inicializar uma thread para a leitura dos dados e atualização da interface grafica
         :param ip: ip da conexão socket
@@ -63,9 +63,7 @@ class MainWidget(FloatLayout):
         try:
             self._apogeu = int(self._apogeu)
             self._port = int(self._port)
-            self._serverIP = ip_address(self._serverIP)
-            self._serverIP = ip
-            self._serverPort = port
+            self._serverIP = str(ip_address(self._serverIP))
             if self._login == 'supernova' and self._senha == 'astra':
                 Window.set_system_cursor("wait")
                 self._connect = Cliente(self._serverIP, self._port)
@@ -80,30 +78,19 @@ class MainWidget(FloatLayout):
                 self.enableSwitchesAndButtons()
                 self._conn.dismiss()
             else:
-                #print("Senha invalida!")
                 self._connError.ids.erroConnect.text = "Senha incorreta!"
                 self._connError.open()
         except ValueError:
             if (type(self._apogeu) != int):
                 self._connError.ids.erroConnect.text = "Selecione o apogeu!"
-                #print("Selecione o apogeu!")
                 self._connError.open()
             else:
                 self._connError.ids.erroConnect.text = "Erro: server/port mal definidos!"
                 self._connError.open()
         except ConnectionRefusedError:
-            #print("Falha ao iniciar startDataRead")
             Window.set_system_cursor("arrow")
             self._connError.ids.erroConnect.text = "Falha ao conectar!"
-            self._connError.open()
-
-
-        # finally:
-        #     print("Falha ao iniciar startDataRead")
-        #     Window.set_system_cursor("arrow")
-        #     self._connError.ids.erroConnect.text = "Falha ao conectar!"
-        #     self._connError.open()
-        
+            self._connError.open()        
 
     
     def updater(self):
