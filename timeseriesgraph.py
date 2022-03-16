@@ -95,10 +95,11 @@ class TimeSeriesGraph(Graph):
         """
         try:
             # Verifica se o número de pontos é maior que zero para atribuir corretamente o índice da medição
-            self.plots[plot_number].points.append((self._numMeds,meas[1]))    
-            self._numMeds +=1     
+            self.plots[plot_number].points.append((self._numMeds,meas[1])) 
+            if plot_number == 0:   
+                self._numMeds +=1     
             
-            if plot_number == 0:
+            
                 self._timestamps.append(meas[0])
                 self._timestamps = self._timestamps[-self._max_points:]
 
@@ -106,15 +107,16 @@ class TimeSeriesGraph(Graph):
             self.plots[plot_number].points = self.plots[plot_number].points[-self._max_points:]
             
             # Atualiza o label da medição mais antiga
-            self.xmin = min(self.plots[plot_number].points)[0]
+            self.xmin = min(self.plots[0].points)[0]
 
             # Atualiza o label da medição mais recente  
-            if len(self.plots[plot_number].points) >= self._max_points:
-                self.xmax = max(self.plots[plot_number].points)[0]
+            if len(self.plots[0].points) >= self._max_points:
+                self.xmax = max(self.plots[0].points)[0]
             else:
                 Clock.schedule_once(self.clearLabel)
 
-            self.update_x_labels()
+            if plot_number == 0:
+                self.update_x_labels()
         except Exception as e:
             print(e.args)
     

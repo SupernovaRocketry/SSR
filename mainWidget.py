@@ -15,6 +15,7 @@ from kivy.garden.mapview import MapMarkerPopup
 from cliente import Cliente
 from threading import Thread
 from time import sleep
+from ipaddress import ip_address
 
 class MainWidget(FloatLayout):
     '''
@@ -53,16 +54,17 @@ class MainWidget(FloatLayout):
         self._graphGiroscopio = self.DataGraphGiro(self._max_points, self._color_graphs, self._color_graphs_y, self._color_graphs_z)
     pass
 
-    def startDataRead(self, ip, port):
+    def startDataRead(self):
         """
         Método utilizado para configurar a conexão socket e inicializar uma thread para a leitura dos dados e atualização da interface grafica
         :param ip: ip da conexão socket
         :param port: porta para a conexao socket
         """
-        self._serverIP = ip
-        self._serverPort = port
-        if self._login == 'supernova' and self._senha == 'astra':
-            try:
+        try:
+            self._apogeu = int(self._apogeu)
+            self._port = int(self._port)
+            self._serverIP = str(ip_address(self._serverIP))
+            if self._login == 'supernova' and self._senha == 'astra':
                 Window.set_system_cursor("wait")
                 self._connect = Cliente(self._serverIP, self._port)
                 self._connect.start()
@@ -70,23 +72,25 @@ class MainWidget(FloatLayout):
                 self._updateThread = Thread(target = self.updater)
                 self._updateThread.start()
                 self.ids.imagem_conexao.background_normal = 'imgs/conectado.png'
+                self.ids.latitude.font_size = self.ids.altitude.font_size/2
+                self.ids.longitude.font_size = self.ids.altitude.font_size/2
                 self._limitesGraficos()
-                self.enableSwitches()
-                try:
-                    self.ids.mapa.do_update(10)
-                except: 
-                    print("Falha ao atualizar location")
-
+                self.enableSwitchesAndButtons()
                 self._conn.dismiss()
-            except:
-                print("Falha ao iniciar startDataRead")
-                Window.set_system_cursor("arrow")
-                self._connError.ids.erroConnect.text = "Falha ao conectar!"
+            else:
+                self._connError.ids.erroConnect.text = "Senha incorreta!"
                 self._connError.open()
-        else:
-            print("Senha invalida!")
-            self._connError.ids.erroConnect.text = "Senha incorreta!"
-            self._connError.open()
+        except ValueError:
+            if (type(self._apogeu) != int):
+                self._connError.ids.erroConnect.text = "Selecione o apogeu!"
+                self._connError.open()
+            else:
+                self._connError.ids.erroConnect.text = "Erro: server/port mal definidos!"
+                self._connError.open()
+        except ConnectionRefusedError:
+            Window.set_system_cursor("arrow")
+            self._connError.ids.erroConnect.text = "Falha ao conectar!"
+            self._connError.open()        
 
     
     def updater(self):
@@ -125,8 +129,8 @@ class MainWidget(FloatLayout):
         Método para a atualização dos da interface gráfica
         """
         self.ids.altitude.text = str(self._instDados['Altitude'])
-        self.ids.latitude.text = str(self._instDados['Latitude'])
-        self.ids.longitude.text = str(self._instDados['Longitude'])
+        self.ids.latitude.text = str("{:.15f}".format(self._instDados['Latitude']))
+        self.ids.longitude.text = str("{:.15f}".format(self._instDados['Longitude']))
         self.ids.acelerometroX.text = str("{:.2f}".format(self._instDados['Acelerometro']['x']))
         self.ids.acelerometroY.text = str("{:.2f}".format(self._instDados['Acelerometro']['y']))
         self.ids.acelerometroZ.text = str("{:.1f}".format(self._instDados['Acelerometro']['z']))
@@ -138,7 +142,6 @@ class MainWidget(FloatLayout):
         self.ids.mapa.lon = self._instDados['Longitude']
         self.ids.mapaMarker.lat = self._instDados['Latitude']
         self.ids.mapaMarker.lon = self._instDados['Longitude']
-        # self.ids.mapaMarker.do_update(1)
         self.ids.mapa.do_update(1)
         self.updateBoolean()
                                                    
@@ -152,7 +155,7 @@ class MainWidget(FloatLayout):
         # Atualiza o grafico com dados do acelerometro
         self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acelerometro']['x']), 0)
         self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acelerometro']['y']), 1)
-       # self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acelerometro']['z']), 2)
+        self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acelerometro']['z']), 2)
         
         # # Atualiza o grafico com dados do giroscopio
         self.ids.graphGiroscopio.updateGraph((self._instDados['timestamp'], self._instDados['Giroscopio']['x']), 0)
@@ -177,6 +180,7 @@ class MainWidget(FloatLayout):
             self.ids.escala.source = 'imgs/escala3000.png'
         if self._apogeu == 5000:
             self.ids.escala.source = 'imgs/escala5000.png'
+        
 
     def DataGraph(self, xmax, plot_color, **kwargs):
         # super().__init__(**kwargs)
@@ -225,11 +229,12 @@ class MainWidget(FloatLayout):
 
 
     # Ativa todos os switches (torna todos os switches clicaveis)
-    def enableSwitches(self):
+    def enableSwitchesAndButtons(self):
         self.ids.rbf1_switch.disabled = False
         self.ids.rbf2_switch.disabled = False
         self.ids.rbf3_switch.disabled = False
         self.ids.bd_switch.disabled = False
+        self.ids.bttnMarkBase.disabled = False
 
 
     # Métodos de callback para ativação de todos os switches

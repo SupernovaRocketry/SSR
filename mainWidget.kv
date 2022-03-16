@@ -424,43 +424,43 @@
             Color:
                 rgb: .5, .5, .5
             Line:
-                points: int(self.parent.width)*.02, int(self.parent.height)*0.53, int(self.parent.width)*.09, int(self.parent.height)*0.53
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.53, int(self.parent.width)*.13, int(self.parent.height)*0.53
                 width: 2
             Line:
-                points: int(self.parent.width)*.02, int(self.parent.height)*0.62, int(self.parent.width)*.09, int(self.parent.height)*0.62
+                points: int(self.parent.width)*.02, int(self.parent.height)*0.62, int(self.parent.width)*.13, int(self.parent.height)*0.62
                 width: 2
             Line:
                 points: int(self.parent.width)*.02, int(self.parent.height)*0.53, int(self.parent.width)*.02, int(self.parent.height)*0.62
                 width: 2
             Line:
-                points: int(self.parent.width)*.09, int(self.parent.height)*0.53, int(self.parent.width)*.09, int(self.parent.height)*0.62
+                points: int(self.parent.width)*.13, int(self.parent.height)*0.53, int(self.parent.width)*.13, int(self.parent.height)*0.62
                 width: 2
             Color:
                 rgb: .7, .7, .7
             Rectangle:
                 pos: int(self.parent.width)*.02, int(self.parent.height)*0.53
-                size: int(self.parent.width)*.07,  int(self.parent.height)*0.09
+                size: int(self.parent.width)*.11,  int(self.parent.height)*0.09
 
             # ------ Longitude
             Color:
                 rgb: .5, .5, .5
             Line:
-                points: int(self.parent.width)*.1, int(self.parent.height)*0.53, int(self.parent.width)*.17, int(self.parent.height)*0.53
+                points: int(self.parent.width)*.14, int(self.parent.height)*0.53, int(self.parent.width)*.25, int(self.parent.height)*0.53
                 width: 2
             Line:
-                points: int(self.parent.width)*.1, int(self.parent.height)*0.62, int(self.parent.width)*.17, int(self.parent.height)*0.62
+                points: int(self.parent.width)*.14, int(self.parent.height)*0.62, int(self.parent.width)*.25, int(self.parent.height)*0.62
                 width: 2
             Line:
-                points: int(self.parent.width)*.1, int(self.parent.height)*0.53, int(self.parent.width)*.1, int(self.parent.height)*0.62
+                points: int(self.parent.width)*.14, int(self.parent.height)*0.53, int(self.parent.width)*.14, int(self.parent.height)*0.62
                 width: 2
             Line:
-                points: int(self.parent.width)*.17, int(self.parent.height)*0.53, int(self.parent.width)*.17, int(self.parent.height)*0.62
+                points: int(self.parent.width)*.25, int(self.parent.height)*0.53, int(self.parent.width)*.25, int(self.parent.height)*0.62
                 width: 2
             Color:
                 rgb: .7, .7, .7
             Rectangle:
-                pos: int(self.parent.width)*.1, int(self.parent.height)*0.53
-                size: int(self.parent.width)*.07,  int(self.parent.height)*0.09
+                pos: int(self.parent.width)*.14, int(self.parent.height)*0.53
+                size: int(self.parent.width)*.11,  int(self.parent.height)*0.09
             # Line:
             #     points: int(self.parent.width)*0.01, int(self.parent.height)*0.67, int(self.parent.width)*0.26, int(self.parent.height)*0.67
             #     width: 2
@@ -756,7 +756,7 @@
             pos_hint: {'x': .02, 'y': .185} 
             size_hint: (.07, .02)
             Label:
-                text: 'X'
+                text: 'Roll'
                 text_size: self.size
                 valign: 'center'
                 halign: 'center'
@@ -769,7 +769,7 @@
             pos_hint: {'x': .1, 'y': .185} 
             size_hint: (.07, .02)
             Label:
-                text: 'Y'
+                text: 'Pitch'
                 text_size: self.size
                 valign: 'center'
                 halign: 'center'
@@ -782,7 +782,7 @@
             pos_hint: {'x': .18, 'y': .185} 
             size_hint: (.07, .02)
             Label:
-                text: 'Z'
+                text: 'Yaw'
                 text_size: self.size
                 valign: 'center'
                 halign: 'center'
@@ -860,7 +860,7 @@
 
         BoxLayout:
             orientation: 'vertical'
-            pos_hint: {'x': .1, 'y': .63} 
+            pos_hint: {'x': .14, 'y': .63} 
             size_hint: (.14, .03)
             Label:
                 text: 'Longitude'
@@ -1076,14 +1076,14 @@
             id: mapa
             pos_hint: {'x': .32, 'y': .05}
             size_hint: (.35, .35)
-            lat: -21.785624346951103
-            lon: -43.352172024699804
+            lat: -21.778570807566982
+            lon: -43.373106180550764
             double_tap_zoom: True
             zoom: 15
             MapMarkerPopup:
                 id: mapaMarker
-                lat: -21.785624346951103
-                lon: -43.352172024699804
+                lat: -21.778570807566982
+                lon: -43.373106180550764
                 Button:
                     text: 'Marcar base'
                     on_release: root._markBase()
@@ -1094,6 +1094,7 @@
             text: "Marcar base"
             font_size: self.size[0]*0.15
             on_release: root._markBase()
+            disabled: True
 
 
        
@@ -1262,7 +1263,8 @@
             id: altitude
             text: '-.-'
             text_size: self.size
-            font_size: self.parent.width/2.2
+            font_size: self.parent.width/2.6
+            multiline: False
             valign: 'middle'
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
@@ -1270,13 +1272,13 @@
     
     BoxLayout:
         orientation: 'vertical'
-        size_hint: .07, 0.09
+        size_hint: .11, 0.09
         pos_hint: {'x' : .02, 'y' : 0.53}
         Label:
             id: latitude
             text: '-.-'
             text_size: self.size
-            font_size: self.parent.width/2.2
+            font_size: altitude.font_size #self.parent.width/2.6
             valign: 'middle'
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
@@ -1284,13 +1286,13 @@
 
     BoxLayout:
         orientation: 'vertical'
-        size_hint: .07, 0.09
-        pos_hint: {'x' : .1, 'y' : 0.53}
+        size_hint: .11, 0.09
+        pos_hint: {'x' : .14, 'y' : 0.53}
         Label:
             id: longitude
             text: '-.-'
             text_size: self.size
-            font_size: self.parent.width/2.2
+            font_size: altitude.font_size #self.parent.width/2.6
             valign: 'middle'
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
@@ -1304,7 +1306,7 @@
             id: acelerometroX
             text: '-.-'
             text_size: self.size
-            font_size: self.parent.width/2.2
+            font_size: altitude.font_size
             valign: 'middle'
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
@@ -1318,7 +1320,7 @@
             id: acelerometroY
             text: '-.-'
             text_size: self.size
-            font_size: self.parent.width/2.2
+            font_size: altitude.font_size
             valign: 'middle'
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
@@ -1332,7 +1334,7 @@
             id: acelerometroZ
             text: '-.-'
             text_size: self.size
-            font_size: self.parent.width/2.2
+            font_size: altitude.font_size
             valign: 'middle'
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
@@ -1346,7 +1348,7 @@
             id: giroscopioX
             text: '-.-'
             text_size: self.size
-            font_size: self.parent.width/2.2
+            font_size: altitude.font_size
             valign: 'middle'
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
@@ -1360,7 +1362,7 @@
             id: giroscopioY
             text: '-.-'
             text_size: self.size
-            font_size: self.parent.width/2.2
+            font_size: altitude.font_size
             valign: 'middle'
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
@@ -1374,7 +1376,7 @@
             id: giroscopioZ
             text: '-.-'
             text_size: self.size
-            font_size: self.parent.width/2.2
+            font_size: altitude.font_size
             valign: 'middle'
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'
@@ -1388,7 +1390,7 @@
             id: RSSI
             text: '-.-'
             text_size: self.size
-            font_size: self.parent.width/2.2
+            font_size: altitude.font_size
             valign: 'middle'
             halign: 'center'
             font_name: 'fontes/montserrat/Montserrat-Regular.ttf'

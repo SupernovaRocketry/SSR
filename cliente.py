@@ -30,7 +30,7 @@ class Cliente():
             # self._method()
         except Exception as e:
             print(f'Erro ao conectar {e.args}')
-            raise OverflowError
+            raise e
 
     # def _method(self):
     #     """
