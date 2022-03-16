@@ -15,6 +15,7 @@ from kivy.garden.mapview import MapMarkerPopup
 from cliente import Cliente
 from threading import Thread
 from time import sleep
+from ipaddress import ip_address
 
 class MainWidget(FloatLayout):
     '''
@@ -60,8 +61,9 @@ class MainWidget(FloatLayout):
         :param port: porta para a conexao socket
         """
         try:
-            print(self._apogeu)
             self._apogeu = int(self._apogeu)
+            self._port = int(self._port)
+            self._serverIP = ip_address(self._serverIP)
             self._serverIP = ip
             self._serverPort = port
             if self._login == 'supernova' and self._senha == 'astra':
@@ -78,19 +80,23 @@ class MainWidget(FloatLayout):
                 self.enableSwitchesAndButtons()
                 self._conn.dismiss()
             else:
-                print("Senha invalida!")
+                #print("Senha invalida!")
                 self._connError.ids.erroConnect.text = "Senha incorreta!"
                 self._connError.open()
-        except ValueError:            
-            self._connError.ids.erroConnect.text = "Selecione o apogeu!"
-            print("Selecione o apogeu!")
-            self._connError.open()
+        except ValueError:
+            if (type(self._apogeu) != int):
+                self._connError.ids.erroConnect.text = "Selecione o apogeu!"
+                #print("Selecione o apogeu!")
+                self._connError.open()
+            else:
+                self._connError.ids.erroConnect.text = "Erro: server/port mal definidos!"
+                self._connError.open()
         except ConnectionRefusedError:
-            print("Falha ao iniciar startDataRead")
+            #print("Falha ao iniciar startDataRead")
             Window.set_system_cursor("arrow")
             self._connError.ids.erroConnect.text = "Falha ao conectar!"
             self._connError.open()
-        
+
 
         # finally:
         #     print("Falha ao iniciar startDataRead")
