@@ -64,9 +64,10 @@ class Cliente():
             self._resp = self._resp.decode()
             self._resp = eval(self._resp)
             self._resp['timestamp'] = datetime.now()
-            print(f'{type(self._resp)} : {self._resp}')
+            #print(f'{type(self._resp)} : {self._resp}')
         except Exception as e:
             print(f'Erro ao realizar a comunicacao com o servidor {e.args}')
+            raise e
 
         return self._resp
 

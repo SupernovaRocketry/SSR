@@ -16,6 +16,7 @@ from cliente import Cliente
 from threading import Thread
 from time import sleep
 from ipaddress import ip_address
+from dbhandler import DBHandler
 
 class MainWidget(FloatLayout):
     '''
@@ -41,7 +42,7 @@ class MainWidget(FloatLayout):
         self._port = kwargs.get('server_port')
         self._conn = ConnectSocketPopup(self._serverIP, self._port)
         self._connError = ConnectSocketPopupError()
-        self._bdValue = False
+        self._updateDB = False
         
         
         #self._connect.start()
@@ -63,19 +64,23 @@ class MainWidget(FloatLayout):
         try:
             self._apogeu = int(self._apogeu)
             self._port = int(self._port)
-            self._serverIP = str(ip_address(self._serverIP))
+            self._serverIP = str(ip_address(self._serverIP))            
             if self._login == 'supernova' and self._senha == 'astra':
                 Window.set_system_cursor("wait")
                 self._connect = Cliente(self._serverIP, self._port)
                 self._connect.start()
                 Window.set_system_cursor("arrow")
                 self._updateThread = Thread(target = self.updater)
-                self._updateThread.start()
                 self.ids.imagem_conexao.background_normal = 'imgs/conectado.png'
                 self.ids.latitude.font_size = self.ids.altitude.font_size/2
                 self.ids.longitude.font_size = self.ids.altitude.font_size/2
+                self.ids.graphAcelerometro.clearLabel()
+                self.ids.graphGiroscopio.clearLabel()
+                self.ids.graphAltitude.clearLabel()
+                self._dataBase = DBHandler(self._missao)
                 self._limitesGraficos()
                 self.enableSwitchesAndButtons()
+                self._updateThread.start()  
                 self._conn.dismiss()
             else:
                 self._connError.ids.erroConnect.text = "Senha incorreta!"
@@ -97,22 +102,36 @@ class MainWidget(FloatLayout):
         """
         Metodo que invoca as rotinas de leitura de dados, utilizando a interface e inserção dos dados no banco de dados
         """
-        try:
-            while self._updateWidgets:
-                #ler dados
-                #atualizar a interface
-                #insedir os dados no banco de dados
+        # try:
+        #     while self._updateWidgets:
+        #         #ler dados
+        #         #atualizar a interface
+        #         #insedir os dados no banco de dados
 
+        #         #Le dados
+        #         self.readData()
+
+        #         # Atualiza dados
+        #         self._updateGUI()
+
+
+        #         #sleep(.05)
+        # except Exception as e:
+        #     print(f'Erro: {e}')
+
+        while self._updateWidgets:
+            try:
                 #Le dados
                 self.readData()
 
                 # Atualiza dados
                 self._updateGUI()
 
-
-                #sleep(.05)
-        except Exception as e:
-            print(f'Erro: {e}')
+                # Insere os dados no banco de dados
+                if self._updateDB:
+                    self._dataBase.insertData(self._instDados)
+            except Exception as e:
+                print(f'Erro updater: {e}')
 
     
     def readData(self):
@@ -123,6 +142,7 @@ class MainWidget(FloatLayout):
             self._instDados = self._connect._method()
         except Exception as e:
             print(f'Falha ao adquirir os dados: {e}')
+            raise e
 
     def _updateGUI(self):
         """
@@ -239,11 +259,16 @@ class MainWidget(FloatLayout):
 
     # Métodos de callback para ativação de todos os switches
     def bdActivate(self, switchObject, switchValue):
-        self._bdValue = switchValue
         if switchValue:
             self.ids.bd_led.source = 'imgs/green_led.png'
+            try:
+                self._dataBase.conect()
+            except Exception as e:
+                print("Erro ao realizar a conexão com o banco de dados!")
         else:
             self.ids.bd_led.source = 'imgs/red_led.png'   
+
+        self._updateDB = switchValue
 
     def rbf1Activate(self, switchObject, switchValue):
         if switchValue:

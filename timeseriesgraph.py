@@ -113,10 +113,10 @@ class TimeSeriesGraph(Graph):
             if len(self.plots[0].points) >= self._max_points:
                 self.xmax = max(self.plots[0].points)[0]
             else:
-                Clock.schedule_once(self.clearLabel)
+                if len(self.plots) == 1:
+                    Clock.schedule_once(self.clearLabel)
 
-            if plot_number == 0:
-                self.update_x_labels()
+            self.update_x_labels()
         except Exception as e:
             print(e.args)
     
