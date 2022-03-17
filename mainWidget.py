@@ -129,7 +129,7 @@ class MainWidget(FloatLayout):
 
                 # Insere os dados no banco de dados
                 if self._updateDB:
-                    self._dataBase.insertData(self._instDados)
+                    self._dataBase.insertData(data = self._instDados)
             except Exception as e:
                 print(f'Erro updater: {e}')
 

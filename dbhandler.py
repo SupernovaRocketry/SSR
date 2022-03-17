@@ -71,28 +71,32 @@ class DBHandler():
         try:
             self._lock.acquire()
             self._data = self._handleData(data)
-            timestamp = str(data['timestamp'])
-            str_cols = 'timestamp,' + ','.join(data.keys())
-            str_values = f"'{timestamp}'," + ','.join(str(data[k]) for k in data.keys())
-            sql_str = f'INSERT INTO {self._tablename} ({str_cols} VALUES {str_values})'
+            str_cols = ','.join(self._data.keys())
+            str_values = '"' + '", "'.join(str(self._data[k]) for k in self._data.keys()) + '"'
+            sql_str = f'INSERT INTO {self._tablename} ({str_cols}) VALUES ({str_values});'
             self._cursor.execute(sql_str)
             self._con.commit()            
         except Exception as e:
             print("Erro insertData: ",e.args())
+            raise e
         finally:
             self._lock.release()
 
 
     def _handleData(self, data):
+        """
+        Método 
+        """
         try:
-            newData = {"Altitude" : data['Altitude'], 
+            newData = {"timestamp" : data['timestamp'],
+                        "Altitude" : data['Altitude'], 
                         "Latitude" : data['Latitude'], 
                         "Longitude" : data['Longitude'], 
-                        "Principal Paraquedas Estabilizador" : data['Principal Paraquedas Estabilizador'],
-                        "Redundancia Paraquedas Estabilizador" : data['Redundancia Paraquedas Estabilizador'],
-                        "Comercial Paraquedas Estabilizador" : data['Comercial Paraquedas Estabilizador'],
-                        "Principal Paraquedas Principal" : data['Principal Paraquedas Principal'],
-                        "Comercial Paraquedas Principal" : data['Comercial Paraquedas Principal'],
+                        "Principal_Paraquedas_Estabilizador" : data['Principal Paraquedas Estabilizador'],
+                        "Redundancia_Paraquedas_Estabilizador" : data['Redundancia Paraquedas Estabilizador'],
+                        "Comercial_Paraquedas_Estabilizador" : data['Comercial Paraquedas Estabilizador'],
+                        "Principal_Paraquedas_Principal" : data['Principal Paraquedas Principal'],
+                        "Comercial_Paraquedas_Principal" : data['Comercial Paraquedas Principal'],
                         "Acelerometro_X" : data['Acelerometro']['x'],
                         "Acelerometro_Y" : data['Acelerometro']['y'],
                         "Acelerometro_Z" : data['Acelerometro']['z'],
