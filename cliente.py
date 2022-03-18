@@ -71,3 +71,10 @@ class Cliente():
 
         return self._resp
 
+    def disconect(self):
+        #self._tcp.shutdown()
+        self._tcp.close()
+        print("Desconectar!")
+
+        
+

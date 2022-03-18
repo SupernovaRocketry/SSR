@@ -38,7 +38,10 @@ class DBHandler():
         self._createTable()
 
     def __del__(self):
-        self._con.close()
+        try:
+            self._con.close()
+        except:
+            pass
 
     def _createTable(self):
         """

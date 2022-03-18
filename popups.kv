@@ -23,6 +23,7 @@
                 font_size: 14
                 halign: 'center'
                 valign: 'middle'
+                disabled: False
             Label:
                 text: "Port"
                 font_size: 14
@@ -32,6 +33,7 @@
                 font_size: 14
                 halign: 'center'
                 valign: 'middle'
+                disabled: False
             Label:
                 text: "Login"
                 font_size: 14
@@ -41,15 +43,17 @@
                 font_size: 14
                 halign: 'center'
                 valign: 'middle'
+                disabled: False
             Label:
                 text: "Senha"
                 font_size: 14
             TextInput:
                 id: txt_senha
-                text: 'senha'
+                hint_text: 'senha'
                 font_size: 14
                 halign: 'center'
                 valign: 'middle'
+                disabled: False
             Label:
                 text: 'Missão'
                 font_size: 14
@@ -59,6 +63,7 @@
                 font_size: 14
                 halign: 'center'
                 valign: 'middle'
+                disabled: False
             Label:
                 text: 'Apogeu'
                 font_size: 14
@@ -72,11 +77,13 @@
                 id: txt_apogeu
                 text: "selecione o apogeu"
                 values: ['500', '1000', '3000', '5000']
+                disabled: False
 
         BoxLayout:
             orientation:'horizontal'
             size_hint: (1, .2)
             Button:
+                id: connButton
                 size_hint_y: None
                 height: 40
                 text: 'Conectar'
@@ -87,7 +94,7 @@
                     app.root._missao = txt_missao.text
                     app.root._port = txt_port.text
                     app.root._apogeu = txt_apogeu.text
-                    app.root.startDataRead()
+                    app.root.clickConnection()
             Button:
                 size_hint_y: None
                 height: 40
@@ -99,7 +106,7 @@
     title: ""
     separator_height: 0
     size_hint: None, None
-    size: (200, 100)
+    size: (250, 100)
     BoxLayout:
         orientation: 'vertical'
         Button:

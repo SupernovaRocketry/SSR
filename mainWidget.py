@@ -13,7 +13,7 @@ from timeseriesgraph import TimeSeriesGraph
 from kivy_garden.graph import LinePlot
 from kivy.garden.mapview import MapMarkerPopup
 from cliente import Cliente
-from threading import Thread
+from threading import Thread, Lock
 from time import sleep
 from ipaddress import ip_address
 from dbhandler import DBHandler
@@ -43,7 +43,8 @@ class MainWidget(FloatLayout):
         self._conn = ConnectSocketPopup(self._serverIP, self._port)
         self._connError = ConnectSocketPopupError()
         self._updateDB = False
-        
+        self._verifyConn = False
+        self._lock = Lock
         
         #self._connect.start()
         Window.fullscreen = False
@@ -55,7 +56,7 @@ class MainWidget(FloatLayout):
         self._graphGiroscopio = self.DataGraphGiro(self._max_points, self._color_graphs, self._color_graphs_y, self._color_graphs_z)
     pass
 
-    def startDataRead(self):
+    def _startDataRead(self):
         """
         Método utilizado para configurar a conexão socket e inicializar uma thread para a leitura dos dados e atualização da interface grafica
         :param ip: ip da conexão socket
@@ -71,6 +72,7 @@ class MainWidget(FloatLayout):
                 self._connect.start()
                 Window.set_system_cursor("arrow")
                 self._updateThread = Thread(target = self.updater)
+                self._updateThread.daemon = False
                 self.ids.imagem_conexao.background_normal = 'imgs/conectado.png'
                 self.ids.latitude.font_size = self.ids.altitude.font_size/2
                 self.ids.longitude.font_size = self.ids.altitude.font_size/2
@@ -78,6 +80,7 @@ class MainWidget(FloatLayout):
                 self.ids.graphGiroscopio.clearLabel()
                 self.ids.graphAltitude.clearLabel()
                 self._dataBase = DBHandler(self._missao)
+                self._disableNewConnections()
                 self._limitesGraficos()
                 self.enableSwitchesAndButtons()
                 self._updateThread.start()  
@@ -85,6 +88,8 @@ class MainWidget(FloatLayout):
             else:
                 self._connError.ids.erroConnect.text = "Senha incorreta!"
                 self._connError.open()
+                raise Exception('Senha incorreta!')
+
         except ValueError:
             if (type(self._apogeu) != int):
                 self._connError.ids.erroConnect.text = "Selecione o apogeu!"
@@ -92,44 +97,34 @@ class MainWidget(FloatLayout):
             else:
                 self._connError.ids.erroConnect.text = "Erro: server/port mal definidos!"
                 self._connError.open()
+
+            raise ValueError
+
         except ConnectionRefusedError:
             Window.set_system_cursor("arrow")
             self._connError.ids.erroConnect.text = "Falha ao conectar!"
-            self._connError.open()        
+            self._connError.open()
+            raise ConnectionRefusedError        
 
     
     def updater(self):
         """
         Metodo que invoca as rotinas de leitura de dados, utilizando a interface e inserção dos dados no banco de dados
         """
-        # try:
-        #     while self._updateWidgets:
-        #         #ler dados
-        #         #atualizar a interface
-        #         #insedir os dados no banco de dados
-
-        #         #Le dados
-        #         self.readData()
-
-        #         # Atualiza dados
-        #         self._updateGUI()
-
-
-        #         #sleep(.05)
-        # except Exception as e:
-        #     print(f'Erro: {e}')
-
         while self._updateWidgets:
             try:
-                #Le dados
-                self.readData()
+                if self._verifyConn:
+                    #Le dados
+                    self.readData()
 
-                # Atualiza dados
-                self._updateGUI()
+                    # Atualiza dados
+                    self._updateGUI()
 
-                # Insere os dados no banco de dados
-                if self._updateDB:
-                    self._dataBase.insertData(data = self._instDados)
+                    # Insere os dados no banco de dados
+                    if self._updateDB:
+                        self._dataBase.insertData(data = self._instDados)
+                else:
+                    print('Desconectado!')
             except Exception as e:
                 print(f'Erro updater: {e}')
 
@@ -186,10 +181,16 @@ class MainWidget(FloatLayout):
 
     
     def stopRefresh(self):
+        """
+        Método para parar de atualizar os widgets
+        """
         self._updateWidgets = False
 
 
     def _limitesGraficos(self):
+        """
+        Método para definir os limites dos graficos e alterar a imagem da barra de altitude.
+        """
         self.ids.graphAltitude.ymax = self._apogeu*1.2
         self.ids.graphAltitude.y_ticks_major = self._apogeu*1.2/6
         if self._apogeu == 500:
@@ -203,6 +204,9 @@ class MainWidget(FloatLayout):
         
 
     def DataGraph(self, xmax, plot_color, **kwargs):
+        """
+        Método para a criação do grafico de Altitude
+        """
         # super().__init__(**kwargs)
         plot = LinePlot(line_width = 1.5, color = plot_color)
         self.ids.graphAltitude.add_plot(plot)
@@ -210,6 +214,9 @@ class MainWidget(FloatLayout):
             
 
     def DataGraphAcel(self, xmax, plot_color, plot_color_y, plot_color_z, **kwargs):
+        """
+        Método para a criação do grafico com dados do acelerometro.
+        """
         plot = LinePlot(line_width = 1.5, color = plot_color)
         plot2 = LinePlot(line_width = 1.5, color = plot_color_y)
         plot3 = LinePlot(line_width = 1.5, color = plot_color_z)
@@ -219,6 +226,9 @@ class MainWidget(FloatLayout):
         self.ids.graphAcelerometro.xmax = xmax
 
     def DataGraphGiro(self, xmax, plot_color, plot_color_y, plot_color_z, **kwargs):
+        """
+        Método para a criação do grafico com dados do giroscopio.
+        """
         plot = LinePlot(line_width = 1.5, color = plot_color)
         plot2 = LinePlot(line_width = 1.5, color = plot_color_y)
         plot3 = LinePlot(line_width = 1.5, color = plot_color_z)
@@ -230,6 +240,9 @@ class MainWidget(FloatLayout):
 
 
     def updateBoolean(self):
+        """
+        Método que atualiza os estados dos LED de acordo com o acionamento de cada paraquedas.
+        """
         if self._instDados['Principal Paraquedas Estabilizador'] == 1:
             self.ids.paraquedasEstabilizadorPrincipal.source = 'imgs/green_led.png'
         
@@ -244,12 +257,14 @@ class MainWidget(FloatLayout):
 
         if self._instDados['Comercial Paraquedas Principal'] == 1:
             self.ids.paraquedasPrincipalComercial.source = 'imgs/green_led.png'
-# class DataGraph(FloatLayout):    
-#     def __init__ (self, xmax, plot_color, **kwargs):
+
 
 
     # Ativa todos os switches (torna todos os switches clicaveis)
     def enableSwitchesAndButtons(self):
+        """
+        Método para habilitar os switches após a conexão.
+        """
         self.ids.rbf1_switch.disabled = False
         self.ids.rbf2_switch.disabled = False
         self.ids.rbf3_switch.disabled = False
@@ -259,6 +274,10 @@ class MainWidget(FloatLayout):
 
     # Métodos de callback para ativação de todos os switches
     def bdActivate(self, switchObject, switchValue):
+        """
+            Método para demonstração do estado de gravação dos dados em um Banco de Dados.
+            Altera o valor de _updateDB, que diz se está ou não gravando os dados em um banco de dados. 
+        """
         if switchValue:
             self.ids.bd_led.source = 'imgs/green_led.png'
             try:
@@ -271,24 +290,122 @@ class MainWidget(FloatLayout):
         self._updateDB = switchValue
 
     def rbf1Activate(self, switchObject, switchValue):
+        """
+        Método para demonstração do estado do Remove Before Light 1 (LED 1 ON/OFF)
+        """
         if switchValue:
             self.ids.rbf1_led.source = 'imgs/green_led.png'
         else:
             self.ids.rbf1_led.source = 'imgs/red_led.png'
 
     def rbf2Activate(self, switchObject, switchValue):
+        """
+        Método para demonstração do estado do Remove Before Light 2 (LED 2 ON/OFF)
+        """
         if switchValue:
             self.ids.rbf2_led.source = 'imgs/green_led.png'
         else:
             self.ids.rbf2_led.source = 'imgs/red_led.png'
 
     def rbf3Activate(self, switchObject, switchValue):
+        """
+        Método para demonstração do estado do Remove Before Light 3 (LED 3 ON/OFF)
+        """
         if switchValue:
             self.ids.rbf3_led.source = 'imgs/green_led.png'
         else:
             self.ids.rbf3_led.source = 'imgs/red_led.png'
 
     def _markBase(self):
-        marker = MapMarkerPopup(lat=self._instDados['Latitude'], lon=self._instDados['Longitude'])
+        """
+        Método que cria um novo MapMarkerPopup para marcar a base de lançamento e desabilita o botão
+        """
+        marker = MapMarkerPopup(lat=self._instDados['Latitude'], lon=self._instDados['Longitude'], source='imgs/markerBase.png')
         self.ids.mapa.add_widget(marker)
+        self.ids.mapa.center_on(self._instDados['Latitude'], self._instDados['Longitude'])
         self.ids.bttnMarkBase.disabled = True
+
+
+    def _disableNewConnections(self):     
+        """
+        Método que trava os dados correspondentes a conexão
+        """
+        self._conn.ids.txt_ip.disabled = True
+        self._conn.ids.txt_port.disabled = True
+        self._conn.ids.txt_login.disabled = True
+        self._conn.ids.txt_senha.disabled = True
+        self._conn.ids.txt_missao.disabled = True
+        self._conn.ids.txt_apogeu.disabled = True
+        self._conn.ids.connButton.text = 'Desconectar'
+
+    def _disconect(self):
+        """
+        Método para tratar a desconexão do supervisorio ao foguete.
+        Reseta todas as configurações ao original.
+        """
+        self._conn.ids.txt_ip.disabled = False
+        self._conn.ids.txt_port.disabled = False
+        self._conn.ids.txt_login.disabled = False
+        self._conn.ids.txt_senha.disabled = False
+        self._conn.ids.txt_missao.disabled = False
+        self._conn.ids.txt_apogeu.disabled = False
+        self._conn.ids.connButton.text = 'Conectar'        
+        self.ids.imagem_conexao.disabled = True
+        self.ids.imagem_conexao.background_disabled_normal = 'imgs/desconectado.png'
+        self._connect.disconect()
+        self.ids.altitude.text = '-.-'
+        self.ids.latitude.text = '-.-'
+        self.ids.latitude.font_size = self.ids.altitude.font_size
+        self.ids.longitude.text = '-.-'
+        self.ids.longitude.font_size = self.ids.altitude.font_size
+        self.ids.acelerometroX.text = '-.-'
+        self.ids.acelerometroY.text = '-.-'
+        self.ids.acelerometroZ.text = '-.-'
+        self.ids.giroscopioX.text = '-.-'
+        self.ids.giroscopioY.text = '-.-'
+        self.ids.giroscopioZ.text = '-.-'
+        self.ids.RSSI.text = '-.-'
+        self.ids.mapa.lat = -21.778570807566982
+        self.ids.mapa.lon = -43.373106180550764
+        self.ids.mapaMarker.lat = -21.778570807566982
+        self.ids.mapaMarker.lon = -43.373106180550764
+        self.ids.mapa.do_update(1)
+        self.ids.paraquedasEstabilizadorPrincipal.source = 'imgs/red_led.png'
+        self.ids.paraquedasEstabilizadorRedundante.source = 'imgs/red_led.png'
+        self.ids.paraquedasEstabilizadorComercial.source = 'imgs/red_led.png'
+        self.ids.paraquedasPrincipal.source = 'imgs/red_led.png'
+        self.ids.paraquedasPrincipalComercial.source = 'imgs/red_led.png'
+        self.ids.rbf1_switch.active = False
+        self.ids.rbf2_switch.active = False
+        self.ids.rbf3_switch.active = False
+        self.ids.bd_switch.active = False
+        self.ids.rbf1_switch.disabled = True
+        self.ids.rbf2_switch.disabled = True
+        self.ids.rbf3_switch.disabled = True
+        self.ids.bd_switch.disabled = True
+        self.ids.bttnMarkBase.disabled = True
+        self.ids.escala.source = 'imgs/escalaZerada.png'
+        self.ids.graficoMedidorAltitude.size_hint = self.ids.medidorAltitude.size_hint[0], 0
+        self.ids.graphAltitude.clearPlots()
+        self.ids.graphAltitude.clearLabel()
+        self.ids.graphAcelerometro.clearPlots()
+        self.ids.graphAcelerometro.clearLabel()
+        self.ids.graphGiroscopio.clearPlots()
+        self.ids.graphGiroscopio.clearLabel()
+        self._conn.dismiss()
+        #self._updateThread.terminate() 
+
+    def clickConnection(self):
+        """
+        Método que verifica se está sendo feita a conexão ou desconexão e chama o método correspondente.
+        """
+        self._verifyConn = not self._verifyConn
+        try:
+            if self._verifyConn:
+                self._startDataRead()
+            else:
+                self._disconect()                
+        except:
+            self._verifyConn = not self._verifyConn
+            print('Falha ao conectar! verifyConn não alterado.')
+
