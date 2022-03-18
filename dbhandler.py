@@ -112,15 +112,15 @@ class DBHandler():
         except Exception as e:
             print("Falha ao tratar dados: ",e.args())
 
-    def selectData(self, cols):
-        """
-        Método que realiza a busca no BD para utilizar nos relatorios automatizados
-        """
-        try:
-            self._lock.acquire()
+    # def selectData(self, cols):
+    #     """
+    #     Método que realiza a busca no BD para utilizar nos relatorios automatizados
+    #     """
+    #     try:
+    #         self._lock.acquire()
 
-            self._cursor.execute(sql_str)
-            self._con.commit()
-            self._lock.release()
-        except Exception as e:
-            print("Erro: ",e.args())
+    #         self._cursor.execute(sql_str)
+    #         self._con.commit()
+    #         self._lock.release()
+    #     except Exception as e:
+    #         print("Erro: ",e.args())

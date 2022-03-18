@@ -1,5 +1,6 @@
 #:kivy 1.11.1
-#: import MapView kivy.garden.mapview.MapView
+#: import MapView kivy_garden.mapview.MapView
+#: import MapMarkerPopup kivy_garden.mapview.MapMarkerPopup
 #: import utils kivy.utils
 #: import Svg kivy.graphics.svg 
 
@@ -1084,6 +1085,7 @@
                 id: mapaMarker
                 lat: -21.778570807566982
                 lon: -43.373106180550764
+                source:'imgs/marker.png'
                 Button:
                     text: 'Marcar base'
                     on_release: root._markBase()

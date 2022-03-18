@@ -7,11 +7,10 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 # from kivy.uix.image import AsyncImage
 from kivy.core.window import Window
-from kivy.graphics.svg import Svg
 from popups import ConnectSocketPopup, ConnectSocketPopupError
 from timeseriesgraph import TimeSeriesGraph
 from kivy_garden.graph import LinePlot
-from kivy.garden.mapview import MapMarkerPopup
+from kivy_garden.mapview import MapMarkerPopup
 from cliente import Cliente
 from threading import Thread, Lock
 from time import sleep
