@@ -285,6 +285,7 @@ class MainWidget(FloatLayout):
                 print("Erro ao realizar a conexão com o banco de dados!")
         else:
             self.ids.bd_led.source = 'imgs/red_led.png'   
+            self._dataBase.disconect()
 
         self._updateDB = switchValue
 

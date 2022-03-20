@@ -112,6 +112,10 @@ class DBHandler():
         except Exception as e:
             print("Falha ao tratar dados: ",e.args())
 
+
+    def disconect(self):
+        self._con.close()
+
     # def selectData(self, cols):
     #     """
     #     Método que realiza a busca no BD para utilizar nos relatorios automatizados
