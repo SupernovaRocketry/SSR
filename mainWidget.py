@@ -21,7 +21,7 @@ class MainWidget(FloatLayout):
     '''
     Widget principal do supervisório
     '''
-    _updateWidgets = True
+    _updateWidgets = False
     _max_points = 1000
     _supernova_color = "#7D0101"
     _color_graphs = (1,0,0)
@@ -42,7 +42,6 @@ class MainWidget(FloatLayout):
         self._conn = ConnectSocketPopup(self._serverIP, self._port)
         self._connError = ConnectSocketPopupError()
         self._updateDB = False
-        self._verifyConn = False
         self._lock = Lock
         
         #self._connect.start()
@@ -111,19 +110,16 @@ class MainWidget(FloatLayout):
         Metodo que invoca as rotinas de leitura de dados, utilizando a interface e inserção dos dados no banco de dados
         """
         while self._updateWidgets:
-            try:
-                if self._verifyConn:
-                    #Le dados
-                    self.readData()
+            try:    
+                #Le dados
+                self.readData()
 
-                    # Atualiza dados
-                    self._updateGUI()
+                # Atualiza dados
+                self._updateGUI()
 
-                    # Insere os dados no banco de dados
-                    if self._updateDB:
-                        self._dataBase.insertData(data = self._instDados)
-                else:
-                    print('Desconectado!')
+                # Insere os dados no banco de dados
+                if self._updateDB:
+                    self._dataBase.insertData(data = self._instDados)
             except Exception as e:
                 print(f'Erro updater: {e}')
 
@@ -399,13 +395,13 @@ class MainWidget(FloatLayout):
         """
         Método que verifica se está sendo feita a conexão ou desconexão e chama o método correspondente.
         """
-        self._verifyConn = not self._verifyConn
+        self._updateWidgets = not self._updateWidgets
         try:
-            if self._verifyConn:
+            if self._updateWidgets:
                 self._startDataRead()
             else:
                 self._disconect()                
         except:
-            self._verifyConn = not self._verifyConn
-            print('Falha ao conectar! verifyConn não alterado.')
+            self._updateWidgets = not self._updateWidgets
+            print('Falha ao conectar! _updateWidgets não alterado.')
 
