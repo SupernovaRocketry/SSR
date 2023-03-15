@@ -32,7 +32,7 @@ Utilizando o Python 3.7.8, ao realizar o download do projeto, é necessário ins
 2. python -m virtualenv .env
 3. .env\Scripts\Activate
 4. pip install -r requirements.txt
-5. python -m pip install kivy_garden.graph
+5. pip install Kivy_Garden.mapview
 
 ## Considerações finais
 Atualizado por: [Thiago Saber](https://github.com/ThiiD).
