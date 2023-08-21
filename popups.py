@@ -1,17 +1,32 @@
 from kivy.uix.popup import Popup
+from kivy.uix.screenmanager import ScreenManager, Screen
+
+# class ConnectSocketPopup(Popup):
+#     '''
+#     Popup para fazer a conexão socket.
+#     '''
+#     def __init__(self, server_ip, server_port, **kwargs):
+#         '''
+#         Construtor da classe connectSocket
+#         '''
+#         super().__init__(**kwargs)
+#         self.ids.txt_ip.text = str(server_ip)
+#         self.ids.txt_port.text = str(server_port)
+#     pass
 
 class ConnectSocketPopup(Popup):
     '''
-    Popup para fazer a conexão socket.
+    Popup para fazer a conexão - (UART, WiFi)
     '''
     def __init__(self, server_ip, server_port, **kwargs):
         '''
         Construtor da classe connectSocket
         '''
-        super().__init__(**kwargs)
-        self.ids.txt_ip.text = str(server_ip)
-        self.ids.txt_port.text = str(server_port)
-    pass
+        super().__init__(**kwargs)      
+        self.manager = ScreenManager()
+        self.manager.add_widget(UARTConnection(name='UART'))
+        self.manager.add_widget(WiFiConnection(name='WiFiConnection'))
+
 
 class ConnectSocketPopupError(Popup):
     """
@@ -31,3 +46,8 @@ class ConfiguraGraficosPopup(Popup):
         """
         super().__init__(**kwargs)
         
+class UARTConnection(Screen):
+    pass
+
+class WiFiConnection(Screen):
+    pass
