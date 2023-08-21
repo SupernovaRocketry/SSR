@@ -1,7 +1,161 @@
 #:kivy 1.11.1
 
+# <ConnectSocketPopup>:
+#     title: 'Conexão Socket'
+#     # size_hint_y: 0.3
+#     # size_hint_x: 0.2
+#     size_hint: None, None
+#     size: (600, 375)
+#     BoxLayout:
+#         id: layout
+#         orientation:'vertical'
+#         GridLayout:
+#             size_hint: (1, .8)
+#             cols: 2
+#             rows: 6
+#             Label:
+#                 text: "IP"
+#                 font_size: 14
+#             TextInput:
+#                 id: txt_ip
+#                 text: '127.0.0.1'
+#                 font_size: 14
+#                 halign: 'center'
+#                 valign: 'middle'
+#                 disabled: False
+#             Label:
+#                 text: "Port"
+#                 font_size: 14
+#             TextInput:
+#                 id: txt_port
+#                 text: '502'
+#                 font_size: 14
+#                 halign: 'center'
+#                 valign: 'middle'
+#                 disabled: False
+#             Label:
+#                 text: "Login"
+#                 font_size: 14
+#             TextInput:
+#                 id: txt_login
+#                 hint_text: 'login'
+#                 font_size: 14
+#                 halign: 'center'
+#                 valign: 'middle'
+#                 disabled: False
+#             Label:
+#                 text: "Senha"
+#                 font_size: 14
+#             TextInput:
+#                 id: txt_senha
+#                 hint_text: 'senha'
+#                 font_size: 14
+#                 halign: 'center'
+#                 valign: 'middle'
+#                 disabled: False
+#             Label:
+#                 text: 'Missão'
+#                 font_size: 14
+#             TextInput:
+#                 id: txt_missao
+#                 text: ''
+#                 font_size: 14
+#                 halign: 'center'
+#                 valign: 'middle'
+#                 disabled: False
+#             Label:
+#                 text: 'Apogeu'
+#                 font_size: 14
+#             Spinner:
+#                 id: txt_apogeu
+#                 text: "Selecione o apogeu"
+#                 values: ['500', '1000', '3000', '5000']
+#                 disabled: False
+
+#         BoxLayout:
+#             orientation:'horizontal'
+#             size_hint: (1, .2)
+#             Button:
+#                 id: connButton
+#                 size_hint_y: None
+#                 height: 40
+#                 text: 'Conectar'
+#                 on_release:
+#                     app.root._login = txt_login.text
+#                     app.root._senha = txt_senha.text
+#                     app.root._serverIP = txt_ip.text
+#                     app.root._missao = txt_missao.text
+#                     app.root._port = txt_port.text
+#                     app.root._apogeu = txt_apogeu.text
+#                     app.root.clickConnection()
+#             Button:
+#                 size_hint_y: None
+#                 height: 40
+#                 text:'Fechar'
+#                 on_release: root.dismiss()
+
+
+# <ConnectSocketPopup>:
+#     title: 'Opções de conexão'
+#     # size_hint_y: 0.3
+#     # size_hint_x: 0.2
+#     size_hint: None, None
+#     size: (600, 375)
+#     BoxLayout:
+#         id: layout
+#         orientation:'vertical'
+#         GridLayout:
+#             size_hint: (1, .8)
+#             cols: 2
+#             rows: 6
+#             size_hint_y: 0.05
+#             Label:
+#                 text: "Conexão"
+#                 font_size: 14
+                
+#             Spinner:
+#                 id: opt_conexao
+#                 text: "Comunicação"
+#                 values: ['UART', 'WiFi']
+#                 size_hint: (1, 0.25)
+#                 disabled: False
+#                 on_text: root.manager.current = self.text
+
+#             # WindowManager:
+#             #     id: window_manager
+#             #     FirstWindow:
+#             #         id: window_uart
+#             #         Label:
+#             #             text: "Teste"
+#             #             font_size:14
+
+            
+
+#         BoxLayout:
+#             orientation:'horizontal'
+#             size_hint: (1, .2)
+#             Button:
+#                 id: connButton
+#                 size_hint_y: None
+#                 height: 40
+#                 text: 'Conectar'
+#                 on_release:
+#                     app.root._login = txt_login.text
+#                     app.root._senha = txt_senha.text
+#                     app.root._serverIP = txt_ip.text
+#                     app.root._missao = txt_missao.text
+#                     app.root._port = txt_port.text
+#                     app.root._apogeu = txt_apogeu.text
+#                     app.root.clickConnection()
+#             Button:
+#                 size_hint_y: None
+#                 height: 40
+#                 text:'Fechar'
+#                 on_release: root.dismiss()
+
+    
 <ConnectSocketPopup>:
-    title: 'Conexão Socket'
+    title: 'Opções de conexão'
     # size_hint_y: 0.3
     # size_hint_x: 0.2
     size_hint: None, None
@@ -10,46 +164,36 @@
         id: layout
         orientation:'vertical'
         GridLayout:
-            # size: int(self.parent.width),  int(self.parent.height)*0.8
             size_hint: (1, .8)
             cols: 2
             rows: 6
+            # size_hint_y: 0.05
             Label:
-                text: "IP"
+                text: "Conexão"
+                font_size: 14
+                
+            Spinner:
+                id: opt_conexao
+                text: "UART"
+                values: ['UART', 'WiFi']
+                disabled: True
+                on_text: root.manager.current = self.text         
+            Label:
+                text: "Porta"
                 font_size: 14
             TextInput:
-                id: txt_ip
-                text: '127.0.0.1'
+                id: txt_porta
+                text: ''
                 font_size: 14
                 halign: 'center'
                 valign: 'middle'
                 disabled: False
             Label:
-                text: "Port"
+                text: "Baudrate"
                 font_size: 14
             TextInput:
-                id: txt_port
-                text: '502'
-                font_size: 14
-                halign: 'center'
-                valign: 'middle'
-                disabled: False
-            Label:
-                text: "Login"
-                font_size: 14
-            TextInput:
-                id: txt_login
-                hint_text: 'login'
-                font_size: 14
-                halign: 'center'
-                valign: 'middle'
-                disabled: False
-            Label:
-                text: "Senha"
-                font_size: 14
-            TextInput:
-                id: txt_senha
-                hint_text: 'senha'
+                id: txt_baudrate
+                text: ''
                 font_size: 14
                 halign: 'center'
                 valign: 'middle'
@@ -67,17 +211,12 @@
             Label:
                 text: 'Apogeu'
                 font_size: 14
-            # TextInput:
-            #     id: txt_apogeu
-            #     text: ''
-            #     font_size: 14
-            #     halign: 'center'
-            #     valign: 'middle'
             Spinner:
                 id: txt_apogeu
-                text: "selecione o apogeu"
+                text: "Selecione o apogeu"
                 values: ['500', '1000', '3000', '5000']
                 disabled: False
+            
 
         BoxLayout:
             orientation:'horizontal'
@@ -168,5 +307,30 @@
     Label:
         id: label
 
+<UARTConnect>:
+    title: 'Opções de conexão'
+    size_hint: None, None
+    size: (600, 375)
+    BoxLayout:
+        id: layout
+        orientation:'vertical'
+        GridLayout:
+            size_hint: (1, .8)
+            cols: 2
+            rows: 6
+            size_hint_y: 0.05
+            Label:
+                text: "Conexão"
+                font_size: 14
+                
+            Spinner:
+                id: opt_conexao
+                text: "UART"
+                values: ['UART', 'WiFi']
+                size_hint: (1, 0.25)
+                disabled: False
 
+            Label:
+                text: "Porta"
+                font_size: 14
 
