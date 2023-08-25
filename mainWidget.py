@@ -11,7 +11,7 @@ from popups import ConnectSocketPopup, ConnectSocketPopupError
 from timeseriesgraph import TimeSeriesGraph
 from kivy_garden.graph import LinePlot
 from kivy_garden.mapview import MapMarkerPopup
-from cliente import Cliente
+from cliente import Cliente, UART
 from threading import Thread, Lock
 from time import sleep
 from ipaddress import ip_address
@@ -33,8 +33,8 @@ class MainWidget(FloatLayout):
         Construtor do widget principal
         '''
         super().__init__()
-        self._login = ""
-        self._senha = ""
+        self._porta = ""
+        self._baudrate = ""
         self._missao = ""
         self._apogeu = 1
         self._serverIP = kwargs.get('server_ip')
@@ -62,12 +62,14 @@ class MainWidget(FloatLayout):
         """
         try:
             self._apogeu = int(self._apogeu)
-            self._port = int(self._port)
-            self._serverIP = str(ip_address(self._serverIP))            
-            if self._login == 'supernova' and self._senha == 'astra':
+            self._porta = str(self._porta)
+            self._baudrate = int(self._baudrate)         
+            if True:
                 Window.set_system_cursor("wait")
-                self._connect = Cliente(self._serverIP, self._port)
+                # self._connect = Cliente(self._serverIP, self._port)
+                self._connect = UART(self._porta, self._baudrate)
                 self._connect.start()
+                print("DEBUG 1")
                 Window.set_system_cursor("arrow")
                 self._updateThread = Thread(target = self.updater)
                 self._updateThread.daemon = False
@@ -129,7 +131,8 @@ class MainWidget(FloatLayout):
         Método para a leitura de dados via socket
         """
         try:
-            self._instDados = self._connect._method()
+            # self._instDados = self._connect._method()
+            self._instDados = self._connect.recieveData()
         except Exception as e:
             print(f'Falha ao adquirir os dados: {e}')
             raise e
@@ -138,39 +141,39 @@ class MainWidget(FloatLayout):
         """
         Método para a atualização dos da interface gráfica
         """
-        self.ids.altitude.text = str(self._instDados['Altitude'])
-        self.ids.latitude.text = str("{:.15f}".format(self._instDados['Latitude']))
-        self.ids.longitude.text = str("{:.15f}".format(self._instDados['Longitude']))
-        self.ids.acelerometroX.text = str("{:.2f}".format(self._instDados['Acelerometro']['x']))
-        self.ids.acelerometroY.text = str("{:.2f}".format(self._instDados['Acelerometro']['y']))
-        self.ids.acelerometroZ.text = str("{:.1f}".format(self._instDados['Acelerometro']['z']))
-        self.ids.giroscopioX.text = str(int(self._instDados['Giroscopio']['x']))
-        self.ids.giroscopioY.text = str(int(self._instDados['Giroscopio']['y']))
-        self.ids.giroscopioZ.text = str(int(self._instDados['Giroscopio']['z']))
+        self.ids.altitude.text = str("{:.1f}".format(self._instDados['Alt']))
+        self.ids.latitude.text = str("{:.15f}".format(self._instDados['Lat']))
+        self.ids.longitude.text = str("{:.15f}".format(self._instDados['Long']))
+        self.ids.acelerometroX.text = str("{:.2f}".format(self._instDados['Acel(x)']))
+        self.ids.acelerometroY.text = str("{:.2f}".format(self._instDados['Acel(y)']))
+        self.ids.acelerometroZ.text = str("{:.1f}".format(self._instDados['Acel(z)']))
+        self.ids.giroscopioX.text = str(int(self._instDados['Gyro(x)']))
+        self.ids.giroscopioY.text = str(int(self._instDados['Gyro(y)']))
+        self.ids.giroscopioZ.text = str(int(self._instDados['Gyro(z)']))
         self.ids.RSSI.text = str(self._instDados['RSSI'])
-        self.ids.mapa.lat = self._instDados['Latitude']
-        self.ids.mapa.lon = self._instDados['Longitude']
-        self.ids.mapaMarker.lat = self._instDados['Latitude']
-        self.ids.mapaMarker.lon = self._instDados['Longitude']
+        self.ids.mapa.lat = self._instDados['Lat']
+        self.ids.mapa.lon = self._instDados['Long']
+        self.ids.mapaMarker.lat = self._instDados['Lat']
+        self.ids.mapaMarker.lon = self._instDados['Long']
         self.ids.mapa.do_update(1)
         self.updateBoolean()
                                                    
         # Atualiza o grafico vertical de altitude
-        self.ids.graficoMedidorAltitude.size_hint = (self.ids.medidorAltitude.size_hint[0], float(self._instDados['Altitude']/(1.2*self._apogeu))*self.ids.medidorAltitude.size_hint[1]) if self._instDados['Altitude'] <= 1.2*self._apogeu else (self.ids.medidorAltitude.size_hint[0], self.ids.medidorAltitude.size_hint[1])
+        self.ids.graficoMedidorAltitude.size_hint = (self.ids.medidorAltitude.size_hint[0], float(self._instDados['Alt']/(1.2*self._apogeu))*self.ids.medidorAltitude.size_hint[1]) if self._instDados['Alt'] <= 1.2*self._apogeu else (self.ids.medidorAltitude.size_hint[0], self.ids.medidorAltitude.size_hint[1])
         # self.ids.linhaGraficoMedidorAltitude.pos = (self.ids.medidorAltitude.pos[0], self.ids.medidorAltitude.pos[1] + float(self._instDados['Altitude']/36)*self.ids.medidorAltitude.size_hint[1])
 
         #Atualiza o grafico de linhas de altitude
-        self.ids.graphAltitude.updateGraph((self._instDados['timestamp'], self._instDados['Altitude']),0)
+        self.ids.graphAltitude.updateGraph((self._instDados['timestamp'], self._instDados['Alt']),0)
 
         # Atualiza o grafico com dados do acelerometro
-        self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acelerometro']['x']), 0)
-        self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acelerometro']['y']), 1)
-        self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acelerometro']['z']), 2)
+        self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acel(x)']), 0)
+        self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acel(y)']), 1)
+        self.ids.graphAcelerometro.updateGraph((self._instDados['timestamp'], self._instDados['Acel(z)']), 2)
         
         # # Atualiza o grafico com dados do giroscopio
-        self.ids.graphGiroscopio.updateGraph((self._instDados['timestamp'], self._instDados['Giroscopio']['x']), 0)
-        self.ids.graphGiroscopio.updateGraph((self._instDados['timestamp'], self._instDados['Giroscopio']['y']), 1)
-        self.ids.graphGiroscopio.updateGraph((self._instDados['timestamp'], self._instDados['Giroscopio']['z']), 2)
+        self.ids.graphGiroscopio.updateGraph((self._instDados['timestamp'], self._instDados['Gyro(x)']), 0)
+        self.ids.graphGiroscopio.updateGraph((self._instDados['timestamp'], self._instDados['Gyro(y)']), 1)
+        self.ids.graphGiroscopio.updateGraph((self._instDados['timestamp'], self._instDados['Gyro(z)']), 2)
 
         
 
@@ -238,7 +241,7 @@ class MainWidget(FloatLayout):
         """
         Método que atualiza os estados dos LED de acordo com o acionamento de cada paraquedas.
         """
-        if self._instDados['Principal Paraquedas Estabilizador'] == 1:
+        if self._instDados['PPE'] == 1:
             self.ids.paraquedasEstabilizadorPrincipal.source = 'imgs/green_led.png'
         
         if self._instDados['Redundancia Paraquedas Estabilizador'] == 1:
@@ -247,7 +250,7 @@ class MainWidget(FloatLayout):
         if self._instDados['Comercial Paraquedas Estabilizador'] == 1:
             self.ids.paraquedasEstabilizadorComercial.source = 'imgs/green_led.png'
 
-        if self._instDados['Principal Paraquedas Principal'] == 1:
+        if self._instDados['PPP'] == 1:
             self.ids.paraquedasPrincipal.source = 'imgs/green_led.png'
 
         if self._instDados['Comercial Paraquedas Principal'] == 1:
@@ -316,9 +319,9 @@ class MainWidget(FloatLayout):
         """
         Método que cria um novo MapMarkerPopup para marcar a base de lançamento e desabilita o botão
         """
-        marker = MapMarkerPopup(lat=self._instDados['Latitude'], lon=self._instDados['Longitude'], source='imgs/markerBase.png')
+        marker = MapMarkerPopup(lat=self._instDados['Lat'], lon=self._instDados['Long'], source='imgs/markerBase.png')
         self.ids.mapa.add_widget(marker)
-        self.ids.mapa.center_on(self._instDados['Latitude'], self._instDados['Longitude'])
+        self.ids.mapa.center_on(self._instDados['Lat'], self._instDados['Long'])
         self.ids.bttnMarkBase.disabled = True
 
 
@@ -326,10 +329,8 @@ class MainWidget(FloatLayout):
         """
         Método que trava os dados correspondentes a conexão
         """
-        self._conn.ids.txt_ip.disabled = True
-        self._conn.ids.txt_port.disabled = True
-        self._conn.ids.txt_login.disabled = True
-        self._conn.ids.txt_senha.disabled = True
+        self._conn.ids.txt_porta.disabled = True
+        self._conn.ids.txt_baudrate.disabled = True
         self._conn.ids.txt_missao.disabled = True
         self._conn.ids.txt_apogeu.disabled = True
         self._conn.ids.connButton.text = 'Desconectar'

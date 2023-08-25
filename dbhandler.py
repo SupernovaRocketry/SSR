@@ -92,20 +92,20 @@ class DBHandler():
         """
         try:
             newData = {"timestamp" : data['timestamp'],
-                        "Altitude" : data['Altitude'], 
-                        "Latitude" : data['Latitude'], 
-                        "Longitude" : data['Longitude'], 
-                        "Principal_Paraquedas_Estabilizador" : data['Principal Paraquedas Estabilizador'],
+                        "Altitude" : data['Alt'], 
+                        "Latitude" : data['Lat'], 
+                        "Longitude" : data['Long'], 
+                        "Principal_Paraquedas_Estabilizador" : data['PPE'],
                         "Redundancia_Paraquedas_Estabilizador" : data['Redundancia Paraquedas Estabilizador'],
                         "Comercial_Paraquedas_Estabilizador" : data['Comercial Paraquedas Estabilizador'],
-                        "Principal_Paraquedas_Principal" : data['Principal Paraquedas Principal'],
+                        "Principal_Paraquedas_Principal" : data['PPP'],
                         "Comercial_Paraquedas_Principal" : data['Comercial Paraquedas Principal'],
-                        "Acelerometro_X" : data['Acelerometro']['x'],
-                        "Acelerometro_Y" : data['Acelerometro']['y'],
-                        "Acelerometro_Z" : data['Acelerometro']['z'],
-                        "Giroscopio_Roll" : data['Giroscopio']['x'],
-                        "Giroscopio_Pitch" : data['Giroscopio']['y'],
-                        "Giroscopio_Yaw" : data['Giroscopio']['z'],
+                        "Acelerometro_X" : data['Acel(x)'],
+                        "Acelerometro_Y" : data['Acel(y)'],
+                        "Acelerometro_Z" : data['Acel(z)'],
+                        "Giroscopio_Roll"   : data['Gyro(x)'],
+                        "Giroscopio_Pitch"  : data['Gyro(y)'],
+                        "Giroscopio_Yaw"    : data['Gyro(z)'],
                         "RSSI" : data['RSSI']}
         
             return newData

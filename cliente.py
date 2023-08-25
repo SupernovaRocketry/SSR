@@ -2,6 +2,7 @@ import socket
 import json
 from time import sleep
 from datetime import datetime
+import serial
 
 class Cliente():
     """
@@ -56,6 +57,34 @@ class Cliente():
 
         
 
+class UART():
+    def __init__(self, porta, baudrate):
+        self._porta = porta
+        self._baudrate = baudrate
+        
+
+    def start(self):
+        try:
+            self._ser = serial.Serial(self._porta, self._baudrate)
+            print("Connecting...")
+            sleep(3)
+            print(self._ser.name)
+        except Exception as e:
+            print(e)
+            raise e
+
+
+    def recieveData(self):
+        try:
+            sleep(1)
+            self._data = self._ser.readline().decode('ascii')
+            print(self._data)
+            print(type(self._data))
+            self._data = json.loads(self._data)
+            self._data['timestamp'] = datetime.now()
+            return self._data
+        except Exception as e:
+            print(e)
 # class WiFi():
 #     """
 #     Classe WiFI - Supervisório Supernova Rocketry - Comunicação WiFi
