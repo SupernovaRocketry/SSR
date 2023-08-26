@@ -58,9 +58,11 @@ class Cliente():
         
 
 class UART():
+    _firstData = True
     def __init__(self, porta, baudrate):
         self._porta = porta
         self._baudrate = baudrate
+        self._minAltValue = 0
         
 
     def start(self):
@@ -76,12 +78,16 @@ class UART():
 
     def recieveData(self):
         try:
-            sleep(1)
+            sleep(0.1)
             self._data = self._ser.readline().decode('ascii')
             print(self._data)
             print(type(self._data))
             self._data = json.loads(self._data)
             self._data['timestamp'] = datetime.now()
+            if self._firstData == True:
+                self._minAltValue = self._data['Alt']
+                self._firstData = False
+            self._data['Alt'] = self._data['Alt'] - self._minAltValue
             return self._data
         except Exception as e:
             print(e)
